@@ -1,0 +1,322 @@
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.annotations.*;
+import java.io.File;
+import java.time.Duration;
+import org.apache.commons.io.FileUtils;
+
+public class lyxa {
+    
+    private WebDriver driver;
+    private WebDriverWait wait;
+    private static final String BASE_URL = "https://test-v2-panel.lyxa.ai/auth/sign-in?returnTo=%2F&loginAs=admin";
+    private static final String EMAIL = "nour@gmail.com";
+    private static final String PASSWORD = "Nour1234@";
+    private String testMessage;
+
+    @BeforeClass
+    public void setUp() {
+    	 System.setProperty("webdriver.chrome.driver",
+                 "C:\\Users\\quazi\\Downloads\\Automation web\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe");
+        
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--incognito");
+        options.addArguments("--disable-notifications");
+        options.addArguments("--disable-popup-blocking");
+        
+        driver = new ChromeDriver(options);
+        driver.manage().window().maximize();
+        wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        
+        // Create screenshots directory
+        new File("screenshots").mkdirs();
+        System.out.println("Test environment ready");
+    }
+
+    @Test(priority = 1)
+    public void testNavigateToLoginPage() throws Exception {
+        System.out.println("Test: Navigate to Login Page");
+        
+        driver.get(BASE_URL);
+        Thread.sleep(2000);
+        takeScreenshot("1_login_page_loaded.png");
+        
+        // Verify login page elements are present
+        WebElement emailField = wait.until(ExpectedConditions.presenceOfElementLocated(
+            By.name("email")
+        ));
+        WebElement passwordField = driver.findElement(By.name("password"));
+        WebElement loginButton = driver.findElement(By.cssSelector("button[type='submit']"));
+        
+        Assert.assertTrue(emailField.isDisplayed(), "Email field should be visible");
+        Assert.assertTrue(passwordField.isDisplayed(), "Password field should be visible");
+        Assert.assertTrue(loginButton.isDisplayed(), "Login button should be visible");
+        System.out.println("Login page loaded successfully");
+    }
+
+    @Test(priority = 2, dependsOnMethods = "testNavigateToLoginPage")
+    public void testValidLogin() throws Exception {
+        System.out.println("Test: Valid Login");
+        
+        // Enter credentials
+        WebElement emailField = findElement(
+            By.name("email"),
+            By.xpath("//input[contains(@placeholder,'email') or contains(@placeholder,'Email')]"),
+            By.xpath("//input[@type='text' or @type='email']")
+        );
+        clearAndType(emailField, EMAIL);
+        
+        WebElement passwordField = findElement(
+            By.name("password"),
+            By.id("password"),
+            By.xpath("//input[@type='password']")
+        );
+        clearAndType(passwordField, PASSWORD);
+        
+        takeScreenshot("2_credentials_entered.png");
+        
+        // Click login button
+        WebElement loginButton = findElement(
+            By.cssSelector("button[type='submit']"),
+            By.xpath("//button[contains(text(),'Sign') or contains(text(),'Login')]")
+        );
+        loginButton.click();
+        
+        // Verify successful login
+        boolean loginSuccessful = wait.until(ExpectedConditions.or(
+            ExpectedConditions.urlContains("dashboard"),
+            ExpectedConditions.visibilityOfElementLocated(By.xpath("//h1[contains(text(),'Dashboard')]")),
+            ExpectedConditions.not(ExpectedConditions.urlContains("sign-in"))
+        ));
+        
+        takeScreenshot("3_login_success.png");
+        Assert.assertTrue(loginSuccessful, "❌ Login should be successful");
+        System.out.println("Login successful");
+    }
+
+    @Test(priority = 3, dependsOnMethods = "testValidLogin")
+    public void testOpenNavigationMenu() throws Exception {
+        System.out.println("Test: Open Navigation Menu");
+        
+        // Click menu button
+        WebElement menuButton = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("(//button[contains(@class,'MuiIconButton-root')])[1]")
+        ));
+        menuButton.click();
+        
+        takeScreenshot("4_menu_opened.png");
+        
+        // Verify menu items are visible
+        WebElement settingsOption = wait.until(ExpectedConditions.visibilityOfElementLocated(
+            By.xpath("//span[@class='mnl__nav__item__title MuiBox-root css-0' and text()='Settings']")
+        ));
+        
+        Assert.assertTrue(settingsOption.isDisplayed(), "Settings menu item should be visible");
+        System.out.println("Navigation menu opened successfully");
+    }
+
+    @Test(priority = 4, dependsOnMethods = "testOpenNavigationMenu")
+    public void testNavigateToSettings() throws Exception {
+        System.out.println("Test: Navigate to Settings");
+        
+        // Click Settings menu item
+        WebElement settingsMenuItem = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//span[@class='mnl__nav__item__title MuiBox-root css-0' and text()='Settings']")
+        ));
+        settingsMenuItem.click();
+        
+        Thread.sleep(2000); // Wait for page transition
+        takeScreenshot("5_settings_page.png");
+        
+        // Verify we're on settings page
+        String currentUrl = driver.getCurrentUrl();
+        Assert.assertTrue(currentUrl.contains("settings") || 
+                         driver.getPageSource().contains("Settings"), 
+                         "Should navigate to settings page");
+        
+        System.out.println("Successfully navigated to Settings");
+    }
+
+    @Test(priority = 5, dependsOnMethods = "testNavigateToSettings")
+    public void testOpenDefaultChatMessages() throws Exception {
+        System.out.println("Test: Open Default Chat Messages");
+        
+        // Click Default Chat Messages
+        WebElement defaultChatMessages = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//div[@class='MuiBox-root css-171onha' and text()='Default Chat Messages']")
+        ));
+        defaultChatMessages.click();
+        
+        Thread.sleep(2000);
+        takeScreenshot("6_default_chat_messages.png");
+        
+        // Verify Add Chat Message button is present
+        WebElement addChatMessageBtn = wait.until(ExpectedConditions.visibilityOfElementLocated(
+            By.xpath("//button[contains(text(),'Add Chat Message')]")
+        ));
+        
+        Assert.assertTrue(addChatMessageBtn.isDisplayed(), "Add Chat Message button should be visible");
+        System.out.println("Default Chat Messages section opened");
+    }
+
+    @Test(priority = 6, dependsOnMethods = "testOpenDefaultChatMessages")
+    public void testAddNewChatMessage() throws Exception {
+        System.out.println("Test: Add New Chat Message");
+        
+        // Click Add Chat Message button
+        WebElement addChatMessageBtn = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//button[contains(text(),'Add Chat Message')]")
+        ));
+        addChatMessageBtn.click();
+        
+        Thread.sleep(2000);
+        takeScreenshot("7_add_message_modal.png");
+        
+        // Enter message text
+        WebElement messageTextarea = wait.until(ExpectedConditions.visibilityOfElementLocated(
+            By.xpath("//textarea[not(@readonly)]")
+        ));
+        
+        testMessage = "Automated Test Message " + System.currentTimeMillis();
+        messageTextarea.sendKeys(testMessage);
+        
+        takeScreenshot("8_message_entered.png");
+        
+        // Submit the message
+        WebElement addButton = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//button[@type='submit']")
+        ));
+        addButton.click();
+        
+        Thread.sleep(3000); // Wait for message to be added
+        takeScreenshot("9_message_added.png");
+        
+//        System.out.println("Chat message added: " + testMessage);
+        searchAndDeleteItem(driver, wait, testMessage);
+    }
+
+//    @Test(priority = 7, dependsOnMethods = "testAddNewChatMessage")
+//    public void testVerifyMessageAdded() throws Exception {
+//        System.out.println("Test: Verify Message Was Added");
+//        
+//        // Refresh or check if message appears in the list
+//        Thread.sleep(2000);
+//        
+//        // Check if message appears in page source (basic verification)
+//        String pageSource = driver.getPageSource();
+//        boolean messageFound = pageSource.contains(testMessage) || 
+//                              pageSource.contains("Test Message") ||
+//                              pageSource.contains("successfully");
+//        
+//        // Alternative: Look for success notification or updated list
+//        try {
+//            WebElement successIndicator = driver.findElement(
+//                By.xpath("//*[contains(text(),'success') or contains(text(),'added') or contains(text(),'created')]")
+//            );
+//            messageFound = messageFound || successIndicator.isDisplayed();
+//        } catch (NoSuchElementException e) {
+//            // Success indicator might not be present, continue with page source check
+//        }
+//        
+//        takeScreenshot("10_verification.png");
+//        
+//        Assert.assertTrue(messageFound, "New message should be visible or success should be indicated");
+//        System.out.println("Message addition verified");
+//        
+//        searchAndDeleteItem(driver, wait, testMessage);
+//
+//    }
+    
+    
+    public static void searchAndDeleteItem(WebDriver driver, WebDriverWait wait, String searchTerm) {
+    	try {
+   
+            WebElement searchInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.name("searchValue")
+            ));
+            clearAndType(searchInput, searchTerm);
+            Thread.sleep(2000);
+
+            //  (three dots menu)
+            WebElement menuButton = wait.until(ExpectedConditions.elementToBeClickable(
+                    By.xpath("//tr[td[text()='" + searchTerm + "']]//button[contains(@class, 'MuiIconButton-root')]")
+                ));
+            
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", menuButton);
+            Thread.sleep(500);
+            menuButton.click();
+            Thread.sleep(1000);
+            System.out.println("Three-dot menu clicked");
+           
+            WebElement deleteOption = wait.until(ExpectedConditions.elementToBeClickable(
+            		By.xpath("//li[@role='menuitem' and contains(text(), 'Delete')]")
+            ));
+            deleteOption.click();
+            Thread.sleep(1000);
+
+            // Step 4: Confirm deletion
+            WebElement confirmDeleteButton = wait.until(ExpectedConditions.elementToBeClickable(
+                By.cssSelector("button.MuiButton-contained.MuiButton-containedError.MuiButton-colorError")
+            ));
+            confirmDeleteButton.click();
+            Thread.sleep(1000);
+
+            System.out.println("Successfully deleted item: " + searchTerm);
+
+        } catch (Exception e) {
+            System.err.println("Error during delete operation: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    
+    
+    @AfterClass
+    public void tearDown() {
+        System.out.println("Cleaning up test environment...");
+        if (driver != null) {
+            try {
+                takeScreenshot("12_final_state.png");
+            } catch (Exception e) {
+                System.out.println("Could not take final screenshot: " + e.getMessage());
+            }
+            driver.quit();
+            System.out.println("Browser closed successfully");
+        }
+    }
+
+    // Helper Methods
+    private WebElement findElement(By... locators) {
+        for (By locator : locators) {
+            try {
+                return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+            } catch (Exception ignored) {
+                // Try next locator
+            }
+        }
+        throw new NoSuchElementException("Element not found with any of the provided locators");
+    }
+
+    private static void clearAndType(WebElement element, String text) {
+        element.clear();
+        element.sendKeys(Keys.CONTROL + "a");
+        element.sendKeys(Keys.DELETE);
+        element.sendKeys(text);
+    }
+
+    private void takeScreenshot(String filename) {
+        try {
+            File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+            File destination = new File("screenshots/" + filename);
+            FileUtils.copyFile(screenshot, destination);
+            System.out.println("📸 Screenshot saved: " + filename);
+        } catch (Exception e) {
+            System.out.println("❌ Failed to take screenshot: " + e.getMessage());
+        }
+    }
+}

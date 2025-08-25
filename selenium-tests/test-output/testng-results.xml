@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="5" passed="4" failed="1" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2025-08-25T11:29:44 BDT" name="Default suite" finished-at="2025-08-25T11:30:41 BDT" duration-ms="56339">
+    <groups>
+    </groups>
+    <test started-at="2025-08-25T11:29:44 BDT" name="Default test" finished-at="2025-08-25T11:30:41 BDT" duration-ms="56339">
+      <class name="demoAppSetting">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:demoAppSetting@dd05255]" started-at="2025-08-25T11:29:44 BDT" name="setUp" finished-at="2025-08-25T11:29:46 BDT" duration-ms="1767" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- setUp -->
+        <test-method signature="testNavigateToLoginPage()[pri:1, instance:demoAppSetting@dd05255]" started-at="2025-08-25T11:29:46 BDT" name="testNavigateToLoginPage" finished-at="2025-08-25T11:29:52 BDT" duration-ms="5777" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testNavigateToLoginPage -->
+        <test-method signature="testValidLogin()[pri:2, instance:demoAppSetting@dd05255]" started-at="2025-08-25T11:29:52 BDT" name="testValidLogin" finished-at="2025-08-25T11:29:57 BDT" depends-on-methods="demoAppSetting.testNavigateToLoginPage" duration-ms="5443" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testValidLogin -->
+        <test-method signature="testOpenNavigationMenu()[pri:3, instance:demoAppSetting@dd05255]" started-at="2025-08-25T11:29:57 BDT" name="testOpenNavigationMenu" finished-at="2025-08-25T11:30:02 BDT" depends-on-methods="demoAppSetting.testValidLogin" duration-ms="4417" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testOpenNavigationMenu -->
+        <test-method signature="testNavigateToSettings()[pri:4, instance:demoAppSetting@dd05255]" started-at="2025-08-25T11:30:02 BDT" name="testNavigateToSettings" finished-at="2025-08-25T11:30:04 BDT" depends-on-methods="demoAppSetting.testOpenNavigationMenu" duration-ms="2342" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testNavigateToSettings -->
+        <test-method signature="testOpenAppSettings()[pri:5, instance:demoAppSetting@dd05255]" started-at="2025-08-25T11:30:04 BDT" name="testOpenAppSettings" finished-at="2025-08-25T11:30:40 BDT" depends-on-methods="demoAppSetting.testNavigateToSettings" duration-ms="36363" status="FAIL">
+          <exception class="org.openqa.selenium.NoSuchSessionException">
+            <message>
+              <![CDATA[invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
+  (Session info: chrome=139.0.7258.139)
+Build info: version: '4.31.0', revision: '1ef9f18787*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.12'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [2cb0eaf527cc53117b325a5776706bab, actions {actions=[org.openqa.selenium.interactions.Sequence@400d912a]}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 139.0.7258.139, chrome: {chromedriverVersion: 139.0.7258.68 (40ff94600b6e..., userDataDir: C:\Users\quazi\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:55404}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:55404/devtoo..., se:cdpVersion: 139.0.7258.139, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 2cb0eaf527cc53117b325a5776706bab]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.NoSuchSessionException: invalid session id: session deleted as the browser has closed the connection
+from disconnected: not connected to DevTools
+  (Session info: chrome=139.0.7258.139)
+Build info: version: '4.31.0', revision: '1ef9f18787*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.12'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [2cb0eaf527cc53117b325a5776706bab, actions {actions=[org.openqa.selenium.interactions.Sequence@400d912a]}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 139.0.7258.139, chrome: {chromedriverVersion: 139.0.7258.68 (40ff94600b6e..., userDataDir: C:\Users\quazi\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:55404}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:55404/devtoo..., se:cdpVersion: 139.0.7258.139, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 2cb0eaf527cc53117b325a5776706bab
+at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
+at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)
+at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
+at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
+at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
+at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:215)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:545)
+at org.openqa.selenium.remote.RemoteWebDriver.perform(RemoteWebDriver.java:631)
+at org.openqa.selenium.interactions.Actions$BuiltAction.perform(Actions.java:616)
+at org.openqa.selenium.interactions.Actions.perform(Actions.java:581)
+at demoAppSetting.testOpenAppSettings(demoAppSetting.java:319)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:686)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:992)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+at org.testng.TestRunner.privateRun(TestRunner.java:739)
+at org.testng.TestRunner.run(TestRunner.java:614)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+at org.testng.TestNG.runSuites(TestNG.java:1112)
+at org.testng.TestNG.run(TestNG.java:1079)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.NoSuchSessionException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testOpenAppSettings -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:demoAppSetting@dd05255]" started-at="2025-08-25T11:30:40 BDT" name="tearDown" finished-at="2025-08-25T11:30:41 BDT" duration-ms="145" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+      </class> <!-- demoAppSetting -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>
