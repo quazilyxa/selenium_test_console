@@ -159,7 +159,7 @@ public class brandNutrationCancellation {
             throw e;
         }
     }
-
+//check
     @Test(priority = 4, dependsOnMethods = "testOpenNavigationMenu")
     public void testNavigateToSettings() throws Exception {
         System.out.println("Test: Navigate to Settings");
