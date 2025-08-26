@@ -196,86 +196,110 @@ public class lyxa {
         
         Thread.sleep(3000); // Wait for message to be added
         takeScreenshot("9_message_added.png");
-        
-//        System.out.println("Chat message added: " + testMessage);
-        searchAndDeleteItem(driver, wait, testMessage);
+        System.out.println("Chat message added: " + testMessage);
     }
-
-//    @Test(priority = 7, dependsOnMethods = "testAddNewChatMessage")
-//    public void testVerifyMessageAdded() throws Exception {
-//        System.out.println("Test: Verify Message Was Added");
-//        
-//        // Refresh or check if message appears in the list
-//        Thread.sleep(2000);
-//        
-//        // Check if message appears in page source (basic verification)
-//        String pageSource = driver.getPageSource();
-//        boolean messageFound = pageSource.contains(testMessage) || 
-//                              pageSource.contains("Test Message") ||
-//                              pageSource.contains("successfully");
-//        
-//        // Alternative: Look for success notification or updated list
-//        try {
-//            WebElement successIndicator = driver.findElement(
-//                By.xpath("//*[contains(text(),'success') or contains(text(),'added') or contains(text(),'created')]")
-//            );
-//            messageFound = messageFound || successIndicator.isDisplayed();
-//        } catch (NoSuchElementException e) {
-//            // Success indicator might not be present, continue with page source check
-//        }
-//        
-//        takeScreenshot("10_verification.png");
-//        
-//        Assert.assertTrue(messageFound, "New message should be visible or success should be indicated");
-//        System.out.println("Message addition verified");
-//        
+       
 //        searchAndDeleteItem(driver, wait, testMessage);
-//
 //    }
-    
-    
-    public static void searchAndDeleteItem(WebDriver driver, WebDriverWait wait, String searchTerm) {
-    	try {
-   
-            WebElement searchInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
-                By.name("searchValue")
-            ));
-            clearAndType(searchInput, searchTerm);
-            Thread.sleep(2000);
 
-            //  (three dots menu)
-            WebElement menuButton = wait.until(ExpectedConditions.elementToBeClickable(
+    
+    
+//    public static void searchAndDeleteItem(WebDriver driver, WebDriverWait wait, String searchTerm) {
+//    	try {
+//   
+//            WebElement searchInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
+//                By.name("searchValue")
+//            ));
+//            clearAndType(searchInput, searchTerm);
+//            Thread.sleep(2000);
+//
+//            //  (three dots menu)
+//            WebElement menuButton = wait.until(ExpectedConditions.elementToBeClickable(
+//                    By.xpath("//tr[td[text()='" + searchTerm + "']]//button[contains(@class, 'MuiIconButton-root')]")
+//                ));
+//            
+//            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", menuButton);
+//            Thread.sleep(500);
+//            menuButton.click();
+//            Thread.sleep(1000);
+//            System.out.println("Three-dot menu clicked");
+//           
+//            WebElement deleteOption = wait.until(ExpectedConditions.elementToBeClickable(
+//            		By.xpath("//li[@role='menuitem' and contains(text(), 'Delete')]")
+//            ));
+//            deleteOption.click();
+//            Thread.sleep(1000);
+//
+//            // Step 4: Confirm deletion
+//            WebElement confirmDeleteButton = wait.until(ExpectedConditions.elementToBeClickable(
+//                By.cssSelector("button.MuiButton-contained.MuiButton-containedError.MuiButton-colorError")
+//            ));
+//            confirmDeleteButton.click();
+//            Thread.sleep(1000);
+//
+//            System.out.println("Successfully deleted item: " + searchTerm);
+//
+//        } catch (Exception e) {
+//            System.err.println("Error during delete operation: " + e.getMessage());
+//            e.printStackTrace();
+//        }
+//    }
+//    
+    
+        @Test(priority = 7, dependsOnMethods = "testAddNewChatMessage")
+        public void testSearchAndDeleteDefaultChatMessage() throws Exception {
+            System.out.println("Test: Search and Delete Default Chat Message");
+
+            String searchTerm = testMessage; // Use the message added in the previous test
+            
+            try {
+                WebElement searchInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                    By.name("searchValue")
+                ));
+                clearAndType(searchInput, searchTerm);
+                Thread.sleep(2000);
+
+                // Three dots menu
+                WebElement menuButton = wait.until(ExpectedConditions.elementToBeClickable(
                     By.xpath("//tr[td[text()='" + searchTerm + "']]//button[contains(@class, 'MuiIconButton-root')]")
                 ));
-            
-            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", menuButton);
-            Thread.sleep(500);
-            menuButton.click();
-            Thread.sleep(1000);
-            System.out.println("Three-dot menu clicked");
-           
-            WebElement deleteOption = wait.until(ExpectedConditions.elementToBeClickable(
-            		By.xpath("//li[@role='menuitem' and contains(text(), 'Delete')]")
-            ));
-            deleteOption.click();
-            Thread.sleep(1000);
+                ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", menuButton);
+                Thread.sleep(500);
+                menuButton.click();
+                Thread.sleep(1000);
+                System.out.println("Three-dot menu clicked");
 
-            // Step 4: Confirm deletion
-            WebElement confirmDeleteButton = wait.until(ExpectedConditions.elementToBeClickable(
-                By.cssSelector("button.MuiButton-contained.MuiButton-containedError.MuiButton-colorError")
-            ));
-            confirmDeleteButton.click();
-            Thread.sleep(1000);
+                WebElement deleteOption = wait.until(ExpectedConditions.elementToBeClickable(
+                    By.xpath("//li[@role='menuitem' and contains(text(), 'Delete')]")
+                ));
+                deleteOption.click();
+                Thread.sleep(1000);
 
-            System.out.println("Successfully deleted item: " + searchTerm);
+                // Confirm deletion
+                WebElement confirmDeleteButton = wait.until(ExpectedConditions.elementToBeClickable(
+                    By.cssSelector("button.MuiButton-contained.MuiButton-containedError.MuiButton-colorError")
+                ));
+                confirmDeleteButton.click();
+                Thread.sleep(1000);
 
-        } catch (Exception e) {
-            System.err.println("Error during delete operation: " + e.getMessage());
-            e.printStackTrace();
+                takeScreenshot("10_message_deleted.png");
+                System.out.println("Successfully deleted chat message: " + searchTerm);
+
+            } catch (Exception e) {
+                System.err.println("Error during delete operation: " + e.getMessage());
+                e.printStackTrace();
+                Assert.fail("Failed to delete chat message: " + searchTerm);
+            }
         }
-    }
-    
-    
+ 
+        
+        
+        
+        
+        
+        
+        
+        
     @AfterClass
     public void tearDown() {
         System.out.println("Cleaning up test environment...");

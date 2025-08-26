@@ -25,7 +25,7 @@
       <span class="top-banner-title-font">Test results</span>
       <button id="button" class="button">Switch Retro Theme</button> <!-- button -->
       <br/>
-      <span class="top-banner-font-1">1 suite, 1 failed test</span>
+      <span class="top-banner-font-1">1 suite</span>
     </div> <!-- top-banner-root -->
     <div class="navigator-root">
       <div class="navigator-suite-header">
@@ -39,7 +39,7 @@
         <div class="rounded-window">
           <div class="suite-header light-rounded-window-top">
             <a href="#" panel-name="suite-Default_suite" class="navigator-link">
-              <span class="suite-name border-failed">Default suite</span>
+              <span class="suite-name border-passed">Default suite</span>
             </a> <!-- navigator-link -->
           </div> <!-- suite-header light-rounded-window-top -->
           <div class="navigator-suite-content">
@@ -50,7 +50,7 @@
               <ul>
                 <li>
                   <a href="#" panel-name="test-xml-Default_suite" class="navigator-link ">
-                    <span>C:\Users\quazi\AppData\Local\Temp\testng-eclipse--161297593\testng-customsuite.xml</span>
+                    <span>C:\Users\quazi\AppData\Local\Temp\testng-eclipse-1420555553\testng-customsuite.xml</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
@@ -92,21 +92,7 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">5 methods, 1 failed,   4 passed</span>
-                  </li>
-                  <li>
-                    <span class="method-list-title failed">Failed methods</span>
-                    <span class="show-or-hide-methods failed">
-                      <a href="#" panel-name="suite-Default_suite" class="hide-methods failed suite-Default_suite"> (hide)</a> <!-- hide-methods failed suite-Default_suite -->
-                      <a href="#" panel-name="suite-Default_suite" class="show-methods failed suite-Default_suite"> (show)</a> <!-- show-methods failed suite-Default_suite -->
-                    </span>
-                    <div class="method-list-content failed suite-Default_suite">
-                      <span>
-                        <img src="failed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Default_suite" title="demoAppSetting" class="method navigator-link" hash-for-method="testOpenAppSettings">testOpenAppSettings</a> <!-- method navigator-link -->
-                      </span>
-                      <br/>
-                    </div> <!-- method-list-content failed suite-Default_suite -->
+                    <span class="method-stats">6 methods,   6 passed</span>
                   </li>
                   <li>
                     <span class="method-list-title passed">Passed methods</span>
@@ -117,22 +103,32 @@
                     <div class="method-list-content passed suite-Default_suite">
                       <span>
                         <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Default_suite" title="demoAppSetting" class="method navigator-link" hash-for-method="testNavigateToLoginPage">testNavigateToLoginPage</a> <!-- method navigator-link -->
+                        <a href="#" panel-name="suite-Default_suite" title="brandNutrationCancellation" class="method navigator-link" hash-for-method="testNavigateToLoginPage">testNavigateToLoginPage</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
                         <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Default_suite" title="demoAppSetting" class="method navigator-link" hash-for-method="testNavigateToSettings">testNavigateToSettings</a> <!-- method navigator-link -->
+                        <a href="#" panel-name="suite-Default_suite" title="brandNutrationCancellation" class="method navigator-link" hash-for-method="testNavigateToSettings">testNavigateToSettings</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
                         <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Default_suite" title="demoAppSetting" class="method navigator-link" hash-for-method="testOpenNavigationMenu">testOpenNavigationMenu</a> <!-- method navigator-link -->
+                        <a href="#" panel-name="suite-Default_suite" title="brandNutrationCancellation" class="method navigator-link" hash-for-method="testOpenAppSettings">testOpenAppSettings</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
                         <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Default_suite" title="demoAppSetting" class="method navigator-link" hash-for-method="testValidLogin">testValidLogin</a> <!-- method navigator-link -->
+                        <a href="#" panel-name="suite-Default_suite" title="brandNutrationCancellation" class="method navigator-link" hash-for-method="testOpenNavigationMenu">testOpenNavigationMenu</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="brandNutrationCancellation" class="method navigator-link" hash-for-method="testSearchAndDeleteBrand">testSearchAndDeleteBrand</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="brandNutrationCancellation" class="method navigator-link" hash-for-method="testValidLogin">testValidLogin</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                     </div> <!-- method-list-content passed suite-Default_suite -->
@@ -147,80 +143,10 @@
     <div class="wrapper">
       <div class="main-panel-root">
         <div panel-name="suite-Default_suite" class="panel Default_suite">
-          <div class="suite-Default_suite-class-failed">
-            <div class="main-panel-header rounded-window-top">
-              <img src="failed.png"/>
-              <span class="class-name">demoAppSetting</span>
-            </div> <!-- main-panel-header rounded-window-top -->
-            <div class="main-panel-content rounded-window-bottom">
-              <div class="method">
-                <div class="method-content">
-                  <a name="testOpenAppSettings">
-                  </a> <!-- testOpenAppSettings -->
-                  <span class="method-name">testOpenAppSettings</span>
-                  <div class="stack-trace">org.openqa.selenium.NoSuchSessionException: invalid session id: session deleted as the browser has closed the connection
-from disconnected: not connected to DevTools
-  (Session info: chrome=139.0.7258.139)
-Build info: version: &apos;4.31.0&apos;, revision: &apos;1ef9f18787*&apos;
-System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;17.0.12&apos;
-Driver info: org.openqa.selenium.chrome.ChromeDriver
-Command: [2cb0eaf527cc53117b325a5776706bab, actions {actions=[org.openqa.selenium.interactions.Sequence@400d912a]}]
-Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 139.0.7258.139, chrome: {chromedriverVersion: 139.0.7258.68 (40ff94600b6e..., userDataDir: C:\Users\quazi\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:55404}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:55404/devtoo..., se:cdpVersion: 139.0.7258.139, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
-Session ID: 2cb0eaf527cc53117b325a5776706bab
-	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
-	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
-	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
-	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)
-	at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
-	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
-	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
-	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:215)
-	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
-	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
-	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:545)
-	at org.openqa.selenium.remote.RemoteWebDriver.perform(RemoteWebDriver.java:631)
-	at org.openqa.selenium.interactions.Actions$BuiltAction.perform(Actions.java:616)
-	at org.openqa.selenium.interactions.Actions.perform(Actions.java:581)
-	at demoAppSetting.testOpenAppSettings(demoAppSetting.java:319)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
-	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
-	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
-	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:686)
-	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
-	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
-	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:992)
-	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
-	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
-	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
-	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
-	at org.testng.TestRunner.privateRun(TestRunner.java:739)
-	at org.testng.TestRunner.run(TestRunner.java:614)
-	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
-	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
-	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
-	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
-	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
-	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
-	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
-	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
-	at org.testng.TestNG.runSuites(TestNG.java:1112)
-	at org.testng.TestNG.run(TestNG.java:1079)
-	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
-	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
-	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
-
-</div> <!-- stack-trace -->
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-            </div> <!-- main-panel-content rounded-window-bottom -->
-          </div> <!-- suite-Default_suite-class-failed -->
           <div class="suite-Default_suite-class-passed">
             <div class="main-panel-header rounded-window-top">
               <img src="passed.png"/>
-              <span class="class-name">demoAppSetting</span>
+              <span class="class-name">brandNutrationCancellation</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
               <div class="method">
@@ -239,9 +165,23 @@ Session ID: 2cb0eaf527cc53117b325a5776706bab
               </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
+                  <a name="testOpenAppSettings">
+                  </a> <!-- testOpenAppSettings -->
+                  <span class="method-name">testOpenAppSettings</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
                   <a name="testOpenNavigationMenu">
                   </a> <!-- testOpenNavigationMenu -->
                   <span class="method-name">testOpenNavigationMenu</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testSearchAndDeleteBrand">
+                  </a> <!-- testSearchAndDeleteBrand -->
+                  <span class="method-name">testSearchAndDeleteBrand</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
               <div class="method">
@@ -256,7 +196,7 @@ Session ID: 2cb0eaf527cc53117b325a5776706bab
         </div> <!-- panel Default_suite -->
         <div panel-name="test-xml-Default_suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">C:\Users\quazi\AppData\Local\Temp\testng-eclipse--161297593\testng-customsuite.xml</span>
+            <span class="header-content">C:\Users\quazi\AppData\Local\Temp\testng-eclipse-1420555553\testng-customsuite.xml</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <pre>
@@ -265,7 +205,7 @@ Session ID: 2cb0eaf527cc53117b325a5776706bab
 &lt;suite name=&quot;Default suite&quot; guice-stage=&quot;DEVELOPMENT&quot;&gt;
   &lt;test thread-count=&quot;5&quot; name=&quot;Default test&quot; verbose=&quot;2&quot;&gt;
     &lt;classes&gt;
-      &lt;class name=&quot;demoAppSetting&quot;/&gt;
+      &lt;class name=&quot;brandNutrationCancellation&quot;/&gt;
     &lt;/classes&gt;
   &lt;/test&gt; &lt;!-- Default test --&gt;
 &lt;/suite&gt; &lt;!-- Default suite --&gt;
@@ -305,32 +245,36 @@ data.addColumn('number', 'Number');
 data.addColumn('string', 'Method');
 data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
-data.addRows(5);
+data.addRows(6);
 data.setCell(0, 0, 0)
 data.setCell(0, 1, 'testOpenAppSettings')
-data.setCell(0, 2, 'demoAppSetting')
-data.setCell(0, 3, 36363);
+data.setCell(0, 2, 'brandNutrationCancellation')
+data.setCell(0, 3, 11061);
 data.setCell(1, 0, 1)
-data.setCell(1, 1, 'testNavigateToLoginPage')
-data.setCell(1, 2, 'demoAppSetting')
-data.setCell(1, 3, 5777);
+data.setCell(1, 1, 'testSearchAndDeleteBrand')
+data.setCell(1, 2, 'brandNutrationCancellation')
+data.setCell(1, 3, 10138);
 data.setCell(2, 0, 2)
-data.setCell(2, 1, 'testValidLogin')
-data.setCell(2, 2, 'demoAppSetting')
-data.setCell(2, 3, 5443);
+data.setCell(2, 1, 'testNavigateToLoginPage')
+data.setCell(2, 2, 'brandNutrationCancellation')
+data.setCell(2, 3, 5222);
 data.setCell(3, 0, 3)
-data.setCell(3, 1, 'testOpenNavigationMenu')
-data.setCell(3, 2, 'demoAppSetting')
-data.setCell(3, 3, 4417);
+data.setCell(3, 1, 'testValidLogin')
+data.setCell(3, 2, 'brandNutrationCancellation')
+data.setCell(3, 3, 5045);
 data.setCell(4, 0, 4)
-data.setCell(4, 1, 'testNavigateToSettings')
-data.setCell(4, 2, 'demoAppSetting')
-data.setCell(4, 3, 2342);
+data.setCell(4, 1, 'testOpenNavigationMenu')
+data.setCell(4, 2, 'brandNutrationCancellation')
+data.setCell(4, 3, 4427);
+data.setCell(5, 0, 5)
+data.setCell(5, 1, 'testNavigateToSettings')
+data.setCell(5, 2, 'brandNutrationCancellation')
+data.setCell(5, 3, 2322);
 window.suiteTableData['Default_suite']= { tableData: data, tableDiv: 'times-div-Default_suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 54 seconds</span>
+              <span class="suite-total-time">Total running time: 38 seconds</span>
               <div id="times-div-Default_suite">
               </div> <!-- times-div-Default_suite -->
             </div> <!-- times-div -->
@@ -356,36 +300,38 @@ return data;
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <div class="chronological-class">
-              <div class="chronological-class-name">demoAppSetting</div> <!-- chronological-class-name -->
+              <div class="chronological-class-name">brandNutrationCancellation</div> <!-- chronological-class-name -->
               <div class="configuration-class before">
                 <span class="method-name">setUp</span>
                 <span class="method-start">0 ms</span>
               </div> <!-- configuration-class before -->
               <div class="test-method">
                 <span class="method-name">testNavigateToLoginPage</span>
-                <span class="method-start">1776 ms</span>
+                <span class="method-start">1006 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">testValidLogin</span>
-                <span class="method-start">7570 ms</span>
+                <span class="method-start">6238 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">testOpenNavigationMenu</span>
-                <span class="method-start">13022 ms</span>
+                <span class="method-start">11286 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">testNavigateToSettings</span>
-                <span class="method-start">17448 ms</span>
+                <span class="method-start">15725 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
-                <img src="failed.png">
-                </img>
                 <span class="method-name">testOpenAppSettings</span>
-                <span class="method-start">19793 ms</span>
+                <span class="method-start">18051 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">testSearchAndDeleteBrand</span>
+                <span class="method-start">29122 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-class after">
                 <span class="method-name">tearDown</span>
-                <span class="method-start">56159 ms</span>
+                <span class="method-start">39265 ms</span>
               </div> <!-- configuration-class after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
