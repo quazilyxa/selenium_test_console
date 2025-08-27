@@ -1,41 +1,208 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="6" passed="6" failed="0" skipped="0">
+<testng-results ignored="0" total="6" passed="1" failed="1" skipped="4">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2025-08-26T19:18:26 BDT" name="Default suite" finished-at="2025-08-26T19:19:05 BDT" duration-ms="39681">
+  <suite started-at="2025-08-27T12:20:02 BDT" name="Default suite" finished-at="2025-08-27T12:20:12 BDT" duration-ms="9550">
     <groups>
     </groups>
-    <test started-at="2025-08-26T19:18:26 BDT" name="Default test" finished-at="2025-08-26T19:19:05 BDT" duration-ms="39681">
+    <test started-at="2025-08-27T12:20:02 BDT" name="Default test" finished-at="2025-08-27T12:20:12 BDT" duration-ms="9550">
       <class name="brandNutrationCancellation">
-        <test-method is-config="true" signature="setUp()[pri:0, instance:brandNutrationCancellation@6a78afa0]" started-at="2025-08-26T19:18:26 BDT" name="setUp" finished-at="2025-08-26T19:18:27 BDT" duration-ms="999" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:brandNutrationCancellation@6a78afa0]" started-at="2025-08-27T12:20:02 BDT" name="setUp" finished-at="2025-08-27T12:20:04 BDT" duration-ms="1872" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="testNavigateToLoginPage()[pri:1, instance:brandNutrationCancellation@6a78afa0]" started-at="2025-08-26T19:18:27 BDT" name="testNavigateToLoginPage" finished-at="2025-08-26T19:18:32 BDT" duration-ms="5222" status="PASS">
+        <test-method signature="testNavigateToLoginPage()[pri:1, instance:brandNutrationCancellation@6a78afa0]" started-at="2025-08-27T12:20:04 BDT" name="testNavigateToLoginPage" finished-at="2025-08-27T12:20:10 BDT" duration-ms="5362" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testNavigateToLoginPage -->
-        <test-method signature="testValidLogin()[pri:2, instance:brandNutrationCancellation@6a78afa0]" started-at="2025-08-26T19:18:32 BDT" name="testValidLogin" finished-at="2025-08-26T19:18:37 BDT" depends-on-methods="brandNutrationCancellation.testNavigateToLoginPage" duration-ms="5045" status="PASS">
+        <test-method signature="testValidLogin()[pri:2, instance:brandNutrationCancellation@6a78afa0]" started-at="2025-08-27T12:20:10 BDT" name="testValidLogin" finished-at="2025-08-27T12:20:12 BDT" depends-on-methods="brandNutrationCancellation.testNavigateToLoginPage" duration-ms="2189" status="FAIL">
+          <exception class="org.openqa.selenium.NoSuchElementException">
+            <message>
+              <![CDATA[Element not found with any of the provided locators
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Build info: version: '4.31.0', revision: '1ef9f18787*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.12'
+Driver info: driver.version: unknown]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.NoSuchElementException: Element not found with any of the provided locators
+For documentation on this error, please visit: https://www.selenium.dev/documentation/webdriver/troubleshooting/errors#no-such-element-exception
+Build info: version: '4.31.0', revision: '1ef9f18787*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.12'
+Driver info: driver.version: unknown
+at brandNutrationCancellation.findElement(brandNutrationCancellation.java:326)
+at brandNutrationCancellation.testValidLogin(brandNutrationCancellation.java:99)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:686)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:992)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+at org.testng.TestRunner.privateRun(TestRunner.java:739)
+at org.testng.TestRunner.run(TestRunner.java:614)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+at org.testng.TestNG.runSuites(TestNG.java:1112)
+at org.testng.TestNG.run(TestNG.java:1079)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.NoSuchElementException -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testValidLogin -->
-        <test-method signature="testOpenNavigationMenu()[pri:3, instance:brandNutrationCancellation@6a78afa0]" started-at="2025-08-26T19:18:37 BDT" name="testOpenNavigationMenu" finished-at="2025-08-26T19:18:41 BDT" depends-on-methods="brandNutrationCancellation.testValidLogin" duration-ms="4427" status="PASS">
+        <test-method signature="testOpenNavigationMenu()[pri:3, instance:brandNutrationCancellation@6a78afa0]" started-at="2025-08-27T12:20:12 BDT" name="testOpenNavigationMenu" finished-at="2025-08-27T12:20:12 BDT" depends-on-methods="brandNutrationCancellation.testValidLogin" duration-ms="2" status="SKIP">
+          <exception class="java.lang.Throwable">
+            <message>
+              <![CDATA[Method brandNutrationCancellation.testOpenNavigationMenu() on instance brandNutrationCancellation@6a78afa0 depends on not successfully finished methods 
+[brandNutrationCancellation.testValidLogin() on instance brandNutrationCancellation@6a78afa0]]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.Throwable: Method brandNutrationCancellation.testOpenNavigationMenu() on instance brandNutrationCancellation@6a78afa0 depends on not successfully finished methods 
+[brandNutrationCancellation.testValidLogin() on instance brandNutrationCancellation@6a78afa0]
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:159)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+at org.testng.TestRunner.privateRun(TestRunner.java:739)
+at org.testng.TestRunner.run(TestRunner.java:614)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+at org.testng.TestNG.runSuites(TestNG.java:1112)
+at org.testng.TestNG.run(TestNG.java:1079)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.Throwable -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testOpenNavigationMenu -->
-        <test-method signature="testNavigateToSettings()[pri:4, instance:brandNutrationCancellation@6a78afa0]" started-at="2025-08-26T19:18:41 BDT" name="testNavigateToSettings" finished-at="2025-08-26T19:18:44 BDT" depends-on-methods="brandNutrationCancellation.testOpenNavigationMenu" duration-ms="2322" status="PASS">
+        <test-method signature="testNavigateToSettings()[pri:4, instance:brandNutrationCancellation@6a78afa0]" started-at="2025-08-27T12:20:12 BDT" name="testNavigateToSettings" finished-at="2025-08-27T12:20:12 BDT" depends-on-methods="brandNutrationCancellation.testOpenNavigationMenu" duration-ms="2" status="SKIP">
+          <exception class="java.lang.Throwable">
+            <message>
+              <![CDATA[Method brandNutrationCancellation.testNavigateToSettings() on instance brandNutrationCancellation@6a78afa0 depends on not successfully finished methods 
+[brandNutrationCancellation.testOpenNavigationMenu() on instance brandNutrationCancellation@6a78afa0]]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.Throwable: Method brandNutrationCancellation.testNavigateToSettings() on instance brandNutrationCancellation@6a78afa0 depends on not successfully finished methods 
+[brandNutrationCancellation.testOpenNavigationMenu() on instance brandNutrationCancellation@6a78afa0]
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:159)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+at org.testng.TestRunner.privateRun(TestRunner.java:739)
+at org.testng.TestRunner.run(TestRunner.java:614)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+at org.testng.TestNG.runSuites(TestNG.java:1112)
+at org.testng.TestNG.run(TestNG.java:1079)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.Throwable -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testNavigateToSettings -->
-        <test-method signature="testOpenAppSettings()[pri:5, instance:brandNutrationCancellation@6a78afa0]" started-at="2025-08-26T19:18:44 BDT" name="testOpenAppSettings" finished-at="2025-08-26T19:18:55 BDT" depends-on-methods="brandNutrationCancellation.testNavigateToSettings" duration-ms="11061" status="PASS">
+        <test-method signature="testOpenAppSettings()[pri:5, instance:brandNutrationCancellation@6a78afa0]" started-at="2025-08-27T12:20:12 BDT" name="testOpenAppSettings" finished-at="2025-08-27T12:20:12 BDT" depends-on-methods="brandNutrationCancellation.testNavigateToSettings" duration-ms="0" status="SKIP">
+          <exception class="java.lang.Throwable">
+            <message>
+              <![CDATA[Method brandNutrationCancellation.testOpenAppSettings() on instance brandNutrationCancellation@6a78afa0 depends on not successfully finished methods 
+[brandNutrationCancellation.testNavigateToSettings() on instance brandNutrationCancellation@6a78afa0]]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.Throwable: Method brandNutrationCancellation.testOpenAppSettings() on instance brandNutrationCancellation@6a78afa0 depends on not successfully finished methods 
+[brandNutrationCancellation.testNavigateToSettings() on instance brandNutrationCancellation@6a78afa0]
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:159)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+at org.testng.TestRunner.privateRun(TestRunner.java:739)
+at org.testng.TestRunner.run(TestRunner.java:614)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+at org.testng.TestNG.runSuites(TestNG.java:1112)
+at org.testng.TestNG.run(TestNG.java:1079)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.Throwable -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testOpenAppSettings -->
-        <test-method signature="testSearchAndDeleteBrand()[pri:6, instance:brandNutrationCancellation@6a78afa0]" started-at="2025-08-26T19:18:55 BDT" name="testSearchAndDeleteBrand" finished-at="2025-08-26T19:19:05 BDT" depends-on-methods="brandNutrationCancellation.testOpenAppSettings" duration-ms="10138" status="PASS">
+        <test-method signature="testSearchAndDeleteBrand()[pri:6, instance:brandNutrationCancellation@6a78afa0]" started-at="2025-08-27T12:20:12 BDT" name="testSearchAndDeleteBrand" finished-at="2025-08-27T12:20:12 BDT" depends-on-methods="brandNutrationCancellation.testOpenAppSettings" duration-ms="0" status="SKIP">
+          <exception class="java.lang.Throwable">
+            <message>
+              <![CDATA[Method brandNutrationCancellation.testSearchAndDeleteBrand() on instance brandNutrationCancellation@6a78afa0 depends on not successfully finished methods 
+[brandNutrationCancellation.testOpenAppSettings() on instance brandNutrationCancellation@6a78afa0]]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.Throwable: Method brandNutrationCancellation.testSearchAndDeleteBrand() on instance brandNutrationCancellation@6a78afa0 depends on not successfully finished methods 
+[brandNutrationCancellation.testOpenAppSettings() on instance brandNutrationCancellation@6a78afa0]
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:159)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+at org.testng.TestRunner.privateRun(TestRunner.java:739)
+at org.testng.TestRunner.run(TestRunner.java:614)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+at org.testng.TestNG.runSuites(TestNG.java:1112)
+at org.testng.TestNG.run(TestNG.java:1079)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.Throwable -->
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testSearchAndDeleteBrand -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:brandNutrationCancellation@6a78afa0]" started-at="2025-08-26T19:19:05 BDT" name="tearDown" finished-at="2025-08-26T19:19:05 BDT" duration-ms="391" status="PASS">
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:brandNutrationCancellation@6a78afa0]" started-at="2025-08-27T12:20:12 BDT" name="tearDown" finished-at="2025-08-27T12:20:12 BDT" duration-ms="50" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
