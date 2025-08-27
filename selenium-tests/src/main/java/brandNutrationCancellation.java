@@ -325,7 +325,7 @@ public class brandNutrationCancellation {
         }
         throw new NoSuchElementException("Element not found with any of the provided locators");
     }
-
+//test
     private void clearAndType(WebElement element, String text) {
         element.clear();
         element.sendKeys(Keys.CONTROL + "a");
