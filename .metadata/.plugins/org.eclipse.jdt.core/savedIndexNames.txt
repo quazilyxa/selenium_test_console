@@ -36,7 +36,6 @@ INDEX VERSION 1.134+C:\Users\quazi\eclipse-workspace\.metadata\.plugins\org.ecli
 1727604932.index
 2523018510.index
 3814841632.index
-3422094935.index
 383830997.index
 3154218446.index
 525390121.index
