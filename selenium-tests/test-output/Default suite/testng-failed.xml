@@ -3,17 +3,18 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="demoAppSetting">
+      <class name="brandNutrationCancellation">
         <methods>
           <include name="testValidLogin"/>
-          <include name="testNavigateToSettings"/>
-          <include name="testNavigateToLoginPage"/>
           <include name="testOpenAppSettings"/>
+          <include name="testNavigateToSettings"/>
+          <include name="tearDown"/>
           <include name="testOpenNavigationMenu"/>
           <include name="setUp"/>
-          <include name="tearDown"/>
+          <include name="testSearchAndDeleteBrand"/>
+          <include name="testNavigateToLoginPage"/>
         </methods>
-      </class> <!-- demoAppSetting -->
+      </class> <!-- brandNutrationCancellation -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->
