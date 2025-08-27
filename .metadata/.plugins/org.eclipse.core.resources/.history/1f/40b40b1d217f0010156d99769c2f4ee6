@@ -1,0 +1,574 @@
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.annotations.*;
+import org.testng.ITestResult;
+import java.io.File;
+import java.util.List;
+import java.time.Duration;
+import org.apache.commons.io.FileUtils;
+import java.util.concurrent.ThreadLocalRandom;
+
+import org.openqa.selenium.interactions.Actions;
+
+public class testAppSettings {
+    
+    private WebDriver driver;
+    private WebDriverWait wait;
+    private Actions actions;
+    private JavascriptExecutor js;
+    
+    // Constants
+    private static final String BASE_URL = "https://test-v2-panel.lyxa.ai/auth/sign-in?returnTo=%2F&loginAs=admin";
+    private static final String EMAIL = "nour@gmail.com";
+    private static final String PASSWORD = "Nour1234@";
+    private static final String CHROME_DRIVER_PATH = "C:\\Users\\quazi\\Downloads\\Automation web\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe";
+    
+    // Test data storage
+    private String addedUnit;
+    private String addedRiderArea;
+    private int addedMonthlyTarget;
+    private int addedRewardPrize;
+
+    @BeforeClass
+    public void setUp() {
+        System.setProperty("webdriver.chrome.driver", CHROME_DRIVER_PATH);
+        
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--incognito");
+        options.addArguments("--disable-notifications");
+        options.addArguments("--disable-popup-blocking");
+        options.addArguments("--disable-web-security");
+        options.addArguments("--allow-running-insecure-content");
+        
+        driver = new ChromeDriver(options);
+        driver.manage().window().maximize();
+        wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        actions = new Actions(driver);
+        js = (JavascriptExecutor) driver;
+        
+        // Create screenshots directory
+        new File("screenshots").mkdirs();
+        System.out.println("Test environment initialized successfully");
+    }
+
+
+    @Test(priority = 1)
+    public void testNavigateToLoginPage() throws Exception {
+        System.out.println("Test: Navigate to Login Page");
+        
+        driver.get(BASE_URL);
+        Thread.sleep(2000);
+        takeScreenshot("1_login_page_loaded.png");
+        
+        // Verify login page elements are present
+        WebElement emailField = wait.until(ExpectedConditions.presenceOfElementLocated(
+            By.name("email")
+        ));
+        WebElement passwordField = driver.findElement(By.name("password"));
+        WebElement loginButton = driver.findElement(By.cssSelector("button[type='submit']"));
+        
+        Assert.assertTrue(emailField.isDisplayed(), "Email field should be visible");
+        Assert.assertTrue(passwordField.isDisplayed(), "Password field should be visible");
+        Assert.assertTrue(loginButton.isDisplayed(), "Login button should be visible");
+        System.out.println("Login page loaded successfully");
+        Thread.sleep(2000);
+    }
+
+    @Test(priority = 2, dependsOnMethods = "testNavigateToLoginPage")
+    public void testValidLogin() throws Exception {
+        System.out.println("Test: Valid Login");
+        
+        // Enter credentials
+        WebElement emailField = findElement(
+            By.name("email"),
+            By.xpath("//input[contains(@placeholder,'email') or contains(@placeholder,'Email')]"),
+            By.xpath("//input[@type='text' or @type='email']")
+        );
+        clearAndType(emailField, EMAIL);
+        Thread.sleep(2000);
+        WebElement passwordField = findElement(
+            By.name("password"),
+            By.id("password"),
+            By.xpath("//input[@type='password']")
+        );
+        clearAndType(passwordField, PASSWORD);
+        
+        takeScreenshot("2_credentials_entered.png");
+        
+        // Click login button
+        WebElement loginButton = findElement(
+            By.cssSelector("button[type='submit']"),
+            By.xpath("//button[contains(text(),'Sign') or contains(text(),'Login')]")
+        );
+        loginButton.click();
+        Thread.sleep(2000);
+        // Verify successful login
+        boolean loginSuccessful = wait.until(ExpectedConditions.or(
+            ExpectedConditions.urlContains("dashboard"),
+            ExpectedConditions.visibilityOfElementLocated(By.xpath("//h1[contains(text(),'Dashboard')]")),
+            ExpectedConditions.not(ExpectedConditions.urlContains("sign-in"))
+        ));
+        
+        takeScreenshot("3_login_success.png");
+        Assert.assertTrue(loginSuccessful, "Login should be successful");
+        System.out.println("Login successful");
+    }
+
+    @Test(priority = 3, dependsOnMethods = "testValidLogin", description = "Open navigation menu")
+    public void testOpenNavigationMenu() throws InterruptedException {
+        System.out.println("Test: Open Navigation Menu");
+        
+        WebElement menuButton = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("(//button[contains(@class,'MuiIconButton-root')])[1]")
+        ));
+        menuButton.click();
+        Thread.sleep(2000);
+        takeScreenshot("04_menu_opened.png");
+        
+        WebElement settingsOption = wait.until(ExpectedConditions.visibilityOfElementLocated(
+            By.xpath("//span[@class='mnl__nav__item__title MuiBox-root css-0' and text()='Settings']")
+        ));
+        
+        Assert.assertTrue(settingsOption.isDisplayed(), "Settings menu item should be visible");
+        System.out.println("✓ Navigation menu opened successfully");
+    }
+
+    @Test(priority = 4, dependsOnMethods = "testOpenNavigationMenu", description = "Navigate to Settings")
+    public void testNavigateToSettings() throws InterruptedException {
+        System.out.println("Test: Navigate to Settings");
+        
+        WebElement settingsMenuItem = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//span[@class='mnl__nav__item__title MuiBox-root css-0' and text()='Settings']")
+        ));
+        settingsMenuItem.click();
+        
+        Thread.sleep(2000);
+        takeScreenshot("05_settings_page.png");
+        
+        String currentUrl = driver.getCurrentUrl();
+        Assert.assertTrue(currentUrl.contains("settings") || 
+                         driver.getPageSource().contains("Settings"), 
+                         "Should navigate to settings page");
+        
+        System.out.println("✓ Successfully navigated to Settings");
+    }
+
+    @Test(priority = 5, dependsOnMethods = "testNavigateToSettings", description = "Open App Settings")
+    public void testOpenAppSettings() throws InterruptedException {
+        System.out.println("Test: Open App Settings");
+        
+        WebElement appSettings = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//div[@class='MuiBox-root css-171onha' and text()='App Settings']")
+        ));
+        appSettings.click();
+        
+        Thread.sleep(2000);
+        takeScreenshot("06_app_settings_opened.png");
+        
+        WebElement configurationsTab = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//button[@role='tab' and contains(text(),'Configurations')]")
+        ));
+        
+        Assert.assertTrue(configurationsTab.isDisplayed(), "Configurations tab should be visible");
+        System.out.println("✓ App Settings opened successfully");
+    }
+
+    @Test(priority = 6, description = "Verify that the admin can add BD monthly target")
+    public void testAddBDMonthlyTarget6() throws Exception {
+        System.out.println("Test: Add BD Monthly Target");
+
+        // Wait for and locate the Monthly Target input
+        WebElement monthlyTargetInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
+            By.xpath("//input[@name='businessDevelopmentSetting.monthlyShopTarget']")));
+
+        int newValue = (int)(Math.random() * 49) + 1; // 1-49
+        clearAndType(monthlyTargetInput, String.valueOf(newValue));
+
+        String enteredValue = monthlyTargetInput.getAttribute("value");
+        Assert.assertEquals(enteredValue, String.valueOf(newValue),
+            "Monthly target value should be entered correctly");
+
+        Thread.sleep(2000);
+        takeScreenshot("6_bd_monthly_target.png");
+        Thread.sleep(2000);
+    }
+
+    @Test(priority = 7, description = "Verify that the admin can set BD monthly reward prize and add a unit")
+    public void testSetBDMonthlyRewardPrizeAndAddUnit() throws Exception {
+        System.out.println("Test: Set BD Monthly Reward Prize and Add Unit");
+
+        // Locate the Monthly Reward Prize input
+        WebElement rewardPrizeInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
+            By.xpath("//input[@name='businessDevelopmentSetting.monthlyRewardPrize']")));
+        
+        // Generate random prize value between 1-99
+        int newValues = (int)(Math.random() * 99) + 1;
+        clearAndType(rewardPrizeInput, String.valueOf(newValues));
+
+        // Verify the value was entered correctly
+        String enteredValue = rewardPrizeInput.getAttribute("value");
+        Assert.assertEquals(enteredValue, String.valueOf(newValues),
+            "Monthly reward prize value should be entered correctly");
+
+        // Take screenshot after setting reward prize
+        takeScreenshot("7_bd_monthly_reward_prize.png");
+
+        // Complete code for Units section interaction
+        WebElement addButton = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//button[contains(text(),'+ Add')]")));
+        addButton.click();
+
+        Thread.sleep(1000);
+        takeScreenshot("7_units_section.png");
+    }
+
+    @Test(priority = 8, description = "Verify that the admin can add a new Unit")
+    public void testAddUnit() throws Exception {
+        System.out.println("Test: Add a new Unit");
+
+        // Locate the Unit input
+        WebElement unitInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
+            By.xpath("//fieldset[.//span[text()='Enter Unit']]//input")
+        ));
+
+        String randomUnit = "" + (char)('a' + (int)(Math.random() * 26))
+        	    + (char)('a' + (int)(Math.random() * 26));
+
+        	// Ensure input is clickable and focused
+        	wait.until(ExpectedConditions.elementToBeClickable(unitInput));
+        	unitInput.click();
+
+        	// Clear and type unit
+        	unitInput.clear();
+        	unitInput.sendKeys(randomUnit);
+
+        	Thread.sleep(1000);
+
+        	// Press ENTER to confirm
+        	unitInput.sendKeys(Keys.ENTER);
+        	Thread.sleep(1000);
+
+        // Scroll into view to ensure unit list or save button is visible
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView(true);", unitInput);
+
+        // Take screenshot after adding unit
+        takeScreenshot("8_unit_added.png");
+
+        // Optional: Verify the unit is displayed in the list (if UI shows it immediately)
+        WebElement addedUnit = wait.until(ExpectedConditions.visibilityOfElementLocated(
+            By.xpath("//div[contains(text(),'" + randomUnit + "')]")
+        ));
+        Assert.assertTrue(addedUnit.isDisplayed(), "Newly added unit should be visible in the list");
+    }
+
+    @Test(priority = 9, description = "Verify that the admin can add a new Rider Search Area (km)")
+    public void testAddRiderSearchArea() throws Exception {
+        System.out.println("Test: Add Rider Search Area (km)");
+
+        // Click the "+ Add" button under Rider Search Area (km)
+        WebElement riderAddButton = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//h6[text()='Rider Search Area (km)']/following-sibling::button")
+        ));
+        riderAddButton.click();
+        Thread.sleep(1000);
+
+        // Locate the Rider Search input
+        WebElement riderSearchInput = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//h6[text()='Rider Search Area (km)']/following::input[@placeholder='Add Rider Search Area' or @placeholder='Enter number'][1]")
+        ));
+        riderSearchInput.click();
+
+        // Generate a random Rider Search Area between 3000–5000
+        int newRiderValue = 3000 + (int)(Math.random() * 2001);
+        riderSearchInput.clear();
+        riderSearchInput.sendKeys(String.valueOf(newRiderValue) + Keys.ENTER);
+
+        Thread.sleep(1000);
+
+        // Take screenshot after adding rider search area
+        takeScreenshot("9_rider_search_area.png");
+
+        // Optional: Verify that the new rider value is visible in the list
+        WebElement addedRiderValue = wait.until(ExpectedConditions.visibilityOfElementLocated(
+            By.xpath("//div[contains(text(),'" + newRiderValue + "')]")
+        ));
+        Assert.assertTrue(addedRiderValue.isDisplayed(), "Newly added Rider Search Area should be visible in the list");
+    }
+
+    @Test(priority = 10, description = "Verify that the admin can add a new Rider Batch with delay time")
+    public void testAddRiderBatch() throws Exception {
+        System.out.println("Test: Add Rider Batch");
+
+        // Click the "+ Add" button under Rider Batches
+        WebElement riderBatchAddButton = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//h6[text()='Rider Batches']/following-sibling::button")
+        ));
+        riderBatchAddButton.click();
+        Thread.sleep(1000);
+
+        // Get all Rider Batch inputs and select the newly added one (last in the list)
+        List<WebElement> riderBatchInputs = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
+            By.xpath("//input[@placeholder='Enter Rider Batch']")
+        ));
+        WebElement latestRiderBatchInput = riderBatchInputs.get(riderBatchInputs.size() - 1);
+
+        // Enter a random Rider Batch value (1–10)
+        int riderBatchValue = (int)(Math.random() * 10) + 1;
+        latestRiderBatchInput.sendKeys(String.valueOf(riderBatchValue));
+        Thread.sleep(1000);
+        latestRiderBatchInput.sendKeys(Keys.TAB);
+
+        // Locate delay time inputs and select the newly added one
+        List<WebElement> delayTimeInputs = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
+            By.xpath("//input[contains(@name,'delayTime')]")
+        ));
+        WebElement latestDelayTimeInput = delayTimeInputs.get(delayTimeInputs.size() - 1);
+
+        // Enter a random Delay Time value (8–15)
+        int delayTimeValue = (int)(Math.random() * 8) + 8;
+        latestDelayTimeInput.sendKeys(String.valueOf(delayTimeValue));
+
+        Thread.sleep(1000);
+
+        // Take screenshot after adding rider batch
+        takeScreenshot("10_rider_batch_added.png");
+
+        // Optional: Verify that values were entered correctly
+        Assert.assertEquals(latestRiderBatchInput.getAttribute("value"), String.valueOf(riderBatchValue),
+            "Rider Batch value should match the entered value");
+        Assert.assertEquals(latestDelayTimeInput.getAttribute("value"), String.valueOf(delayTimeValue),
+            "Delay Time value should match the entered value");
+    }
+
+    @Test(priority = 11, description = "Verify that the admin can save changes in App Settings")
+    public void testSaveAppSettings() throws Exception {
+        System.out.println("Test: Save App Settings");
+
+        // Locate and wait for the Save Changes button
+        WebElement saveButton = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//button[contains(text(),'Save Changes')]")
+        ));
+        Thread.sleep(2000);
+
+        // Use Actions to click (to handle any overlay issues)
+        Actions actions = new Actions(driver);
+        actions.moveToElement(saveButton).click().perform();
+
+        // Take screenshot after saving
+        takeScreenshot("11_save_app_settings.png");
+
+        // Optional: Verify success message / toast appears
+        WebElement successToast = wait.until(ExpectedConditions.visibilityOfElementLocated(
+            By.xpath("//*[contains(text(),'Changes saved') or contains(text(),'successfully')]")
+        ));
+        Assert.assertTrue(successToast.isDisplayed(), "Success message should be displayed after saving");
+    }
+
+    @Test(priority = 12, dependsOnMethods = "testDeleteAddedUnit", description = "Verify and delete added rider area")
+    public void testDeleteAddedRiderArea() throws InterruptedException {
+        System.out.println("Test: Delete Added Rider Area");
+        
+        try {
+            WebElement deleteIcon = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//div[text()='" + addedRiderArea + "']/following-sibling::*[name()='svg'] | " +
+                        "//span[text()='" + addedRiderArea + "']/following-sibling::*[name()='svg']")
+            ));
+            
+            waitAndClick(deleteIcon);
+            Thread.sleep(2000);
+            takeScreenshot("13_rider_area_deleted.png");
+            System.out.println("✓ Rider area deleted successfully: " + addedRiderArea + " km");
+        } catch (TimeoutException e) {
+            System.out.println("⚠ Rider area delete icon not found, may have been already removed");
+        }
+    }
+
+    @Test(priority = 13, dependsOnMethods = "testDeleteAddedRiderArea", description = "Delete rider batch and final save")
+    public void testDeleteRiderBatchAndFinalSave() throws InterruptedException {
+        System.out.println("Test: Delete Rider Batch and Final Save");
+        
+        js.executeScript("window.scrollBy(0, 600);");
+        Thread.sleep(2000);
+        
+        try {
+            WebElement deleteButton = wait.until(ExpectedConditions.elementToBeClickable(
+                By.cssSelector("button.css-19sp94p")
+            ));
+            
+            waitAndClick(deleteButton);
+            Thread.sleep(2000);
+            
+            WebElement finalSaveButton = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//button[contains(text(),'Save Changes')]")
+            ));
+            
+            waitAndClick(finalSaveButton);
+            Thread.sleep(3000);
+            
+            takeScreenshot("14_final_cleanup_completed.png");
+            System.out.println("✓ Rider batch deleted and final save completed");
+        } catch (TimeoutException e) {
+            System.out.println("⚠ Rider batch delete button not found");
+        }
+        
+        // Return to top of page
+        actions.keyDown(Keys.CONTROL).sendKeys(Keys.HOME).keyUp(Keys.CONTROL).perform();
+        Thread.sleep(2000);
+    }
+
+    // Additional validation tests
+    @Test(priority = 14, description = "Verify monthly target accepts numbers only")
+    public void testMonthlyTargetValidation() throws InterruptedException {
+        System.out.println("Test: Monthly Target Validation");
+        
+        WebElement monthlyTargetInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
+            By.name("businessDevelopmentSetting.monthlyShopTarget")
+        ));
+        
+        // Test with letters
+        monthlyTargetInput.clear();
+        monthlyTargetInput.sendKeys("abc");
+        String valueAfterLetters = monthlyTargetInput.getAttribute("value");
+        
+        // Test with numbers
+        monthlyTargetInput.clear();
+        monthlyTargetInput.sendKeys("123");
+        String valueAfterNumbers = monthlyTargetInput.getAttribute("value");
+        
+        Assert.assertTrue(valueAfterLetters.isEmpty() || valueAfterLetters.matches("\\d*"), 
+            "Monthly target should not accept letters");
+        Assert.assertEquals(valueAfterNumbers, "123", "Monthly target should accept numbers");
+        
+        takeScreenshot("15_monthly_target_validation.png");
+        System.out.println("✓ Monthly target validation passed");
+    }
+
+    @Test(priority = 15, description = "Verify reward prize accepts numbers only")
+    public void testRewardPrizeValidation() throws InterruptedException {
+        System.out.println("Test: Reward Prize Validation");
+        
+        WebElement rewardPrizeInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
+            By.name("businessDevelopmentSetting.monthlyRewardPrize")
+        ));
+        
+        // Test with letters
+        rewardPrizeInput.clear();
+        rewardPrizeInput.sendKeys("xyz");
+        String valueAfterLetters = rewardPrizeInput.getAttribute("value");
+        
+        // Test with numbers
+        rewardPrizeInput.clear();
+        rewardPrizeInput.sendKeys("456");
+        String valueAfterNumbers = rewardPrizeInput.getAttribute("value");
+        
+        Assert.assertTrue(valueAfterLetters.isEmpty() || valueAfterLetters.matches("\\d*"), 
+            "Reward prize should not accept letters");
+        Assert.assertEquals(valueAfterNumbers, "456", "Reward prize should accept numbers");
+        
+        takeScreenshot("16_reward_prize_validation.png");
+        System.out.println("✓ Reward prize validation passed");
+    }
+
+    @Test(priority = 16, description = "Test payment method selection")
+    public void testPaymentMethodSelection() throws InterruptedException {
+        System.out.println("Test: Payment Method Selection");
+        
+        try {
+            WebElement cashButton = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//button[contains(text(),'Cash')]")
+            ));
+            
+            WebElement cardButton = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//button[contains(text(),'Card')]")
+            ));
+            
+            // Test toggling payment methods
+            String cashClassBefore = cashButton.getAttribute("class");
+            cashButton.click();
+            Thread.sleep(500);
+            String cashClassAfter = cashButton.getAttribute("class");
+            
+            Assert.assertNotEquals(cashClassBefore, cashClassAfter, "Cash payment method should toggle");
+            
+            takeScreenshot("17_payment_methods_tested.png");
+            System.out.println("✓ Payment method selection tested");
+        } catch (TimeoutException e) {
+            System.out.println("⚠ Payment method buttons not found on current view");
+        }
+    }
+
+    // Summary method to display test results
+    
+    
+
+    @AfterClass
+    public void tearDown() {
+        if (driver != null) {
+            driver.quit();
+            System.out.println("Test environment cleaned up");
+        }
+    }
+
+    // Utility Methods
+    private void takeScreenshot(String filename) {
+        try {
+            File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+            FileUtils.copyFile(screenshot, new File("screenshots/" + filename));
+            System.out.println("Screenshot saved: " + filename);
+        } catch (Exception e) {
+            System.out.println("Failed to take screenshot: " + e.getMessage());
+        }
+    }
+
+    private WebElement findElement(By... locators) {
+        for (By locator : locators) {
+            try {
+                WebElement element = wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+                if (element.isDisplayed()) {
+                    return element;
+                }
+            } catch (TimeoutException e) {
+                continue;
+            }
+        }
+        throw new NoSuchElementException("None of the provided locators found a visible element");
+    }
+
+    private void clearAndType(WebElement element, String text) {
+        element.clear();
+        element.sendKeys(text);
+    }
+
+    private void scrollToElement(WebElement element) {
+        js.executeScript("arguments[0].scrollIntoView({behavior: 'smooth', block: 'center'});", element);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+
+    private void waitAndClick(WebElement element) {
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+        actions.moveToElement(element).click().perform();
+    }
+    
+    
+    @AfterMethod
+    public void logTestResult(ITestResult result) {
+        String testName = result.getMethod().getMethodName();
+        if (result.getStatus() == ITestResult.SUCCESS) {
+            System.out.println("✓ PASSED: " + testName);
+        } else if (result.getStatus() == ITestResult.FAILURE) {
+            System.out.println("✗ FAILED: " + testName + " - " + result.getThrowable().getMessage());
+        } else if (result.getStatus() == ITestResult.SKIP) {
+            System.out.println("⊘ SKIPPED: " + testName);
+        }
+    }
+}

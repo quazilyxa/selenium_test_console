@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item key="hasShownOverlayPopupBefore" value="true"/>
+	<section name="java.lang.Class">
+		<item key="replaceBarOpen" value="true"/>
+		<list key="findhistory">
+			<item value="scroll"/>
+			<item value="add"/>
+			<item value="//"/>
+			<item value="newRiderValue"/>
+			<item value="newRiderValue\"/>
+			<item value="WebElement unitInput = wait.until"/>
+			<item value="this.wait"/>
+			<item value="testAddBDMonthlyTarget"/>
+			<item value="waitAndClick"/>
+			<item value="wa"/>
+			<item value="save change"/>
+			<item value="riderBatchInputs"/>
+			<item value="riderBatchValue"/>
+			<item value="javasc"/>
+			<item value="unit"/>
+		</list>
+		<list key="replacehistory">
+			<item value=" "/>
+		</list>
+	</section>
+</section>

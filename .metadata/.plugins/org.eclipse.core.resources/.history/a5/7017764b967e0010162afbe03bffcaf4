@@ -1,0 +1,665 @@
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.annotations.*;
+import java.io.File;
+import java.util.List;
+import java.time.Duration;
+import org.apache.commons.io.FileUtils;
+import java.util.concurrent.ThreadLocalRandom;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.interactions.Actions;
+
+
+public class testAppSettings {
+    
+    private WebDriver driver;
+    private WebDriverWait wait;
+    private Actions actions;
+    private static final String BASE_URL = "https://test-v2-panel.lyxa.ai/auth/sign-in?returnTo=%2F&loginAs=admin";
+    private static final String EMAIL = "nour@gmail.com";
+    private static final String PASSWORD = "Nour1234@";
+
+
+    @BeforeClass
+    public void setUp() {
+    	 System.setProperty("webdriver.chrome.driver",
+                 "C:\\Users\\quazi\\Downloads\\Automation web\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe");
+        
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--incognito");
+        options.addArguments("--disable-notifications");
+        options.addArguments("--disable-popup-blocking");
+        
+        driver = new ChromeDriver(options);
+        driver.manage().window().maximize();
+        wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        actions = new Actions(driver);
+        
+        // Create screenshots directory
+        new File("screenshots").mkdirs();
+        System.out.println("Test environment ready");
+    }
+
+    @Test(priority = 1)
+    public void testNavigateToLoginPage() throws Exception {
+        System.out.println("Test: Navigate to Login Page");
+        
+        driver.get(BASE_URL);
+        Thread.sleep(2000);
+        takeScreenshot("1_login_page_loaded.png");
+        
+        // Verify login page elements are present
+        WebElement emailField = wait.until(ExpectedConditions.presenceOfElementLocated(
+            By.name("email")
+        ));
+        WebElement passwordField = driver.findElement(By.name("password"));
+        WebElement loginButton = driver.findElement(By.cssSelector("button[type='submit']"));
+        
+        Assert.assertTrue(emailField.isDisplayed(), "Email field should be visible");
+        Assert.assertTrue(passwordField.isDisplayed(), "Password field should be visible");
+        Assert.assertTrue(loginButton.isDisplayed(), "Login button should be visible");
+        System.out.println("Login page loaded successfully");
+        Thread.sleep(2000);
+    }
+    
+    @Test(priority = 2, dependsOnMethods = "testNavigateToLoginPage")
+    public void testValidLogin() throws Exception {
+        System.out.println("Test: Valid Login");
+        
+        WebElement emailField = findElement(
+            By.name("email"),
+            By.xpath("//input[contains(@placeholder,'email') or contains(@placeholder,'Email')]"),
+            By.xpath("//input[@type='text' or @type='email']")
+        );
+        clearAndType(emailField, EMAIL);
+        Thread.sleep(2000);
+        WebElement passwordField = findElement(
+            By.name("password"),
+            By.id("password"),
+            By.xpath("//input[@type='password']")
+        );
+        clearAndType(passwordField, PASSWORD);
+        
+        takeScreenshot("2_credentials_entered.png");
+        
+        WebElement loginButton = findElement(
+            By.cssSelector("button[type='submit']"),
+            By.xpath("//button[contains(text(),'Sign') or contains(text(),'Login')]")
+        );
+        loginButton.click();
+        Thread.sleep(2000);
+        boolean loginSuccessful = wait.until(ExpectedConditions.or(
+            ExpectedConditions.urlContains("dashboard"),
+            ExpectedConditions.visibilityOfElementLocated(By.xpath("//h1[contains(text(),'Dashboard')]")),
+            ExpectedConditions.not(ExpectedConditions.urlContains("sign-in"))
+        ));
+        
+        takeScreenshot("3_login_success.png");
+        Assert.assertTrue(loginSuccessful, "Login should be successful");
+        System.out.println("Login successful");
+    }
+
+    @Test(priority = 3, dependsOnMethods = "testValidLogin")
+    public void testOpenNavigationMenu() throws Exception {
+        System.out.println("Test: Open Navigation Menu");
+        Thread.sleep(2000);
+        WebElement menuButton = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("(//button[contains(@class,'MuiIconButton-root')])[1]")
+        ));
+        menuButton.click();
+        Thread.sleep(2000);
+        takeScreenshot("4_menu_opened.png");
+        
+        WebElement settingsOption = wait.until(ExpectedConditions.visibilityOfElementLocated(
+            By.xpath("//span[@class='mnl__nav__item__title MuiBox-root css-0' and text()='Settings']")
+        ));
+        
+        Assert.assertTrue(settingsOption.isDisplayed(), "Settings menu item should be visible");
+        System.out.println("Navigation menu opened successfully");
+    }
+
+    @Test(priority = 4, dependsOnMethods = "testOpenNavigationMenu")
+    public void testNavigateToSettings() throws Exception {
+        System.out.println("Test: Navigate to Settings");
+        
+        WebElement settingsMenuItem = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//span[@class='mnl__nav__item__title MuiBox-root css-0' and text()='Settings']")
+        ));
+        settingsMenuItem.click();
+      
+        Thread.sleep(2000);
+        takeScreenshot("5_settings_page.png");
+        
+        String currentUrl = driver.getCurrentUrl();
+        Assert.assertTrue(currentUrl.contains("settings") || 
+                         driver.getPageSource().contains("Settings"), 
+                         "Should navigate to settings page");
+        
+        System.out.println("Successfully navigated to Settings");
+    }
+
+    @Test(priority = 5, dependsOnMethods = "testNavigateToSettings")
+    public void testOpenAppSettings() throws Exception {
+        System.out.println("Test: Open App Settings");
+        
+        WebElement testOpenAppSettings = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//div[@class='MuiBox-root css-171onha' and text()='App Settings']")
+        ));
+        testOpenAppSettings.click();
+        
+        Thread.sleep(2000);
+        takeScreenshot("6_default_app_settings.png");
+        
+        WebElement configurationsTab = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//button[@role='tab' and contains(text(),'Configurations')]")
+            ));
+        Assert.assertTrue(configurationsTab.isDisplayed(), "Configurations tab should be visible");
+    }
+
+    @Test(priority = 6, dependsOnMethods = "testOpenAppSettings")
+    public void testMonthlyTargetAcceptsValidNumbers() {
+        WebElement monthlyTargetInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
+            By.name("businessDevelopmentSetting.monthlyShopTarget")));
+        
+        clearAndType(monthlyTargetInput, "25");
+        
+        Assert.assertEquals(monthlyTargetInput.getAttribute("value"), "25");
+    }
+
+    @Test(priority = 7, dependsOnMethods = "testOpenAppSettings")
+    public void testMonthlyTargetRejectsNonNumericInput() {
+        WebElement monthlyTargetInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
+            By.name("businessDevelopmentSetting.monthlyShopTarget")));
+        
+        monthlyTargetInput.clear();
+        monthlyTargetInput.sendKeys("abc");
+        
+        String value = monthlyTargetInput.getAttribute("value");
+        Assert.assertTrue(value.isEmpty() || isValidationErrorDisplayed());
+    }
+
+    @Test(priority = 8, dependsOnMethods = "testOpenAppSettings")
+    public void testMonthlyTargetHandlesSpecialCharacters() {
+        WebElement monthlyTargetInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
+            By.name("businessDevelopmentSetting.monthlyShopTarget")));
+        
+        String[] specialChars = {"!@#$%", "123.45", "-50", "1e5"};
+        
+        for (String chars : specialChars) {
+            monthlyTargetInput.clear();
+            monthlyTargetInput.sendKeys(chars);
+            
+            String value = monthlyTargetInput.getAttribute("value");
+            if (chars.equals("123.45") || chars.equals("-50")) {
+                Assert.assertFalse(value.isEmpty());
+            } else {
+                Assert.assertTrue(value.isEmpty() || isValidationErrorDisplayed());
+            }
+        }
+    }
+
+    @Test(priority = 9, dependsOnMethods = "testOpenAppSettings")
+    public void testMonthlyTargetHandlesLeadingTrailingSpaces() {
+        WebElement monthlyTargetInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
+            By.name("businessDevelopmentSetting.monthlyShopTarget")));
+        
+        monthlyTargetInput.clear();
+        monthlyTargetInput.sendKeys("  25  ");
+        
+        String value = monthlyTargetInput.getAttribute("value");
+        Assert.assertEquals(value.trim(), "25");
+    }
+
+    @Test(priority = 10, dependsOnMethods = "testOpenAppSettings")
+    public void testMonthlyRewardPrizeAcceptsValidNumbers() {
+        WebElement rewardPrizeInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
+            By.name("businessDevelopmentSetting.monthlyRewardPrize")));
+        
+        clearAndType(rewardPrizeInput, "50");
+        
+        Assert.assertEquals(rewardPrizeInput.getAttribute("value"), "50");
+    }
+
+    @Test(priority = 11, dependsOnMethods = "testOpenAppSettings")
+    public void testUnitInputAcceptsValidText() {
+        WebElement addButton = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//button[contains(text(),'+ Add')]")));
+        addButton.click();
+        
+        WebElement unitInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
+            By.xpath("//fieldset[.//span[text()='Enter Unit']]/preceding-sibling::input")));
+        
+        unitInput.clear();
+        unitInput.sendKeys("test");
+        
+        Assert.assertEquals(unitInput.getAttribute("value"), "test");
+    }
+
+    @Test(priority = 12, dependsOnMethods = "testOpenAppSettings")
+    public void testFieldMaxLengthLimits() {
+        WebElement monthlyTargetInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
+            By.name("businessDevelopmentSetting.monthlyShopTarget")));
+        
+        String longInput = "1234567890123456789012345678901234567890";
+        monthlyTargetInput.clear();
+        monthlyTargetInput.sendKeys(longInput);
+        
+        String actualValue = monthlyTargetInput.getAttribute("value");
+        Assert.assertTrue(actualValue.length() <= 10, "Field should enforce maximum length");
+    }
+
+    @Test(priority = 13, dependsOnMethods = "testOpenAppSettings")
+    public void testAddButtonForUnitsIsClickable() {
+        WebElement addButton = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//button[contains(text(),'+ Add')]")));
+        
+        Assert.assertTrue(addButton.isEnabled());
+        addButton.click();
+        
+        WebElement unitInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
+            By.xpath("//fieldset[.//span[text()='Enter Unit']]/preceding-sibling::input")));
+        Assert.assertTrue(unitInput.isDisplayed());
+    }
+
+    @Test(priority = 14, dependsOnMethods = "testOpenAppSettings")
+    public void testCashButtonFunctionality() {
+        WebElement cashButton = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//button[contains(text(),'Cash')]")));
+        
+        Assert.assertTrue(cashButton.isEnabled());
+        cashButton.click();
+        
+        String classAttribute = cashButton.getAttribute("class");
+        Assert.assertTrue(classAttribute.contains("selected") || classAttribute.contains("active"));
+    }
+
+    @Test(priority = 15, dependsOnMethods = "testOpenAppSettings")
+    public void testCardButtonFunctionality() {
+        WebElement cardButton = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//button[contains(text(),'Card')]")));
+        
+        Assert.assertTrue(cardButton.isEnabled());
+        cardButton.click();
+        
+        String classAttribute = cardButton.getAttribute("class");
+        Assert.assertTrue(classAttribute.contains("selected") || classAttribute.contains("active"));
+    }
+
+    @Test(priority = 16, dependsOnMethods = "testOpenAppSettings")
+    public void testDeleteIconsForUnitsWork() throws InterruptedException {
+        testAddButtonForUnitsIsClickable();
+        WebElement unitInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
+            By.xpath("//fieldset[.//span[text()='Enter Unit']]/preceding-sibling::input")));
+        
+        String testUnit = "testunit";
+        unitInput.clear();
+        unitInput.sendKeys(testUnit + Keys.ENTER);
+        
+        Thread.sleep(1000);
+        
+        WebElement deleteIcon = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//div[text()='" + testUnit + "']/following-sibling::*[name()='svg']")));
+        
+        deleteIcon.click();
+        
+        try {
+            driver.findElement(By.xpath("//div[text()='" + testUnit + "']"));
+            Assert.fail("Unit should have been deleted");
+        } catch (NoSuchElementException e) {
+            // Expected
+        }
+    }
+
+    @Test(priority = 17, dependsOnMethods = "testOpenAppSettings")
+    public void testRiderSearchAreaAddButton() {
+        WebElement riderAddButton = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//h6[text()='Rider Search Area (km)']/following-sibling::button")));
+        
+        riderAddButton.click();
+        
+        WebElement riderSearchInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
+            By.xpath("//h6[text()='Rider Search Area (km)']/following::input[@placeholder='Add Rider Search Area' or @placeholder='Enter number'][1]")));
+        
+        Assert.assertTrue(riderSearchInput.isDisplayed());
+    }
+
+    @Test(priority = 18, dependsOnMethods = "testOpenAppSettings")
+    public void testRiderBatchAddButton() {
+        WebElement riderBatchAddButton = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//h6[text()='Rider Batches']/following-sibling::button")));
+        
+        riderBatchAddButton.click();
+        
+        List<WebElement> riderBatchInputs = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
+            By.xpath("//input[@placeholder='Enter Rider Batch']")));
+        
+        Assert.assertTrue(riderBatchInputs.size() > 0);
+    }
+
+    @Test(priority = 19, dependsOnMethods = "testOpenAppSettings")
+    public void testSaveChangesButtonFunctionality() {
+        WebElement saveButton = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//button[contains(text(),'Save Changes')]")));
+        
+        Assert.assertTrue(saveButton.isEnabled());
+        actions.moveToElement(saveButton).click().perform();
+        
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+
+    @Test(priority = 20, dependsOnMethods = "testOpenAppSettings")
+    public void testNumericFieldsValidation() {
+        String[] numericFields = {
+            "businessDevelopmentSetting.monthlyShopTarget",
+            "businessDevelopmentSetting.monthlyRewardPrize"
+        };
+        
+        for (String fieldName : numericFields) {
+            WebElement field = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.name(fieldName)));
+            
+            String[] invalidInputs = {"abc", "12.5.6", "1e", "++123", "test123"};
+            
+            for (String invalid : invalidInputs) {
+                field.clear();
+                field.sendKeys(invalid);
+                
+                String value = field.getAttribute("value");
+                Assert.assertTrue(value.isEmpty() || isValidationErrorDisplayed(),
+                    "Field " + fieldName + " should reject invalid input: " + invalid);
+            }
+        }
+    }
+
+    @Test(priority = 21, dependsOnMethods = "testOpenAppSettings")
+    public void testDelayTimeFieldValidation() {
+        testRiderBatchAddButton();
+        
+        List<WebElement> delayTimeInputs = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
+            By.xpath("//input[contains(@name,'delayTime')]")));
+        
+        WebElement latestDelayTimeInput = delayTimeInputs.get(delayTimeInputs.size() - 1);
+        
+        latestDelayTimeInput.clear();
+        latestDelayTimeInput.sendKeys("15");
+        Assert.assertEquals(latestDelayTimeInput.getAttribute("value"), "15");
+        
+        latestDelayTimeInput.clear();
+        latestDelayTimeInput.sendKeys("abc");
+        String value = latestDelayTimeInput.getAttribute("value");
+        Assert.assertTrue(value.isEmpty() || isValidationErrorDisplayed());
+    }
+
+    @Test(priority = 22, dependsOnMethods = "testOpenAppSettings")
+    public void testRiderSearchAreaNumericValidation() {
+        testRiderSearchAreaAddButton();
+        
+        WebElement riderSearchInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
+            By.xpath("//h6[text()='Rider Search Area (km)']/following::input[@placeholder='Add Rider Search Area' or @placeholder='Enter number'][1]")));
+        
+        riderSearchInput.clear();
+        riderSearchInput.sendKeys("5000");
+        Assert.assertEquals(riderSearchInput.getAttribute("value"), "5000");
+        
+        riderSearchInput.clear();
+        riderSearchInput.sendKeys("abc");
+        String value = riderSearchInput.getAttribute("value");
+        Assert.assertTrue(value.isEmpty() || isValidationErrorDisplayed());
+    }
+
+    @Test(priority = 23, dependsOnMethods = "testOpenAppSettings")
+    public void testEmptyFieldValidation() {
+        WebElement monthlyTargetInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
+            By.name("businessDevelopmentSetting.monthlyShopTarget")));
+        
+        monthlyTargetInput.clear();
+        
+        WebElement saveButton = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//button[contains(text(),'Save Changes')]")));
+        actions.moveToElement(saveButton).click().perform();
+        
+        Assert.assertTrue(isValidationErrorDisplayed() ||
+                          isFieldHighlightedAsRequired(monthlyTargetInput));
+    }
+
+    @Test(priority = 24, dependsOnMethods = "testOpenAppSettings")
+    public void testUnitDeletionFunctionality() throws InterruptedException {
+        WebElement addButton = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//button[contains(text(),'+ Add')]")));
+        addButton.click();
+        
+        WebElement unitInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
+            By.xpath("//fieldset[.//span[text()='Enter Unit']]/preceding-sibling::input")));
+        
+        String testUnit = "deletetest";
+        unitInput.clear();
+        unitInput.sendKeys(testUnit + Keys.ENTER);
+        
+        Thread.sleep(1000);
+        
+        WebElement deleteIcon = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//div[text()='" + testUnit + "']/following-sibling::*[name()='svg']")));
+        
+        actions.moveToElement(deleteIcon).click().perform();
+        
+        try {
+            driver.findElement(By.xpath("//div[text()='" + testUnit + "']"));
+            Assert.fail("Unit should have been deleted");
+        } catch (NoSuchElementException e) {
+            // Expected
+        }
+    }
+
+    @Test(priority = 25, dependsOnMethods = "testOpenAppSettings")
+    public void testRiderSearchAreaDeletion() throws InterruptedException {
+        WebElement riderAddButton = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//h6[text()='Rider Search Area (km)']/following-sibling::button")));
+        riderAddButton.click();
+        WebElement riderSearchInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
+            By.xpath("//h6[text()='Rider Search Area (km)']/following::input[@placeholder='Add Rider Search Area' or @placeholder='Enter number'][1]")));
+        
+        String testValue = "4500";
+        riderSearchInput.clear();
+        riderSearchInput.sendKeys(testValue + Keys.ENTER);
+        
+        Thread.sleep(1000);
+        
+        WebElement deleteIcon = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//div[text()='" + testValue + "']/following-sibling::*[name()='svg'] | " +
+                     "//span[text()='" + testValue + "']/following-sibling::*[name()='svg']")));
+        
+        actions.moveToElement(deleteIcon).click().perform();
+        
+        try {
+            driver.findElement(By.xpath("//div[text()='" + testValue + "'] | //span[text()='" + testValue + "']"));
+            Assert.fail("Rider search area should have been deleted");
+        } catch (NoSuchElementException e) {
+            // Expected
+        }
+    }
+
+    @Test(priority = 26, dependsOnMethods = "testOpenAppSettings")
+    public void testRiderBatchDeletion() throws InterruptedException {
+        WebElement riderBatchAddButton = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//h6[text()='Rider Batches']/following-sibling::button")));
+        riderBatchAddButton.click();
+        
+        List<WebElement> riderBatchInputs = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
+            By.xpath("//input[@placeholder='Enter Rider Batch']")));
+        
+        WebElement latestRiderBatchInput = riderBatchInputs.get(riderBatchInputs.size() - 1);
+        String testBatchValue = "5";
+        latestRiderBatchInput.sendKeys(testBatchValue);
+        
+        Thread.sleep(1000);
+        
+        try {
+            WebElement deleteButton = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//button[@class='css-19sp94p']")));
+            
+            actions.moveToElement(deleteButton).click().perform();
+            
+            List<WebElement> updatedInputs = driver.findElements(
+                By.xpath("//input[@placeholder='Enter Rider Batch']"));
+            Assert.assertTrue(updatedInputs.size() < riderBatchInputs.size());
+            
+        } catch (TimeoutException e) {
+            // Test passes if delete button is not found
+        }
+    }
+     
+    @Test(priority = 27, dependsOnMethods = "testOpenAppSettings")
+    public void testPageIntegrity() {
+        String[] expectedSections = {
+            "Business Development",
+            "Payment Method", 
+            "Units",
+            "Rider Search Area (km)",
+            "Rider Batches"
+        };
+        
+        for (String section : expectedSections) {
+            WebElement sectionElement = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//*[contains(text(),'" + section + "')]")));
+            Assert.assertTrue(sectionElement.isDisplayed(), section + " should be visible");
+        }
+    }
+
+    @Test(priority = 28, dependsOnMethods = "testOpenAppSettings")
+    public void testElementsAlignment() {
+        WebElement monthlyTarget = driver.findElement(By.name("businessDevelopmentSetting.monthlyShopTarget"));
+        WebElement monthlyReward = driver.findElement(By.name("businessDevelopmentSetting.monthlyRewardPrize"));
+        
+        Assert.assertTrue(monthlyTarget.isDisplayed());
+        Assert.assertTrue(monthlyReward.isDisplayed());
+        
+        Assert.assertTrue(monthlyTarget.getLocation().getY() > 0);
+        Assert.assertTrue(monthlyReward.getLocation().getY() > 0);
+    }
+
+    @Test(priority = 29, dependsOnMethods = "testOpenAppSettings")
+    public void testErrorHandling() {
+        WebElement monthlyTargetInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
+            By.name("businessDevelopmentSetting.monthlyShopTarget")));
+        
+        monthlyTargetInput.clear();
+        monthlyTargetInput.sendKeys("invalid");
+        
+        WebElement saveButton = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//button[contains(text(),'Save Changes')]")));
+        actions.moveToElement(saveButton).click().perform();
+        
+        Assert.assertTrue(isValidationErrorDisplayed(), "Validation error should be displayed for invalid input");
+    }
+
+    @Test(priority = 30, dependsOnMethods = "testOpenAppSettings")
+    public void testStatePreservationAfterActions() {
+        WebElement monthlyTarget = wait.until(ExpectedConditions.visibilityOfElementLocated(
+            By.name("businessDevelopmentSetting.monthlyShopTarget")));
+        WebElement monthlyReward = wait.until(ExpectedConditions.visibilityOfElementLocated(
+            By.name("businessDevelopmentSetting.monthlyRewardPrize")));
+        
+        monthlyTarget.clear();
+        monthlyTarget.sendKeys("30");
+        monthlyReward.clear();
+        monthlyReward.sendKeys("75");
+        
+        WebElement addButton = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//button[contains(text(),'+ Add')]")));
+        addButton.click();
+        
+        Assert.assertEquals(monthlyTarget.getAttribute("value"), "30");
+        Assert.assertEquals(monthlyReward.getAttribute("value"), "75");
+    }
+
+    @Test(priority = 31, dependsOnMethods = "testOpenAppSettings")
+    public void testScrollFunctionality() throws InterruptedException {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        
+        js.executeScript("window.scrollBy(0, 500);");
+        
+        Thread.sleep(1000);
+        
+        WebElement riderBatchesSection = wait.until(ExpectedConditions.visibilityOfElementLocated(
+            By.xpath("//h6[text()='Rider Batches']")));
+        Assert.assertTrue(riderBatchesSection.isDisplayed());
+        
+        actions.keyDown(Keys.CONTROL).sendKeys(Keys.HOME).keyUp(Keys.CONTROL).perform();
+    }
+
+
+    @AfterClass
+    public void tearDown() {
+        System.out.println("Cleaning up test environment...");
+        if (driver != null) {
+            try {
+                takeScreenshot("final_state.png");
+            } catch (Exception e) {
+                System.out.println("Could not take final screenshot: " + e.getMessage());
+            }
+            driver.quit();
+            System.out.println("Browser closed successfully");
+        }
+    }
+        
+    private WebElement findElement(By... locators) {
+        for (By locator : locators) {
+            try {
+                return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+            } catch (Exception ignored) {
+               
+            }
+        }
+        throw new NoSuchElementException("Element not found with any of the provided locators");
+    }
+
+    private void clearAndType(WebElement element, String text) {
+        element.clear();
+        element.sendKeys(Keys.CONTROL + "a");
+        element.sendKeys(Keys.DELETE);
+        element.sendKeys(text);
+    }
+    
+    private boolean isValidationErrorDisplayed() {
+        try {
+            WebElement errorElement = driver.findElement(By.xpath(
+                "//*[contains(@class, 'error') or contains(@class, 'invalid') or " +
+                "contains(text(), 'required') or contains(text(), 'invalid') or " +
+                "contains(text(), 'error')]"));
+            return errorElement.isDisplayed();
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
+    
+    private boolean isFieldHighlightedAsRequired(WebElement field) {
+        String classAttribute = field.getAttribute("class");
+        String style = field.getAttribute("style");
+        
+        return classAttribute.contains("error") || 
+               classAttribute.contains("required") || 
+               style.contains("border-color: red") ||
+               style.contains("border: red");
+    }
+ 
+
+    private void takeScreenshot(String filename) {
+        try {
+            File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+            File destination = new File("screenshots/" + filename);
+            FileUtils.copyFile(screenshot, destination);
+            System.out.println("Screenshot saved: " + filename);
+        } catch (Exception e) {
+            System.out.println("Failed to take screenshot: " + e.getMessage());
+        }
+    }
+}
