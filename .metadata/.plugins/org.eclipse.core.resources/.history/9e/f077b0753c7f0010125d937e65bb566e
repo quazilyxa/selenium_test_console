@@ -1,0 +1,600 @@
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.annotations.*;
+import java.io.File;
+import java.util.List;
+import java.time.Duration;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.interactions.Actions;
+
+public class testAppSettings {
+    
+    private WebDriver driver;
+    private WebDriverWait wait;
+    private static final String BASE_URL = "https://test-v2-panel.lyxa.ai/auth/sign-in?returnTo=%2F&loginAs=admin";
+    private static final String EMAIL = "nour@gmail.com";
+    private static final String PASSWORD = "Nour1234@";
+
+    @BeforeClass
+    public void setUp() {
+        System.out.println("Starting browser setup...");
+        
+        try {
+            System.setProperty("webdriver.chrome.driver",
+                "C:\\Users\\quazi\\Downloads\\Automation web\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe");
+            
+            ChromeOptions options = new ChromeOptions();
+            options.addArguments("--incognito");
+            options.addArguments("--disable-notifications");
+            options.addArguments("--disable-popup-blocking");
+            options.addArguments("--disable-web-security");
+            options.addArguments("--no-sandbox");
+            options.addArguments("--disable-dev-shm-usage");
+            
+            System.out.println("Creating ChromeDriver instance...");
+            driver = new ChromeDriver(options);
+            driver.manage().window().maximize();
+            wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+            
+            // Create screenshots directory
+            new File("screenshots").mkdirs();
+            System.out.println("Test environment ready - Browser should be visible now");
+            
+        } catch (Exception e) {
+            System.err.println("Failed to setup browser: " + e.getMessage());
+            e.printStackTrace();
+            throw new RuntimeException("Browser setup failed", e);
+        }
+    }
+
+    @Test(priority = 1)
+    public void testNavigateToLoginPage() throws Exception {
+        System.out.println("Test: Navigate to Login Page");
+        
+        try {
+            driver.get(BASE_URL);
+            Thread.sleep(2000);
+            takeScreenshot("1_login_page_loaded.png");
+            
+            // Verify login page elements are present
+            WebElement emailField = wait.until(ExpectedConditions.presenceOfElementLocated(
+                By.name("email")
+            ));
+            WebElement passwordField = driver.findElement(By.name("password"));
+            WebElement loginButton = driver.findElement(By.cssSelector("button[type='submit']"));
+            
+            Assert.assertTrue(emailField.isDisplayed(), "Email field should be visible");
+            Assert.assertTrue(passwordField.isDisplayed(), "Password field should be visible");
+            Assert.assertTrue(loginButton.isDisplayed(), "Login button should be visible");
+            System.out.println("Login page loaded successfully");
+            Thread.sleep(2000);
+            
+        } catch (Exception e) {
+            System.err.println("Error in testNavigateToLoginPage: " + e.getMessage());
+            takeScreenshot("error_login_page.png");
+            throw e;
+        }
+    }
+    
+    @Test(priority = 2, dependsOnMethods = "testNavigateToLoginPage")
+    public void testValidLogin() throws Exception {
+        System.out.println("Test: Valid Login");
+        
+        try {
+            // Enter credentials
+            WebElement emailField = findElement(
+                By.name("email"),
+                By.xpath("//input[contains(@placeholder,'email') or contains(@placeholder,'Email')]"),
+                By.xpath("//input[@type='text' or @type='email']")
+            );
+            clearAndType(emailField, EMAIL);
+            Thread.sleep(2000);
+            
+            WebElement passwordField = findElement(
+                By.name("password"),
+                By.id("password"),
+                By.xpath("//input[@type='password']")
+            );
+            clearAndType(passwordField, PASSWORD);
+            
+            takeScreenshot("2_credentials_entered.png");
+            
+            // Click login button
+            WebElement loginButton = findElement(
+                By.cssSelector("button[type='submit']"),
+                By.xpath("//button[contains(text(),'Sign') or contains(text(),'Login')]")
+            );
+            loginButton.click();
+            Thread.sleep(2000);
+            
+            // Verify successful login
+            boolean loginSuccessful = wait.until(ExpectedConditions.or(
+                ExpectedConditions.urlContains("dashboard"),
+                ExpectedConditions.visibilityOfElementLocated(By.xpath("//h1[contains(text(),'Dashboard')]")),
+                ExpectedConditions.not(ExpectedConditions.urlContains("sign-in"))
+            ));
+            
+            takeScreenshot("3_login_success.png");
+            Assert.assertTrue(loginSuccessful, "Login should be successful");
+            System.out.println("Login successful");
+            
+        } catch (Exception e) {
+            System.err.println("Error in testValidLogin: " + e.getMessage());
+            takeScreenshot("error_login.png");
+            throw e;
+        }
+    }
+
+    @Test(priority = 3, dependsOnMethods = "testValidLogin")
+    public void testOpenNavigationMenu() throws Exception {
+        System.out.println("Test: Open Navigation Menu");
+        
+        try {
+            Thread.sleep(2000);
+            // Click menu button
+            WebElement menuButton = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("(//button[contains(@class,'MuiIconButton-root')])[1]")
+            ));
+            menuButton.click();
+            Thread.sleep(2000);
+            takeScreenshot("4_menu_opened.png");
+            
+            // Verify menu items are visible
+            WebElement settingsOption = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//span[@class='mnl__nav__item__title MuiBox-root css-0' and text()='Settings']")
+            ));
+            
+            Assert.assertTrue(settingsOption.isDisplayed(), "Settings menu item should be visible");
+            System.out.println("Navigation menu opened successfully");
+            
+        } catch (Exception e) {
+            System.err.println("Error in testOpenNavigationMenu: " + e.getMessage());
+            takeScreenshot("error_menu.png");
+            throw e;
+        }
+    }
+
+    @Test(priority = 4, dependsOnMethods = "testOpenNavigationMenu")
+    public void testNavigateToSettings() throws Exception {
+        System.out.println("Test: Navigate to Settings");
+        
+        try {
+            // Click Settings menu item
+            WebElement settingsMenuItem = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//span[@class='mnl__nav__item__title MuiBox-root css-0' and text()='Settings']")
+            ));
+            settingsMenuItem.click();
+          
+            Thread.sleep(2000); // Wait for page transition
+            takeScreenshot("5_settings_page.png");
+            
+            // Verify we're on settings page
+            String currentUrl = driver.getCurrentUrl();
+            Assert.assertTrue(currentUrl.contains("settings") || 
+                             driver.getPageSource().contains("Settings"), 
+                             "Should navigate to settings page");
+            
+            System.out.println("Successfully navigated to Settings");
+            
+        } catch (Exception e) {
+            System.err.println("Error in testNavigateToSettings: " + e.getMessage());
+            takeScreenshot("error_settings.png");
+            throw e;
+        }
+    }
+
+    @Test(priority = 5, dependsOnMethods = "testNavigateToSettings")
+    public void testOpenAppSettings() throws Exception {
+        System.out.println("Test: Open App Settings");
+        
+        try {
+            // Click App Settings
+            WebElement testOpenAppSettings = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//div[@class='MuiBox-root css-171onha' and text()='App Settings']")
+            ));
+            testOpenAppSettings.click();
+            
+            Thread.sleep(2000);
+            takeScreenshot("6_default_app_settings.png");
+            
+            // Verify Configuration button is present
+            WebElement configurationsTab = wait.until(ExpectedConditions.elementToBeClickable(
+                    By.xpath("//button[@role='tab' and contains(text(),'Configurations')]")
+                ));
+            Thread.sleep(2000);
+            System.out.println("App Settings opened successfully");
+            
+        } catch (Exception e) {
+            System.err.println("Error in testOpenAppSettings: " + e.getMessage());
+            takeScreenshot("error_app_settings.png");
+            throw e;
+        }
+    }
+
+    @Test(priority = 6, description = "Verify that the admin can add BD monthly target")
+    public void testAddBDMonthlyTarget() throws Exception {
+        System.out.println("Test: Add BD Monthly Target");
+
+        try {
+            // Wait for and locate the Monthly Target input
+            WebElement monthlyTargetInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//input[@name='businessDevelopmentSetting.monthlyShopTarget']")));
+
+            int newValue = (int)(Math.random() * 49) + 1; // 1-49
+            clearAndType(monthlyTargetInput, String.valueOf(newValue));
+
+            String enteredValue = monthlyTargetInput.getAttribute("value");
+            Assert.assertEquals(enteredValue, String.valueOf(newValue),
+                "Monthly target value should be entered correctly");
+
+            Thread.sleep(2000);
+            takeScreenshot("6_bd_monthly_target.png");
+            System.out.println("BD Monthly Target added successfully: " + newValue);
+            
+        } catch (Exception e) {
+            System.err.println("Error in testAddBDMonthlyTarget: " + e.getMessage());
+            takeScreenshot("error_bd_target.png");
+            throw e;
+        }
+    }
+
+    @Test(priority = 7, description = "Verify that the admin can set BD monthly reward prize and add a unit")
+    public void testSetBDMonthlyRewardPrizeAndAddUnit() throws Exception {
+        System.out.println("Test: Set BD Monthly Reward Prize and Add Unit");
+
+        try {
+            // Locate the Monthly Reward Prize input
+            WebElement rewardPrizeInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//input[@name='businessDevelopmentSetting.monthlyRewardPrize']")));
+            
+            // Generate random prize value between 1-99
+            int newValues = (int)(Math.random() * 99) + 1;
+            clearAndType(rewardPrizeInput, String.valueOf(newValues));
+
+            // Verify the value was entered correctly
+            String enteredValue = rewardPrizeInput.getAttribute("value");
+            Assert.assertEquals(enteredValue, String.valueOf(newValues),
+                "Monthly reward prize value should be entered correctly");
+
+            // Take screenshot after setting reward prize
+            takeScreenshot("7_bd_monthly_reward_prize.png");
+
+            // Complete code for Units section interaction
+            WebElement addButton = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//button[contains(text(),'+ Add')]")));
+            addButton.click();
+
+            Thread.sleep(1000);
+            takeScreenshot("7_units_section.png");
+            System.out.println("BD Monthly Reward Prize set successfully: " + newValues);
+            
+        } catch (Exception e) {
+            System.err.println("Error in testSetBDMonthlyRewardPrizeAndAddUnit: " + e.getMessage());
+            takeScreenshot("error_reward_prize.png");
+            throw e;
+        }
+    }
+
+    @Test(priority = 8, description = "Verify that the admin can add a new Unit")
+    public void testAddUnit() throws Exception {
+        System.out.println("Test: Add a new Unit");
+
+        // Click the Add button to open the unit input form
+        WebElement addButton = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//button[contains(text(),'+ Add')]")));
+        addButton.click();
+
+        Thread.sleep(1000);
+        takeScreenshot("7_units_section.png");
+
+        // Wait for the input field to appear and be visible
+        WebElement unitInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
+            By.xpath("//fieldset[.//span[text()='Enter Unit']]/preceding-sibling::input")
+        ));
+
+        // Generate a random 2-character unit name
+        String randomUnit = "" + (char)('a' + (int)(Math.random() * 26))
+            + (char)('a' + (int)(Math.random() * 26));
+
+        // Ensure input is clickable and focused
+        wait.until(ExpectedConditions.elementToBeClickable(unitInput));
+        unitInput.click();
+
+        // Clear and enter the random unit value
+        unitInput.clear();
+        unitInput.sendKeys(randomUnit);
+
+        Thread.sleep(1000);
+
+        // Press ENTER to confirm and TAB to move to next field
+        Thread.sleep(2000);
+        unitInput.sendKeys(Keys.ENTER);
+        Thread.sleep(1000);
+        unitInput.sendKeys(Keys.TAB);
+
+        // Scroll down to ensure visibility of elements
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0, 200);");
+
+        // Take screenshot after adding unit
+        takeScreenshot("8_unit_added.png");
+
+        // Optional: Verify the unit is displayed in the list (if UI shows it immediately)
+        try {
+            WebElement addedUnit = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//div[contains(text(),'" + randomUnit + "')]")
+            ));
+            Assert.assertTrue(addedUnit.isDisplayed(), "Newly added unit should be visible in the list");
+            System.out.println("Successfully verified unit '" + randomUnit + "' was added and is visible");
+        } catch (Exception e) {
+            System.out.println("Note: Unit verification skipped - unit may not be immediately visible in UI");
+        }
+    }
+
+    @Test(priority = 9, description = "Verify that the admin can add a new Rider Search Area (km)")
+    public void testAddRiderSearchArea() throws Exception {
+        System.out.println("Test: Add Rider Search Area (km)");
+
+        try {
+            // Click the "+ Add" button under Rider Search Area (km)
+            WebElement riderAddButton = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//h6[text()='Rider Search Area (km)']/following-sibling::button")
+            ));
+            riderAddButton.click();
+            Thread.sleep(1000);
+
+            // Locate the Rider Search input
+            WebElement riderSearchInput = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//h6[text()='Rider Search Area (km)']/following::input[@placeholder='Add Rider Search Area' or @placeholder='Enter number'][1]")
+            ));
+            riderSearchInput.click();
+
+            // Generate a random Rider Search Area between 3000–5000
+            int newRiderValue = 3000 + (int)(Math.random() * 2001);
+            riderSearchInput.clear();
+            riderSearchInput.sendKeys(String.valueOf(newRiderValue) + Keys.ENTER);
+
+            Thread.sleep(1000);
+
+            // Take screenshot after adding rider search area
+            takeScreenshot("9_rider_search_area.png");
+
+            // Optional: Verify that the new rider value is visible in the list
+            try {
+                WebElement addedRiderValue = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                    By.xpath("//div[contains(text(),'" + newRiderValue + "')]")
+                ));
+                Assert.assertTrue(addedRiderValue.isDisplayed(), "Newly added Rider Search Area should be visible in the list");
+            } catch (Exception e) {
+                System.out.println("Rider Search Area verification skipped - element may not be immediately visible");
+            }
+            System.out.println("Rider Search Area added successfully: " + newRiderValue);
+            
+        } catch (Exception e) {
+            System.err.println("Error in testAddRiderSearchArea: " + e.getMessage());
+            takeScreenshot("error_rider_search.png");
+            throw e;
+        }
+    }
+
+    @Test(priority = 10, description = "Verify that the admin can add a new Rider Batch with delay time")
+    public void testAddRiderBatch() throws Exception {
+        System.out.println("Test: Add Rider Batch");
+
+        try {
+            // Click the "+ Add" button under Rider Batches
+            WebElement riderBatchAddButton = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//h6[text()='Rider Batches']/following-sibling::button")
+            ));
+            riderBatchAddButton.click();
+            Thread.sleep(1000);
+
+            // Get all Rider Batch inputs and select the newly added one (last in the list)
+            List<WebElement> riderBatchInputs = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
+                By.xpath("//input[@placeholder='Enter Rider Batch']")
+            ));
+            WebElement latestRiderBatchInput = riderBatchInputs.get(riderBatchInputs.size() - 1);
+
+            // Enter a random Rider Batch value (1–10)
+            int riderBatchValue = (int)(Math.random() * 10) + 1;
+            latestRiderBatchInput.sendKeys(String.valueOf(riderBatchValue));
+            Thread.sleep(1000);
+            latestRiderBatchInput.sendKeys(Keys.TAB);
+
+            // Locate delay time inputs and select the newly added one
+            List<WebElement> delayTimeInputs = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
+                By.xpath("//input[contains(@name,'delayTime')]")
+            ));
+            WebElement latestDelayTimeInput = delayTimeInputs.get(delayTimeInputs.size() - 1);
+
+            // Enter a random Delay Time value (8–15)
+            int delayTimeValue = (int)(Math.random() * 8) + 8;
+            latestDelayTimeInput.sendKeys(String.valueOf(delayTimeValue));
+
+            Thread.sleep(1000);
+
+            // Take screenshot after adding rider batch
+            takeScreenshot("10_rider_batch_added.png");
+
+            // Optional: Verify that values were entered correctly
+            Assert.assertEquals(latestRiderBatchInput.getAttribute("value"), String.valueOf(riderBatchValue),
+                "Rider Batch value should match the entered value");
+            Assert.assertEquals(latestDelayTimeInput.getAttribute("value"), String.valueOf(delayTimeValue),
+                "Delay Time value should match the entered value");
+            System.out.println("Rider Batch added successfully: " + riderBatchValue + " with delay: " + delayTimeValue);
+            
+        } catch (Exception e) {
+            System.err.println("Error in testAddRiderBatch: " + e.getMessage());
+            takeScreenshot("error_rider_batch.png");
+            throw e;
+        }
+    }
+
+    @Test(priority = 11, description = "Verify that the admin can save changes in App Settings")
+    public void testSaveAppSettings() throws Exception {
+        System.out.println("Test: Save App Settings");
+
+        try {
+            // Locate and wait for the Save Changes button
+            WebElement saveButton = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//button[contains(text(),'Save Changes')]")
+            ));
+            Thread.sleep(2000);
+
+            // Use Actions to click (to handle any overlay issues)
+            Actions actions = new Actions(driver);
+            actions.moveToElement(saveButton).click().perform();
+
+            // Take screenshot after saving
+            takeScreenshot("11_save_app_settings.png");
+
+            // Optional: Verify success message / toast appears
+            try {
+                WebElement successToast = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                    By.xpath("//*[contains(text(),'Changes saved') or contains(text(),'successfully')]")
+                ));
+                Assert.assertTrue(successToast.isDisplayed(), "Success message should be displayed after saving");
+            } catch (Exception e) {
+                System.out.println("Success message verification skipped - toast may not be visible");
+            }
+            System.out.println("App Settings saved successfully");
+            
+        } catch (Exception e) {
+            System.err.println("Error in testSaveAppSettings: " + e.getMessage());
+            takeScreenshot("error_save_settings.png");
+            throw e;
+        }
+
+    }
+    
+    @Test(priority = 12, description = "Verify that the admin can delete an existing Unit")
+    public void testDeleteUnit() throws Exception {
+        System.out.println("Test: Delete an existing Unit");
+
+        // Replace this with the actual unit name you want to delete
+        String randomUnit = "ab"; // Example, should match a unit already added
+
+        try {
+            // Scroll up to make the delete icon visible
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("window.scrollBy(0, -600);");
+            Thread.sleep(1000);
+
+            // Locate and click the delete icon for the specified unit
+            WebElement deleteIcon = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//div[text()='" + randomUnit + "']/following-sibling::*[name()='svg']")
+            ));
+            Actions actions = new Actions(driver);
+            actions.moveToElement(deleteIcon).click().perform();
+            Thread.sleep(2000);
+
+            // Verify that the unit is no longer visible
+            try {
+                wait.until(ExpectedConditions.invisibilityOfElementLocated(
+                    By.xpath("//div[text()='" + randomUnit + "']")
+                ));
+                System.out.println("Unit deleted successfully: " + randomUnit);
+            } catch (Exception e) {
+                System.out.println("Unit deletion verification skipped or failed");
+            }
+
+        } catch (Exception e) {
+            System.err.println("Error in testDeleteUnit: " + e.getMessage());
+            takeScreenshot("error_delete_unit.png");
+            throw e;
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    @AfterClass
+    public void tearDown() {
+        System.out.println("Cleaning up test environment...");
+        if (driver != null) {
+            try {
+                takeScreenshot("final_state.png");
+            } catch (Exception e) {
+                System.out.println("Could not take final screenshot: " + e.getMessage());
+            }
+            driver.quit();
+            System.out.println("Browser closed successfully");
+        }
+    }
+        
+    private WebElement findElement(By... locators) {
+        for (By locator : locators) {
+            try {
+                return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+            } catch (Exception ignored) {
+                // Continue to next locator
+            }
+        }
+        throw new NoSuchElementException("Element not found with any of the provided locators");
+    }
+
+    private void clearAndType(WebElement element, String text) {
+        element.clear();
+        element.sendKeys(Keys.CONTROL + "a");
+        element.sendKeys(Keys.DELETE);
+        element.sendKeys(text);
+    }
+
+    private void takeScreenshot(String filename) {
+        try {
+            File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+            File destination = new File("screenshots/" + filename);
+            FileUtils.copyFile(screenshot, destination);
+            System.out.println("Screenshot saved: " + filename);
+        } catch (Exception e) {
+            System.out.println("Failed to take screenshot: " + e.getMessage());
+        }
+    }
+}

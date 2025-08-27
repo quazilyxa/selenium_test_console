@@ -1,0 +1,212 @@
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.annotations.*;
+import java.io.File;
+import java.time.Duration;
+import java.util.List;
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.Keys;
+
+public class testAppSettings {
+
+    private WebDriver driver;
+    private WebDriverWait wait;
+    private Actions actions;
+    private static final String BASE_URL = "https://test-v2-panel.lyxa.ai/auth/sign-in?returnTo=%2F&loginAs=admin";
+    private static final String EMAIL = "nour@gmail.com";
+    private static final String PASSWORD = "Nour1234@";
+
+    @BeforeClass
+    public void setUp() {
+   	 System.setProperty("webdriver.chrome.driver",
+                "C:\\Users\\quazi\\Downloads\\Automation web\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe");
+
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--incognito", "--disable-notifications", "--disable-popup-blocking");
+
+        driver = new ChromeDriver(options);
+        driver.manage().window().maximize();
+        wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        actions = new Actions(driver);
+
+        new File("screenshots").mkdirs();
+        System.out.println("Test environment ready");
+    }
+
+    @Test(priority = 1)
+    public void testNavigateToLoginPage() {
+        driver.get(BASE_URL);
+        waitFor(2000);
+        takeScreenshot("1_login_page_loaded.png");
+
+        WebElement emailField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.name("email")));
+        WebElement passwordField = driver.findElement(By.name("password"));
+        WebElement loginButton = driver.findElement(By.cssSelector("button[type='submit']"));
+
+        Assert.assertTrue(emailField.isDisplayed(), "Email field should be visible");
+        Assert.assertTrue(passwordField.isDisplayed(), "Password field should be visible");
+        Assert.assertTrue(loginButton.isDisplayed(), "Login button should be visible");
+    }
+
+    @Test(priority = 2, dependsOnMethods = "testNavigateToLoginPage")
+    public void testValidLogin() {
+        WebElement emailField = findElement(
+                By.name("email"),
+                By.xpath("//input[contains(@placeholder,'email') or contains(@placeholder,'Email')]")
+        );
+        clearAndType(emailField, EMAIL);
+
+        WebElement passwordField = findElement(
+                By.name("password"),
+                By.xpath("//input[@type='password']")
+        );
+        clearAndType(passwordField, PASSWORD);
+
+        takeScreenshot("2_credentials_entered.png");
+
+        WebElement loginButton = findElement(
+                By.cssSelector("button[type='submit']"),
+                By.xpath("//button[contains(text(),'Sign') or contains(text(),'Login')]")
+        );
+        loginButton.click();
+
+        boolean loginSuccessful = wait.until(ExpectedConditions.or(
+                ExpectedConditions.urlContains("dashboard"),
+                ExpectedConditions.visibilityOfElementLocated(By.xpath("//h1[contains(text(),'Dashboard')]")),
+                ExpectedConditions.not(ExpectedConditions.urlContains("sign-in"))
+        ));
+
+        takeScreenshot("3_login_success.png");
+        Assert.assertTrue(loginSuccessful, "Login should be successful");
+    }
+
+    @Test(priority = 3, dependsOnMethods = "testValidLogin")
+    public void testOpenNavigationMenu() {
+        waitFor(2000);
+        WebElement menuButton = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("(//button[contains(@class,'MuiIconButton-root')])[1]")
+        ));
+        menuButton.click();
+        waitFor(2000);
+        takeScreenshot("4_menu_opened.png");
+
+        WebElement settingsOption = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//span[@class='mnl__nav__item__title MuiBox-root css-0' and text()='Settings']")
+        ));
+        Assert.assertTrue(settingsOption.isDisplayed(), "Settings menu item should be visible");
+    }
+
+    @Test(priority = 4, dependsOnMethods = "testOpenNavigationMenu")
+    public void testNavigateToSettings() {
+        WebElement settingsMenuItem = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//span[@class='mnl__nav__item__title MuiBox-root css-0' and text()='Settings']")
+        ));
+        settingsMenuItem.click();
+
+        waitFor(2000);
+        takeScreenshot("5_settings_page.png");
+
+        String currentUrl = driver.getCurrentUrl();
+        Assert.assertTrue(currentUrl.contains("settings") ||
+                        driver.getPageSource().contains("Settings"),
+                "Should navigate to settings page");
+    }
+
+    @Test(priority = 5, dependsOnMethods = "testNavigateToSettings")
+    public void testOpenAppSettings() {
+        WebElement appSettings = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//div[@class='MuiBox-root css-171onha' and text()='App Settings']")
+        ));
+        appSettings.click();
+        waitFor(2000);
+        takeScreenshot("6_default_app_settings.png");
+
+        WebElement configurationsTab = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//button[@role='tab' and contains(text(),'Configurations')]")
+        ));
+        Assert.assertTrue(configurationsTab.isDisplayed(), "Configurations tab should be visible");
+    }
+
+    // Example numeric field test
+    @Test(priority = 6, dependsOnMethods = "testOpenAppSettings")
+    public void testMonthlyTargetAcceptsValidNumbers() {
+        WebElement monthlyTargetInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.name("businessDevelopmentSetting.monthlyShopTarget")));
+        clearAndType(monthlyTargetInput, "25");
+        Assert.assertEquals(monthlyTargetInput.getAttribute("value"), "25");
+    }
+
+    // Utility methods
+    private WebElement findElement(By... locators) {
+        for (By locator : locators) {
+            try {
+                return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+            } catch (Exception ignored) {
+            }
+        }
+        throw new NoSuchElementException("Element not found with any of the provided locators");
+    }
+
+    private void clearAndType(WebElement element, String text) {
+        element.clear();
+        element.sendKeys(Keys.CONTROL + "a");
+        element.sendKeys(Keys.DELETE);
+        element.sendKeys(text);
+    }
+
+    private boolean isValidationErrorDisplayed() {
+        try {
+            WebElement errorElement = driver.findElement(By.xpath(
+                    "//*[contains(@class, 'error') or contains(@class, 'invalid') or " +
+                            "contains(text(), 'required') or contains(text(), 'invalid') or " +
+                            "contains(text(), 'error')]"));
+            return errorElement.isDisplayed();
+        } catch (NoSuchElementException e) {
+            return false;
+        }
+    }
+
+    private boolean isFieldHighlightedAsRequired(WebElement field) {
+        String classAttribute = field.getAttribute("class");
+        String style = field.getAttribute("style");
+        return classAttribute.contains("error") ||
+                classAttribute.contains("required") ||
+                style.contains("border-color: red") ||
+                style.contains("border: red");
+    }
+
+    private void takeScreenshot(String filename) {
+        try {
+            File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+            File destination = new File("screenshots/" + filename);
+            FileUtils.copyFile(screenshot, destination);
+            System.out.println("Screenshot saved: " + filename);
+        } catch (Exception e) {
+            System.out.println("Failed to take screenshot: " + e.getMessage());
+        }
+    }
+
+    private void waitFor(long millis) {
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+
+    @AfterClass
+    public void tearDown() {
+        System.out.println("Cleaning up test environment...");
+        if (driver != null) {
+            takeScreenshot("final_state.png");
+            driver.quit();
+            System.out.println("Browser closed successfully");
+        }
+    }
+}

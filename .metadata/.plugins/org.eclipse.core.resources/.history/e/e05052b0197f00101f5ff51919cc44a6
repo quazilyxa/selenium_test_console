@@ -1,0 +1,572 @@
+import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.*;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.annotations.*;
+import java.io.File;
+import java.util.List;
+import java.time.Duration;
+import org.apache.commons.io.FileUtils;
+import java.util.concurrent.ThreadLocalRandom;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.interactions.Actions;
+
+
+public class demoAppSetting {
+    
+    private WebDriver driver;
+    private WebDriverWait wait;
+    private static final String BASE_URL = "https://test-v2-panel.lyxa.ai/auth/sign-in?returnTo=%2F&loginAs=admin";
+    private static final String EMAIL = "nour@gmail.com";
+    private static final String PASSWORD = "Nour1234@";
+
+
+    @BeforeClass
+    public void setUp() {
+    	 System.setProperty("webdriver.chrome.driver",
+                 "C:\\Users\\quazi\\Downloads\\Automation web\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe");
+        
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--incognito");
+        options.addArguments("--disable-notifications");
+        options.addArguments("--disable-popup-blocking");
+        
+        driver = new ChromeDriver(options);
+        driver.manage().window().maximize();
+        wait = new WebDriverWait(driver, Duration.ofSeconds(15));
+        
+        // Create screenshots directory
+        new File("screenshots").mkdirs();
+        System.out.println("Test environment ready");
+    }
+
+    @Test(priority = 1)
+    public void testNavigateToLoginPage() throws Exception {
+        System.out.println("Test: Navigate to Login Page");
+        
+        driver.get(BASE_URL);
+        Thread.sleep(2000);
+        takeScreenshot("1_login_page_loaded.png");
+        
+        // Verify login page elements are present
+        WebElement emailField = wait.until(ExpectedConditions.presenceOfElementLocated(
+            By.name("email")
+        ));
+        WebElement passwordField = driver.findElement(By.name("password"));
+        WebElement loginButton = driver.findElement(By.cssSelector("button[type='submit']"));
+        
+        Assert.assertTrue(emailField.isDisplayed(), "Email field should be visible");
+        Assert.assertTrue(passwordField.isDisplayed(), "Password field should be visible");
+        Assert.assertTrue(loginButton.isDisplayed(), "Login button should be visible");
+        System.out.println("Login page loaded successfully");
+        Thread.sleep(2000);
+    }
+    
+    @Test(priority = 2, dependsOnMethods = "testNavigateToLoginPage")
+    public void testValidLogin() throws Exception {
+        System.out.println("Test: Valid Login");
+        
+        // Enter credentials
+        WebElement emailField = findElement(
+            By.name("email"),
+            By.xpath("//input[contains(@placeholder,'email') or contains(@placeholder,'Email')]"),
+            By.xpath("//input[@type='text' or @type='email']")
+        );
+        clearAndType(emailField, EMAIL);
+        Thread.sleep(2000);
+        WebElement passwordField = findElement(
+        		
+            By.name("password"),
+            By.id("password"),
+            By.xpath("//input[@type='password']")
+        );
+        clearAndType(passwordField, PASSWORD);
+        
+        takeScreenshot("2_credentials_entered.png");
+        
+        // Click login button
+        WebElement loginButton = findElement(
+            By.cssSelector("button[type='submit']"),
+            By.xpath("//button[contains(text(),'Sign') or contains(text(),'Login')]")
+        );
+        loginButton.click();
+        Thread.sleep(2000);
+        // Verify successful login
+        boolean loginSuccessful = wait.until(ExpectedConditions.or(
+            ExpectedConditions.urlContains("dashboard"),
+            ExpectedConditions.visibilityOfElementLocated(By.xpath("//h1[contains(text(),'Dashboard')]")),
+            ExpectedConditions.not(ExpectedConditions.urlContains("sign-in"))
+        ));
+        
+        takeScreenshot("3_login_success.png");
+        Assert.assertTrue(loginSuccessful, "Login should be successful");
+        System.out.println("Login successful");
+    }
+
+    @Test(priority = 3, dependsOnMethods = "testValidLogin")
+    public void testOpenNavigationMenu() throws Exception {
+        System.out.println("Test: Open Navigation Menu");
+        Thread.sleep(2000);
+        // Click menu button
+        WebElement menuButton = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("(//button[contains(@class,'MuiIconButton-root')])[1]")
+        ));
+        menuButton.click();
+        Thread.sleep(2000);
+        takeScreenshot("4_menu_opened.png");
+        
+        // Verify menu items are visible
+        WebElement settingsOption = wait.until(ExpectedConditions.visibilityOfElementLocated(
+            By.xpath("//span[@class='mnl__nav__item__title MuiBox-root css-0' and text()='Settings']")
+        ));
+        
+        Assert.assertTrue(settingsOption.isDisplayed(), "Settings menu item should be visible");
+        System.out.println("Navigation menu opened successfully");
+    }
+
+    @Test(priority = 4, dependsOnMethods = "testOpenNavigationMenu")
+    public void testNavigateToSettings() throws Exception {
+        System.out.println("Test: Navigate to Settings");
+        
+        // Click Settings menu item
+        WebElement settingsMenuItem = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//span[@class='mnl__nav__item__title MuiBox-root css-0' and text()='Settings']")
+        ));
+        settingsMenuItem.click();
+      
+        Thread.sleep(2000); // Wait for page transition
+        takeScreenshot("5_settings_page.png");
+        
+        // Verify we're on settings page
+        String currentUrl = driver.getCurrentUrl();
+        Assert.assertTrue(currentUrl.contains("settings") || 
+                         driver.getPageSource().contains("Settings"), 
+                         "Should navigate to settings page");
+        
+        System.out.println("Successfully navigated to Settings");
+    }
+
+    @Test(priority = 5, dependsOnMethods = "testNavigateToSettings")
+    public void testOpenAppSettings() throws Exception {
+        System.out.println("Test: Open App Settings");
+        
+        // Click App Settings
+        WebElement testOpenAppSettings = wait.until(ExpectedConditions.elementToBeClickable(
+            By.xpath("//div[@class='MuiBox-root css-171onha' and text()='App Settings']")
+        ));
+        testOpenAppSettings.click();
+        
+        Thread.sleep(2000);
+        takeScreenshot("6_default_app_settings.png");
+        
+        // Verify Configuration button is present
+        WebElement configurationsTab = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//button[@role='tab' and contains(text(),'Configurations')]")
+            ));
+        
+//// --------------Configuration Tab-------------------------       
+        
+        Thread.sleep(2000);
+        WebElement monthlyTargetInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                By.name("businessDevelopmentSetting.monthlyShopTarget")
+            ));
+        
+        int newValue = (int)(Math.random() * 49) + 1; // 1-49
+
+        // Clear and set new value
+        clearAndType(monthlyTargetInput, String.valueOf(newValue));
+        Thread.sleep(2000);
+    
+    WebElement rewardPrizeInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
+            By.name("businessDevelopmentSetting.monthlyRewardPrize")
+        ));
+    	
+    	int newValues = (int)(Math.random() * 99) + 1;  
+    	{clearAndType(rewardPrizeInput, String.valueOf(newValues));
+    
+    
+
+    	// Complete code for Units section interaction
+    	WebElement addButton = wait.until(ExpectedConditions.elementToBeClickable(
+    	    By.xpath("//button[contains(text(),'+ Add')]")
+    	));
+    	addButton.click();
+    	Thread.sleep(1000);
+
+    	// Wait for the input field to appear and be visible
+    	WebElement unitInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
+    			By.xpath("//fieldset[.//span[text()='Enter Unit']]/preceding-sibling::input")
+    		));
+
+
+    	String randomUnit = "" + (char)('a' + (int)(Math.random() * 26))
+    	    + (char)('a' + (int)(Math.random() * 26));
+
+    	// Clear and enter the random unit value
+    	unitInput.clear();
+    	unitInput.sendKeys(randomUnit);
+
+    	Thread.sleep(1000);
+
+		Thread.sleep(2000); 
+		unitInput.sendKeys(Keys.ENTER);
+		Thread.sleep(1000);
+//		unitInput.sendKeys(Keys.TAB);
+	  
+	    
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("window.scrollBy(0, 200);"); 
+		
+		
+		WebElement riderAddButton = wait.until(ExpectedConditions.elementToBeClickable(
+			    By.xpath("//h6[text()='Rider Search Area (km)']/following-sibling::button")
+			));
+		riderAddButton.click();
+	            Thread.sleep(1000);
+	            
+	            WebElement riderSearchInput = wait.until(ExpectedConditions.elementToBeClickable(
+	            	    By.xpath("//h6[text()='Rider Search Area (km)']/following::input[@placeholder='Add Rider Search Area' or @placeholder='Enter number'][1]")
+	            	));
+	            riderSearchInput.click();
+	              
+	            int newRiderValue = 3000 + (int)(Math.random() * 2001);
+	            riderSearchInput.clear();
+	            riderSearchInput.sendKeys(String.valueOf(newRiderValue) + Keys.ENTER);
+
+
+	    	    
+//	    		JavascriptExecutor js1 = (JavascriptExecutor) driver;
+//	    		js1.executeScript("window.scrollBy(0, 300);"); 
+	    	
+	    		
+	    	WebElement riderBatchAddButton = wait.until(ExpectedConditions.elementToBeClickable(
+	    			    By.xpath("//h6[text()='Rider Batches']/following-sibling::button")
+	    			));
+	    			riderBatchAddButton.click();
+	    			Thread.sleep(1000);
+	    			
+	    			List<WebElement> riderBatchInputs = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
+	    				    By.xpath("//input[@placeholder='Enter Rider Batch']")
+	    				));
+	    			
+	    			// Get the last input (newly added one)
+	    			WebElement latestRiderBatchInput = riderBatchInputs.get(riderBatchInputs.size() - 1);
+	    			// Enter random value
+	    			int riderBatchValue = (int)(Math.random() * 10) + 1;
+	    			latestRiderBatchInput.sendKeys(String.valueOf(riderBatchValue));
+	    			Thread.sleep(1000);
+	    			
+	    			latestRiderBatchInput.sendKeys(Keys.TAB);
+	    			// Do the same for delayTime
+	    			List<WebElement> delayTimeInputs = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(
+	    			    By.xpath("//input[contains(@name,'delayTime')]")
+	    			));
+	    			WebElement latestDelayTimeInput = delayTimeInputs.get(delayTimeInputs.size() - 1);
+	    			int delayTimeValue = (int)(Math.random() * 8) + 8;
+	    			latestDelayTimeInput.sendKeys(String.valueOf(delayTimeValue));
+		
+			
+			WebElement saveButton = wait.until(ExpectedConditions.elementToBeClickable(
+				    By.xpath("//button[contains(text(),'Save Changes')]")
+				));
+			Thread.sleep(2000); 
+			Actions actIons = new Actions(driver);
+			actIons.moveToElement(saveButton).click().perform();
+
+			
+		
+		Thread.sleep(3000); // Wait for save to complete
+		takeScreenshot("13_random_unit_added.png");
+		
+		JavascriptExecutor js2 = (JavascriptExecutor) driver;
+		js2.executeScript("window.scrollBy(0, -600);"); 
+		
+		
+		Thread.sleep(1000);
+        WebElement deleteIcon = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//div[text()='" + randomUnit + "']/following-sibling::*[name()='svg']")
+            ));
+            
+            Actions actions4 = new Actions(driver);
+            actions4.moveToElement(deleteIcon).click().perform();
+            Thread.sleep(2000);
+		Actions action = new Actions(driver);
+		
+		Thread.sleep(2000);
+		
+		
+        WebElement deleteIcons = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//div[text()='" + newRiderValue + "']/following-sibling::*[name()='svg'] | " +
+                        "//span[text()='" + newRiderValue + "']/following-sibling::*[name()='svg']")
+            ));
+            
+            Actions actions5 = new Actions(driver);
+            actions5.moveToElement(deleteIcons).click().perform();
+            
+            Thread.sleep(2000);   
+            
+            
+    		JavascriptExecutor js3 = (JavascriptExecutor) driver;
+    		js3.executeScript("window.scrollBy(0, 800);"); 
+            
+    		Thread.sleep(2000); 
+
+   		 WebElement button0 = wait.until(ExpectedConditions.elementToBeClickable(
+			        By.cssSelector("button.css-19sp94p")
+			));
+
+			Actions actions6 = new Actions(driver);
+			actions6.moveToElement(button0).click().perform();
+			Thread.sleep(2000); 
+			WebElement saveButton0 = wait.until(ExpectedConditions.elementToBeClickable(
+				    By.xpath("//button[contains(text(),'Save Changes')]")
+				));
+			Thread.sleep(2000); 
+			Actions actIons6 = new Actions(driver);
+			actIons6.moveToElement(saveButton0).click().perform();
+    		
+   
+                Thread.sleep(2000); 
+            
+            
+		
+		
+		action.keyDown(Keys.CONTROL).sendKeys(Keys.HOME).keyUp(Keys.CONTROL).perform();
+		Thread.sleep(2000);
+    	
+//   ------------------- Courier Tab------------------  	
+    	
+    	WebElement courierTab = wait.until(ExpectedConditions.elementToBeClickable(
+    			By.xpath("//button[@role='tab' and contains(text(),'Courier')]")
+    		));
+    		courierTab.click();
+    		
+    		Thread.sleep(2000);
+    
+    WebElement maxTotalInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
+            By.name("courierSetting.maxTotalEstItemsPrice")
+        ));
+    
+    int new1Value = (int)(Math.random() * (5000 - 3000 + 1)) + 3000;// 1-49
+    
+    clearAndType(maxTotalInput, String.valueOf(new1Value));
+    Thread.sleep(2000);
+    
+    
+    WebElement maxDistanceInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
+            By.name("courierSetting.maxDistance")
+        ));
+    
+    int new2Value = (int)(Math.random() * (500 - 400 + 1)) + 400;
+    
+    clearAndType(maxDistanceInput, String.valueOf(new2Value));
+    Thread.sleep(2000);
+    
+    WebElement savedButton = wait.until(ExpectedConditions.elementToBeClickable(
+		    By.xpath("//button[contains(text(),'Save Changes')]")
+		));
+	Thread.sleep(2000); 
+	Actions actIon1 = new Actions(driver);
+	actIon1.moveToElement(savedButton).click().perform();
+	Thread.sleep(2000);
+	
+//	---------------------Rider Tab--------------
+    
+	WebElement riderTab = wait.until(ExpectedConditions.elementToBeClickable(
+			By.xpath("//button[@role='tab' and contains(text(),'Rider')]")
+		));
+		riderTab.click();
+		
+		Thread.sleep(2000);
+    
+		WebElement dailyHoursInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
+		        By.name("riderSetting.dailyWorkingHours")
+		));
+
+		int randomDailyHours = (int)(Math.random() * (16 - 1 + 1)) + 1; // 1–16
+
+		clearAndType(dailyHoursInput, String.valueOf(randomDailyHours));
+		
+		WebElement bobLimitInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
+		        By.name("riderSetting.bobCashSettlementLimit")
+		));
+
+		int randomBobLimit = (int)(Math.random() * (500 - 150 + 1)) + 150; // 150–500
+
+		clearAndType(bobLimitInput, String.valueOf(randomBobLimit));
+		
+		WebElement saveButton1 = wait.until(ExpectedConditions.elementToBeClickable(
+			    By.xpath("//button[contains(text(),'Save Changes')]")
+			));
+		Thread.sleep(2000); 
+		Actions actIon2 = new Actions(driver);
+		actIon2.moveToElement(saveButton1).click().perform();
+		Thread.sleep(2000);
+    
+//----------------------Finance-----------------------------------------------
+	WebElement financeTab = wait.until(ExpectedConditions.elementToBeClickable(
+			By.xpath("//button[@role='tab' and contains(text(),'Financial')]")
+		));
+		financeTab.click();
+		
+		Thread.sleep(2000);
+		WebElement usdButton = wait.until(ExpectedConditions.elementToBeClickable(
+		        By.xpath("//button[normalize-space(text())='USD']") // match the visible text
+		));
+		usdButton.click();
+		Thread.sleep(2000);
+		WebElement exchangeRateInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
+		        By.name("currencySetting.exchangeRate")
+		));
+		int randomExchangeRate = (int)(Math.random() * (90000 - 88000 + 1)) + 88000;
+		clearAndType(exchangeRateInput, String.valueOf(randomExchangeRate));
+		Thread.sleep(2000);
+		
+		WebElement payLimitInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
+		        By.name("payLimitForUser")
+		));
+		int randomPayLimit = (int)(Math.random() * 50) + 1;
+		clearAndType(payLimitInput, String.valueOf(randomPayLimit));
+		
+		Thread.sleep(2000);
+		WebElement vatInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
+		        By.name("vatPercentage")
+		));
+		int randomVat = (int)(Math.random() * (12 - 7 + 1)) + 7;
+		clearAndType(vatInput, String.valueOf(randomVat));
+		
+		Thread.sleep(2000);
+		WebElement payoutDayInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
+		        By.id("input-autocomplete-payoutSetting.issuanceDay")
+		));
+		String[] days = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+		String randomDay = days[(int)(Math.random() * days.length)];
+		clearAndType(payoutDayInput, randomDay);
+		payoutDayInput.sendKeys(Keys.ENTER);
+		Thread.sleep(2000);
+		WebElement overDueInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
+		        By.name("payoutSetting.overDuePeriods")
+		));
+		int randomOverDue = (int)(Math.random() * 25) + 1;
+		clearAndType(overDueInput, String.valueOf(randomOverDue));
+		
+		WebElement saveButton2 = wait.until(ExpectedConditions.elementToBeClickable(
+	    By.xpath("//button[contains(text(),'Save Changes')]")
+			));
+		Thread.sleep(2000); 
+		Actions actIon3 = new Actions(driver);
+		actIon3.moveToElement(saveButton2).click().perform();
+		
+		Actions action3 = new Actions(driver);
+		action3.keyDown(Keys.CONTROL).sendKeys(Keys.HOME).keyUp(Keys.CONTROL).perform();
+		Thread.sleep(2000);
+		
+//		---------------------------Percentage-----------------------------
+		WebElement percentageTab = wait.until(ExpectedConditions.elementToBeClickable(
+				By.xpath("//button[@role='tab' and contains(text(),'Percentage')]")
+			));
+			percentageTab.click();
+			
+			Thread.sleep(2000);
+			
+			WebElement serviceFeeInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
+			        By.name("serviceFeeSetting.value")
+			));
+			int randomServiceFee = (int)(Math.random() * (15 - 10 + 1)) + 10; // 10–15
+			clearAndType(serviceFeeInput, String.valueOf(randomServiceFee));
+			
+			Thread.sleep(2000);
+			
+			WebElement parentTab = wait.until(ExpectedConditions.elementToBeClickable(
+			        By.xpath("//button[@role='tab' and normalize-space(text())='Parent']")
+			));
+			parentTab.click();
+			
+			Thread.sleep(2000);
+			
+			WebElement searchInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
+			        By.name("searchValue")
+			));
+			clearAndType(searchInput, "Malak Al Tawouk");
+			Thread.sleep(3000);
+			WebElement searchResultButton = wait.until(ExpectedConditions.elementToBeClickable(
+					By.cssSelector("button.MuiIconButton-root.css-15knftu") // or use a more specific class if multiple exist
+			));
+			searchResultButton.click();
+			
+			Thread.sleep(2000);
+			WebElement chargeInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
+			        By.name("charge.value")
+			));
+			int randomCharge = (int)(Math.random() * (100 - 50 + 1)) + 50;
+			clearAndType(chargeInput, String.valueOf(randomCharge));
+			
+			Thread.sleep(3000);
+			
+			WebElement saveButton3 = wait.until(ExpectedConditions.elementToBeClickable(
+				    By.xpath("//button[contains(text(),'Save Changes')]")
+						));
+					Thread.sleep(2000); 
+					Actions actIon4 = new Actions(driver);
+					actIon4.moveToElement(saveButton3).click().perform();
+					
+					Thread.sleep(1000); 
+			
+					
+					
+			WebElement saveButton4 = wait.until(ExpectedConditions.elementToBeClickable(
+						    By.xpath("//button[contains(text(),'Save Changes')]")
+								));
+							Thread.sleep(2000); 
+							Actions actIon5 = new Actions(driver);
+							actIon5.moveToElement(saveButton4).click().perform();
+    	}}
+//-----------------------------------------------------------    
+    public void tearDown() {
+        System.out.println("Cleaning up test environment...");
+        if (driver != null) {
+            try {
+                takeScreenshot("12_final_state.png");
+            } catch (Exception e) {
+                System.out.println("Could not take final screenshot: " + e.getMessage());
+            }
+            driver.quit();
+            System.out.println("Browser closed successfully");
+        }
+    }
+        
+        
+    private WebElement findElement(By... locators) {
+        for (By locator : locators) {
+            try {
+                return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+            } catch (Exception ignored) {
+               
+            }
+        }
+        throw new NoSuchElementException("Element not found with any of the provided locators");
+    }
+
+    private void clearAndType(WebElement element, String text) {
+        element.clear();
+        element.sendKeys(Keys.CONTROL + "a");
+        element.sendKeys(Keys.DELETE);
+        element.sendKeys(text);
+    }
+    
+ 
+
+    private void takeScreenshot(String filename) {
+        try {
+            File screenshot = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
+            File destination = new File("screenshots/" + filename);
+            FileUtils.copyFile(screenshot, destination);
+            System.out.println("Screenshot saved: " + filename);
+        } catch (Exception e) {
+            System.out.println("Failed to take screenshot: " + e.getMessage());
+        }
+    }
+}
