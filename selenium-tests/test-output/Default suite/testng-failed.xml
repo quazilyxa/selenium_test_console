@@ -6,12 +6,12 @@
       <class name="brandNutrationCancellation">
         <methods>
           <include name="testValidLogin"/>
-          <include name="testOpenAppSettings"/>
           <include name="testNavigateToSettings"/>
           <include name="tearDown"/>
+          <include name="testOpenCancellation"/>
           <include name="testOpenNavigationMenu"/>
           <include name="setUp"/>
-          <include name="testSearchAndDeleteBrand"/>
+          <include name="testSearchAndDisableReason"/>
           <include name="testNavigateToLoginPage"/>
         </methods>
       </class> <!-- brandNutrationCancellation -->
