@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite name="LyxaConsoleTestSuite" verbose="1">
+    <test name="lyxaConsole">
+        <classes>
+            <class name="lyxaConsole"/>
+        </classes>
+    </test>
+    <test name="testAppSettings">
+        <classes>
+            <class name="testAppSettings"/>
+        </classes>
+    </test>
+    
+     <test name="demoAppSetting">
+        <classes>
+            <class name="demoAppSetting"/>
+        </classes>
+    </test>
+</suite>
