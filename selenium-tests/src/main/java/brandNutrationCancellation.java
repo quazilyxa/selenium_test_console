@@ -22,6 +22,12 @@ public class brandNutrationCancellation {
     private String randomBrandName;
     private String randomNutritionName;
     private String randomReasonName;
+    private String courierReasonName;
+    private String randomCourierReasonName;
+    private String randomShopReasonName;
+    private String randomResolveChatReasonName;
+    private String randomPlusReasonName;
+    Random random = new Random();
 
 
     @BeforeClass
@@ -191,236 +197,236 @@ public class brandNutrationCancellation {
             throw e;
         }
     }
-//
-//    @Test(priority = 5, dependsOnMethods = "testNavigateToSettings")
-//    public void testOpenAppSettings() throws Exception {
-//        System.out.println("Test: Open and Add Brand");
-//        
-//        try {
-//            
-//            WebElement testOpenAppSettings = wait.until(ExpectedConditions.elementToBeClickable(
-//                By.xpath("//div[@class='MuiBox-root css-171onha' and text()='Brands']")
-//            ));
-//            testOpenAppSettings.click();
-//            
-//            Thread.sleep(2000);
-//            takeScreenshot("6_default_brand.png");
-//            
-//            
-//            WebElement addBrand = wait.until(ExpectedConditions.elementToBeClickable(
-//            		By.xpath("//button[normalize-space()='Add Brand']")
-//                ));
-//            addBrand.click();
-//            Thread.sleep(2000);
-//            System.out.println("Add brand form opened successfully");
-//            
-//            int length = 3 + (int)(Math.random() * 5); // 3 to 7
-//            StringBuilder brandNameBuilder = new StringBuilder();
-//
-//            for (int i = 0; i < length; i++) {
-//                char randomChar = (char) ('A' + (int)(Math.random() * 26)); // Uppercase A-Z
-//                brandNameBuilder.append(randomChar);
-//            }
-//            
-//
-//            randomBrandName = brandNameBuilder.toString(); 
-//
-//            
-//            String randomDescription = "Automated description " + System.currentTimeMillis();
-//
-//            
-//            WebElement nameInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
-//                    By.name("name")
-//            ));
-//            nameInput.sendKeys(randomBrandName);
-//            Thread.sleep(2000);
-//            
-//            WebElement descriptionTextarea = wait.until(ExpectedConditions.visibilityOfElementLocated(
-//                    By.name("description")
-//            ));
-//            descriptionTextarea.sendKeys(randomDescription);
-//            System.out.println("Generated Brand Name: " + randomBrandName);
-//            System.out.println("Generated Description: " + randomDescription);
-//            Thread.sleep(2000);
-//            
-//            WebElement addBrandButton = wait.until(ExpectedConditions.elementToBeClickable(
-//                    By.xpath("//button[@type='submit' and normalize-space()='Add Brand']")
-//            ));
-//            addBrandButton.click();
-//
-//            System.out.println("Clicked on Add Brand button successfully" + randomBrandName);
-//            Thread.sleep(2000);   
-//            
-//        } catch (Exception e) {
-//            System.err.println("Error in testOpenAppSettings: " + e.getMessage());
-//            takeScreenshot("error_app_settings.png");
-//            throw e;
-//        }
-//    }
-//
-//    @Test(priority = 6, dependsOnMethods = "testOpenAppSettings")
-//    public void testSearchAndDeleteBrand() throws Exception {
-//        System.out.println("Test: Search and Delete Brand" + randomBrandName);
-//        
-//        try {
-//            WebElement searchInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
-//                    By.name("searchValue")));
-//            searchInput.clear();
-//            searchInput.sendKeys(randomBrandName);
-//            Thread.sleep(2000);
-//
-//            System.out.println("Searched brand: " + randomBrandName);
-//          JavascriptExecutor js = (JavascriptExecutor) driver;
-//            Thread.sleep(2000);
-//            WebElement menuButton = wait.until(ExpectedConditions.elementToBeClickable(
-//            	    By.xpath("//tr[td[contains(text(),'" + randomBrandName + "')]]//button[contains(@class,'MuiIconButton-root')]")
-//            	));
-//            	menuButton.click();
-//
-//
-//      
-//            WebElement deleteOption = wait.until(ExpectedConditions.elementToBeClickable(
-//                    By.xpath("//li[normalize-space()='Delete']")
-//            ));
-//            deleteOption.click();
-//            Thread.sleep(1000);
-//
-//   
-//            WebElement confirmDeleteButton = wait.until(ExpectedConditions.elementToBeClickable(
-//                    By.xpath("//button[@type='button' and normalize-space()='Delete']")
-//            ));
-//            confirmDeleteButton.click();
-//            Thread.sleep(2000);
-//
-//            System.out.println("Brand deleted successfully: " + randomBrandName);
-//            
-//            Thread.sleep(2000);
-//           
-//
-//        } catch (Exception e) {
-//            System.err.println("Error in testSearchAndDeleteBrand: " + e.getMessage());
-//            takeScreenshot("error_search_delete_brand.png");
-//            throw e;
-//        }
-//        Thread.sleep(2000);
-//    }
-//    
-//    
-//    
-//    @Test(priority = 7, dependsOnMethods = "testNavigateToSettings")
-//    public void testOpenNutrition() throws Exception {
-//        System.out.println("Test: Open and Add Nutrition");
-//        
-//        try {
-//            
-//            WebElement testOpenNutrition = wait.until(ExpectedConditions.elementToBeClickable(
-//                By.xpath("//div[@class='MuiBox-root css-171onha' and text()='Nutrition']")
-//            ));
-//            testOpenNutrition.click();
-//            
-//            Thread.sleep(2000);
-//            takeScreenshot("7_default_nutrition.png");
-//            
-//            
-//            WebElement addNutrition = wait.until(ExpectedConditions.elementToBeClickable(
-//            		By.xpath("//button[normalize-space()='Add Nutrition']")
-//                ));
-//            addNutrition.click();
-//            Thread.sleep(2000);
-//            System.out.println("Add nutrition form opened successfully");
-//            
-//            int length = 3 + (int)(Math.random() * 5); // 3 to 7
-//            StringBuilder nutritionNameBuilder = new StringBuilder();
-//
-//            for (int i = 0; i < length; i++) {
-//                char randomChar = (char) ('A' + (int)(Math.random() * 26)); // Uppercase A-Z
-//                nutritionNameBuilder.append(randomChar);
-//            }
-//
-//            randomNutritionName = nutritionNameBuilder.toString();     
-//            WebElement nameInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
-//                    By.name("name")
-//            ));
-//            nameInput.sendKeys(randomNutritionName);
-//            Thread.sleep(2000);
-//           
-//            
-//            WebElement addBrandButton = wait.until(ExpectedConditions.elementToBeClickable(
-//                    By.xpath("//button[@type='submit' and normalize-space()='Add Nutrition']")
-//            ));
-//            addBrandButton.click();
-//
-//            System.out.println("Clicked on Add Nutrition button successfully" + randomNutritionName);
-//            Thread.sleep(2000);   
-//            
-//        } catch (Exception e) {
-//            System.err.println("Error in testOpenAppSettings: " + e.getMessage());
-//            takeScreenshot("error_app_settings.png");
-//            throw e;
-//        }
-//    }
-//    
-//    
-//    @Test(priority = 8, dependsOnMethods = "testOpenAppSettings")
-//    public void testSearchAndDisableNutrition() throws Exception {
-//        System.out.println("Test: Search and Delete Nutrition" + randomNutritionName);
-//        
-//        try {
-//        	WebElement searchInput = wait.until(ExpectedConditions
-//        		    .visibilityOfElementLocated(By.xpath("//input[@name='searchValue' and not(@disabled)]")));
-//            searchInput.clear();
-//            searchInput.sendKeys(randomNutritionName);
-//            Thread.sleep(2000);
-//
-//            System.out.println("Searched brand: " + randomNutritionName);
-//          JavascriptExecutor js = (JavascriptExecutor) driver;
-//            Thread.sleep(2000);
-//            WebElement toggle = wait.until(ExpectedConditions.elementToBeClickable(
-//            	    By.xpath("//tr[td[contains(text(),'" + randomNutritionName + "')]]//span[contains(@class,'MuiSwitch-switchBase')]")
-//            	));
-//            	toggle.click();
-//            Thread.sleep(2000);
-//            
-//            WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(
-//            	    By.xpath("//input[@id='input-autocomplete-status']/following-sibling::div//button[contains(@class,'MuiAutocomplete-popupIndicator')]")
-//            	));
-//            	dropdown.click();
-//            	Thread.sleep(1000);
-//            	WebElement inactiveOption = wait.until(ExpectedConditions.elementToBeClickable(
-//            		    By.xpath("//li[text()='Inactive']")
-//            		));
-//            		inactiveOption.click();
-//            		Thread.sleep(2000);
-//                    WebElement menuButton = wait.until(ExpectedConditions.elementToBeClickable(
-//                    	    By.xpath("//tr[td[contains(text(),'" + randomNutritionName + "')]]//button[contains(@class,'MuiIconButton-root')]")
-//                    	));
-//                    	menuButton.click();
-//
-//                    	Thread.sleep(1000);
-//              
-//                    WebElement deleteOption = wait.until(ExpectedConditions.elementToBeClickable(
-//                            By.xpath("//li[normalize-space()='Delete']")
-//                    ));
-//                    deleteOption.click();
-//                    Thread.sleep(1000);
-//
-//           
-//                    WebElement confirmDeleteButton = wait.until(ExpectedConditions.elementToBeClickable(
-//                            By.xpath("//button[@type='button' and normalize-space()='Delete']")
-//                    ));
-//                    confirmDeleteButton.click();
-//                    Thread.sleep(2000);	
-//            
-//            
-//
-//        } catch (Exception e) {
-//            System.err.println("Error in testSearchAndDeleteBrand: " + e.getMessage());
-//            takeScreenshot("error_search_delete_brand.png");
-//            throw e;
-//        }
-//        Thread.sleep(2000);
-//    }
-//    
+
+    @Test(priority = 5, dependsOnMethods = "testNavigateToSettings")
+    public void testOpenAppSettings() throws Exception {
+        System.out.println("Test: Open and Add Brand");
+        
+        try {
+            
+            WebElement testOpenAppSettings = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//div[@class='MuiBox-root css-171onha' and text()='Brands']")
+            ));
+            testOpenAppSettings.click();
+            
+            Thread.sleep(2000);
+            takeScreenshot("6_default_brand.png");
+            
+            
+            WebElement addBrand = wait.until(ExpectedConditions.elementToBeClickable(
+            		By.xpath("//button[normalize-space()='Add Brand']")
+                ));
+            addBrand.click();
+            Thread.sleep(2000);
+            System.out.println("Add brand form opened successfully");
+            
+            int length = 3 + (int)(Math.random() * 5); // 3 to 7
+            StringBuilder brandNameBuilder = new StringBuilder();
+
+            for (int i = 0; i < length; i++) {
+                char randomChar = (char) ('A' + (int)(Math.random() * 26)); // Uppercase A-Z
+                brandNameBuilder.append(randomChar);
+            }
+            
+
+            randomBrandName = brandNameBuilder.toString(); 
+
+            
+            String randomDescription = "Automated description " + System.currentTimeMillis();
+
+            
+            WebElement nameInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                    By.name("name")
+            ));
+            nameInput.sendKeys(randomBrandName);
+            Thread.sleep(2000);
+            
+            WebElement descriptionTextarea = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                    By.name("description")
+            ));
+            descriptionTextarea.sendKeys(randomDescription);
+            System.out.println("Generated Brand Name: " + randomBrandName);
+            System.out.println("Generated Description: " + randomDescription);
+            Thread.sleep(2000);
+            
+            WebElement addBrandButton = wait.until(ExpectedConditions.elementToBeClickable(
+                    By.xpath("//button[@type='submit' and normalize-space()='Add Brand']")
+            ));
+            addBrandButton.click();
+
+            System.out.println("Clicked on Add Brand button successfully" + randomBrandName);
+            Thread.sleep(2000);   
+            
+        } catch (Exception e) {
+            System.err.println("Error in testOpenAppSettings: " + e.getMessage());
+            takeScreenshot("error_app_settings.png");
+            throw e;
+        }
+    }
+
+    @Test(priority = 6, dependsOnMethods = "testOpenAppSettings")
+    public void testSearchAndDeleteBrand() throws Exception {
+        System.out.println("Test: Search and Delete Brand" + randomBrandName);
+        
+        try {
+            WebElement searchInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                    By.name("searchValue")));
+            searchInput.clear();
+            searchInput.sendKeys(randomBrandName);
+            Thread.sleep(2000);
+
+            System.out.println("Searched brand: " + randomBrandName);
+          JavascriptExecutor js = (JavascriptExecutor) driver;
+            Thread.sleep(2000);
+            WebElement menuButton = wait.until(ExpectedConditions.elementToBeClickable(
+            	    By.xpath("//tr[td[contains(text(),'" + randomBrandName + "')]]//button[contains(@class,'MuiIconButton-root')]")
+            	));
+            	menuButton.click();
+
+
+      
+            WebElement deleteOption = wait.until(ExpectedConditions.elementToBeClickable(
+                    By.xpath("//li[normalize-space()='Delete']")
+            ));
+            deleteOption.click();
+            Thread.sleep(1000);
+
+   
+            WebElement confirmDeleteButton = wait.until(ExpectedConditions.elementToBeClickable(
+                    By.xpath("//button[@type='button' and normalize-space()='Delete']")
+            ));
+            confirmDeleteButton.click();
+            Thread.sleep(2000);
+
+            System.out.println("Brand deleted successfully: " + randomBrandName);
+            
+            Thread.sleep(2000);
+           
+
+        } catch (Exception e) {
+            System.err.println("Error in testSearchAndDeleteBrand: " + e.getMessage());
+            takeScreenshot("error_search_delete_brand.png");
+            throw e;
+        }
+        Thread.sleep(2000);
+    }
+    
+    
+    
+    @Test(priority = 7, dependsOnMethods = "testNavigateToSettings")
+    public void testOpenNutrition() throws Exception {
+        System.out.println("Test: Open and Add Nutrition");
+        
+        try {
+            
+            WebElement testOpenNutrition = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//div[@class='MuiBox-root css-171onha' and text()='Nutrition']")
+            ));
+            testOpenNutrition.click();
+            
+            Thread.sleep(2000);
+            takeScreenshot("7_default_nutrition.png");
+            
+            
+            WebElement addNutrition = wait.until(ExpectedConditions.elementToBeClickable(
+            		By.xpath("//button[normalize-space()='Add Nutrition']")
+                ));
+            addNutrition.click();
+            Thread.sleep(2000);
+            System.out.println("Add nutrition form opened successfully");
+            
+            int length = 3 + (int)(Math.random() * 5); // 3 to 7
+            StringBuilder nutritionNameBuilder = new StringBuilder();
+
+            for (int i = 0; i < length; i++) {
+                char randomChar = (char) ('A' + (int)(Math.random() * 26)); // Uppercase A-Z
+                nutritionNameBuilder.append(randomChar);
+            }
+
+            randomNutritionName = nutritionNameBuilder.toString();     
+            WebElement nameInput = wait.until(ExpectedConditions.visibilityOfElementLocated(
+                    By.name("name")
+            ));
+            nameInput.sendKeys(randomNutritionName);
+            Thread.sleep(2000);
+           
+            
+            WebElement addBrandButton = wait.until(ExpectedConditions.elementToBeClickable(
+                    By.xpath("//button[@type='submit' and normalize-space()='Add Nutrition']")
+            ));
+            addBrandButton.click();
+
+            System.out.println("Clicked on Add Nutrition button successfully" + randomNutritionName);
+            Thread.sleep(2000);   
+            
+        } catch (Exception e) {
+            System.err.println("Error in testOpenAppSettings: " + e.getMessage());
+            takeScreenshot("error_app_settings.png");
+            throw e;
+        }
+    }
+    
+    
+    @Test(priority = 8, dependsOnMethods = "testOpenAppSettings")
+    public void testSearchAndDisableNutrition() throws Exception {
+        System.out.println("Test: Search and Delete Nutrition" + randomNutritionName);
+        
+        try {
+        	WebElement searchInput = wait.until(ExpectedConditions
+        		    .visibilityOfElementLocated(By.xpath("//input[@name='searchValue' and not(@disabled)]")));
+            searchInput.clear();
+            searchInput.sendKeys(randomNutritionName);
+            Thread.sleep(2000);
+
+            System.out.println("Searched brand: " + randomNutritionName);
+          JavascriptExecutor js = (JavascriptExecutor) driver;
+            Thread.sleep(2000);
+            WebElement toggle = wait.until(ExpectedConditions.elementToBeClickable(
+            	    By.xpath("//tr[td[contains(text(),'" + randomNutritionName + "')]]//span[contains(@class,'MuiSwitch-switchBase')]")
+            	));
+            	toggle.click();
+            Thread.sleep(2000);
+            
+            WebElement dropdown = wait.until(ExpectedConditions.elementToBeClickable(
+            	    By.xpath("//input[@id='input-autocomplete-status']/following-sibling::div//button[contains(@class,'MuiAutocomplete-popupIndicator')]")
+            	));
+            	dropdown.click();
+            	Thread.sleep(1000);
+            	WebElement inactiveOption = wait.until(ExpectedConditions.elementToBeClickable(
+            		    By.xpath("//li[text()='Inactive']")
+            		));
+            		inactiveOption.click();
+            		Thread.sleep(2000);
+                    WebElement menuButton = wait.until(ExpectedConditions.elementToBeClickable(
+                    	    By.xpath("//tr[td[contains(text(),'" + randomNutritionName + "')]]//button[contains(@class,'MuiIconButton-root')]")
+                    	));
+                    	menuButton.click();
+
+                    	Thread.sleep(1000);
+              
+                    WebElement deleteOption = wait.until(ExpectedConditions.elementToBeClickable(
+                            By.xpath("//li[normalize-space()='Delete']")
+                    ));
+                    deleteOption.click();
+                    Thread.sleep(1000);
+
+           
+                    WebElement confirmDeleteButton = wait.until(ExpectedConditions.elementToBeClickable(
+                            By.xpath("//button[@type='button' and normalize-space()='Delete']")
+                    ));
+                    confirmDeleteButton.click();
+                    Thread.sleep(2000);	
+            
+            
+
+        } catch (Exception e) {
+            System.err.println("Error in testSearchAndDeleteBrand: " + e.getMessage());
+            takeScreenshot("error_search_delete_brand.png");
+            throw e;
+        }
+        Thread.sleep(2000);
+    }
+    
     
     @Test(priority = 9, dependsOnMethods = "testNavigateToSettings")
     public void testOpenCancellation() throws Exception {
@@ -451,7 +457,7 @@ public class brandNutrationCancellation {
             String[] words = {"System", "Update", "Delay", "Request", "Change", "Order", "Cancel", "Network", "Issue", "Process"};
             Random rand = new Random();
 
-            // Simple approach - just pick 3-4 words
+         
             int wordCount = 3 + rand.nextInt(2); // 3 or 4 words
             StringBuilder reasonNameBuilder = new StringBuilder();
 
@@ -494,7 +500,7 @@ public class brandNutrationCancellation {
         System.out.println("Test: Search, Update and Delete Status of Reason: " + randomReasonName);
         
         try {
-            // Search for the reason
+            
             WebElement searchBox = wait.until(ExpectedConditions
                 .visibilityOfElementLocated(By.xpath("//input[@name='searchValue' and @placeholder='Search...']"))
             );
@@ -538,7 +544,7 @@ public class brandNutrationCancellation {
 
             			takeScreenshot("10_edit_form_opened.png");
 
-            			// 8. Click on the status dropdown (currently showing "Active")
+            		
             			WebElement statusDropdown = wait.until(ExpectedConditions.elementToBeClickable(
             			    By.xpath("//div[@role='combobox' and contains(@class,'MuiSelect-select') and text()='Active']")
             			));
@@ -546,7 +552,7 @@ public class brandNutrationCancellation {
             			Thread.sleep(1000);
             			System.out.println("Status dropdown clicked");
 
-            			// 9. Select "Inactive" from the dropdown
+            		
             			WebElement inactiveOption = wait.until(ExpectedConditions.elementToBeClickable(
             			    By.xpath("//li[@role='option' and @data-value='inactive' and text()='Inactive']")
             			));
@@ -556,7 +562,7 @@ public class brandNutrationCancellation {
 
             			takeScreenshot("10_status_changed_to_inactive.png");
 
-            			// 10. Save the changes (look for Save/Update button)
+            		
             			WebElement saveButton = wait.until(ExpectedConditions.elementToBeClickable(
             			    By.xpath("//button[@type='submit' or contains(text(),'Save') or contains(text(),'Update')]")
             			));
@@ -593,7 +599,6 @@ public class brandNutrationCancellation {
             deleteOption.click();
             Thread.sleep(1000);
 
-            // Confirm deletion
             WebElement confirmDeleteButton = wait.until(ExpectedConditions.elementToBeClickable(
                 By.xpath("//button[@type='button' and normalize-space()='Delete']")
             ));
@@ -602,6 +607,10 @@ public class brandNutrationCancellation {
             
             System.out.println("Reason deleted successfully: " + randomReasonName);
             takeScreenshot("10_reason_deleted.png");
+            
+            JavascriptExecutor js2 = (JavascriptExecutor) driver;
+            js2.executeScript("window.scrollBy(0,-200);"); 
+            Thread.sleep(500);
 
         } catch (Exception e) {
             System.err.println("Error in testSearchAndDisableReason: " + e.getMessage());
@@ -609,19 +618,860 @@ public class brandNutrationCancellation {
             throw e;
         }
     }
+   
+    
+    @Test(priority = 11)
+    public void testCourierCancellationReasonFlow() throws Exception {
+        System.out.println("Test: Add, Search, Update, and Delete Courier Cancellation Reason");
+
+        try {
+        	
+          WebElement testOpenCancel = wait.until(ExpectedConditions.elementToBeClickable(
+          By.xpath("//div[@class='MuiBox-root css-171onha' and text()='Cancellation Reasons']")
+      ));
+      testOpenCancel.click();
+      
+      Thread.sleep(2000);
+      takeScreenshot("9_default_cancellation.png");
+      Thread.sleep(2000);
+        
+            WebElement courierTab = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//button[normalize-space()='Courier']")   
+            ));
+            courierTab.click();
+            Thread.sleep(1000);
+            takeScreenshot("20_courier_tab_opened.png");
+
+  
+            WebElement addButton = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//button[normalize-space()='Add']")  
+            ));
+            addButton.click();
+            Thread.sleep(1000);
+            takeScreenshot("20_add_form_opened.png");
+            
+            
+            String[] subjects = {
+                    "Customer", "Courier", "Restaurant", "System", "Payment gateway"
+                };
+
+                String[] actions = {
+                    "requested cancellation", "faced an issue", "could not complete the order",
+                    "reported a problem", "encountered an error", "declined the request"
+                };
+
+                String[] contexts = {
+                    "due to incorrect address", "because of payment failure", 
+                    "as the item was unavailable", "due to unexpected delay", 
+                    "because the shop was closed", "due to weather conditions"
+                };
+
+                String reason = subjects[random.nextInt(subjects.length)] + " " +
+                                actions[random.nextInt(actions.length)] + " " +
+                                contexts[random.nextInt(contexts.length)];
+
+                reason += " (Ref-" + (1000 + random.nextInt(9000)) + ")";
+
+
+                WebElement reasonInput = driver.findElement(By.name("reason"));
+                reasonInput.clear();
+                reasonInput.sendKeys(reason);
+
+                randomCourierReasonName = reason;
+                System.out.println("Entered reason: " + reason);
+            
+              WebElement addReasonButton = wait.until(ExpectedConditions.elementToBeClickable(
+              By.xpath("//button[@type='submit' and normalize-space()='Add']")
+          ));
+          addReasonButton.click();
+
+          System.out.println("Clicked on Add reason button successfully: " + randomCourierReasonName);
+          Thread.sleep(2000);      
+
+
+        } catch (Exception e) {
+            System.err.println("Error in testCourierCancellationReasonFlow: " + e.getMessage());
+            takeScreenshot("error_courier_reason.png");
+            throw e;
+        }
+    }
 
     
+    @Test(priority = 12, dependsOnMethods = "testCourierCancellationReasonFlow")
+    public void testSearchUpdateDeleteCourierReason() throws Exception {
+        if (randomCourierReasonName == null || randomCourierReasonName.trim().isEmpty()) {
+            throw new IllegalStateException("randomCourierReasonName is null or empty. Previous test may have failed.");
+        }
+        
+        System.out.println("Test: Search, Update and Delete Courier Reason: " + randomCourierReasonName);
+        
+        try {
+            WebElement searchBox = wait.until(ExpectedConditions
+                .visibilityOfElementLocated(By.xpath("//input[@name='searchValue' and @placeholder='Search...']"))
+            );
+
+            searchBox.click();
+            Thread.sleep(500);
+
+            // Clear search box and enter the reason name
+            searchBox.sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.DELETE);
+            searchBox.sendKeys(randomCourierReasonName);
+            Thread.sleep(1000);
+            searchBox.sendKeys(Keys.ENTER);
+            Thread.sleep(2000);
+
+            takeScreenshot("12_search_results.png");
+            
+            // Scroll down a bit
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("window.scrollBy(0,200);");
+            Thread.sleep(500);
+            
+            // Tab out of search box
+            searchBox.sendKeys(Keys.TAB);
+            Thread.sleep(500);
+            
+            // Click on table header to sort (optional)
+            WebElement tableHeader = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//th[contains(text(),'Name')]")
+            ));
+            tableHeader.click();
+            Thread.sleep(500);
+            
+            // EDIT THE REASON - Click menu button for the specific reason
+            WebElement menuButton = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//tr[td//div[text()='" + randomCourierReasonName + "']]//button[contains(@class,'MuiIconButton-root')]")
+            ));
+            menuButton.click();
+            
+            // Click Edit option
+            WebElement editOption = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//li[normalize-space()='Edit']")
+            ));
+            editOption.click();
+            Thread.sleep(2000);
+            System.out.println("Edit option clicked successfully");
+
+            takeScreenshot("12_edit_form_opened.png");
+
+            // UPDATE STATUS TO INACTIVE
+            WebElement statusDropdown = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//div[@role='combobox' and contains(@class,'MuiSelect-select') and text()='Active']")
+            ));
+            statusDropdown.click();
+            Thread.sleep(1000);
+            System.out.println("Status dropdown clicked");
+
+            // Select Inactive option
+            WebElement inactiveOption = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//li[@role='option' and @data-value='inactive' and text()='Inactive']")
+            ));
+            inactiveOption.click();
+            Thread.sleep(1000);
+            System.out.println("Changed status to Inactive");
+
+            takeScreenshot("12_status_changed_to_inactive.png");
+
+            // SAVE CHANGES
+            WebElement saveButton = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//button[@type='submit' or contains(text(),'Save') or contains(text(),'Update')]")
+            ));
+            saveButton.click();
+            Thread.sleep(2000);
+            System.out.println("Changes saved successfully");
+
+            // CHANGE STATUS FILTER TO SHOW INACTIVE ITEMS
+            WebElement dropdownButton = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//button[contains(@class,'MuiAutocomplete-popupIndicator')]")
+            ));
+            dropdownButton.click();
+            Thread.sleep(1000);
+            System.out.println("Autocomplete dropdown opened");
+            
+            WebElement inactiveFilterOption = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//li[@role='option' and text()='Inactive']")
+            ));
+            inactiveFilterOption.click();
+            Thread.sleep(1000);
+            System.out.println("Selected 'Inactive' from dropdown filter");
+
+            // DELETE THE REASON
+            WebElement menuButtonForDelete = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//tr[td//div[text()='" + randomCourierReasonName + "']]//button[contains(@class,'MuiIconButton-root')]")
+            ));
+            menuButtonForDelete.click();		
+
+            Thread.sleep(1000);
+
+            // Click Delete option
+            WebElement deleteOption = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//li[normalize-space()='Delete']")
+            ));
+            deleteOption.click();
+            Thread.sleep(1000);
+
+            // Confirm deletion
+            WebElement confirmDeleteButton = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//button[@type='button' and normalize-space()='Delete']")
+            ));
+            confirmDeleteButton.click();
+            Thread.sleep(2000);
+            
+            System.out.println("Courier reason deleted successfully: " + randomCourierReasonName);
+            takeScreenshot("12_courier_reason_deleted.png");
+            
+            // Scroll back up
+            JavascriptExecutor js2 = (JavascriptExecutor) driver;
+            js2.executeScript("window.scrollBy(0,-200);"); 
+            Thread.sleep(500);
+
+        } catch (Exception e) {
+            System.err.println("Error in testSearchUpdateDeleteCourierReason: " + e.getMessage());
+            takeScreenshot("error_search_update_delete_courier_reason.png");
+            throw e;
+        }
+    }
+    
+    
+    
+    @Test(priority = 13)
+    public void testShopCancellationReasonShop() throws Exception {
+        System.out.println("Test: Add, Search, Update, and Delete Shop Cancellation Reason");
+
+        try {
+        	
+          WebElement testOpenCancel = wait.until(ExpectedConditions.elementToBeClickable(
+          By.xpath("//div[@class='MuiBox-root css-171onha' and text()='Cancellation Reasons']")
+      ));
+      testOpenCancel.click();
+      
+      Thread.sleep(2000);
+      takeScreenshot("9_default_cancellation.png");
+      Thread.sleep(2000);
+        
+            WebElement shopTab = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//button[normalize-space()='Shop']")   
+            ));
+            shopTab.click();
+            Thread.sleep(1000);
+            takeScreenshot("21_shop_tab_opened.png");
+
+  
+            WebElement addButton = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//button[normalize-space()='Add']")  
+            ));
+            addButton.click();
+            Thread.sleep(1000);
+            takeScreenshot("21_add_form_opened.png");
+            
+            
+            String[] subjects = {
+                    "Customer", "Shop", "Restaurant", "System", "Payment gateway"
+                };
+
+                String[] actions = {
+                    "requested cancellation", "faced an issue", "could not complete the order",
+                    "reported a problem", "encountered an error", "declined the request"
+                };
+
+                String[] contexts = {
+                    "due to incorrect address", "because of payment failure", 
+                    "as the item was unavailable", "due to unexpected delay", 
+                    "because the shop was closed", "due to weather conditions"
+                };
+
+                String reason = subjects[random.nextInt(subjects.length)] + " " +
+                                actions[random.nextInt(actions.length)] + " " +
+                                contexts[random.nextInt(contexts.length)];
+
+                reason += " (Ref-" + (1000 + random.nextInt(9000)) + ")";
+
+
+                WebElement reasonInput = driver.findElement(By.name("reason"));
+                reasonInput.clear();
+                reasonInput.sendKeys(reason);
+
+                randomShopReasonName = reason;
+                System.out.println("Entered reason: " + reason);
+            
+              WebElement addReasonButton = wait.until(ExpectedConditions.elementToBeClickable(
+              By.xpath("//button[@type='submit' and normalize-space()='Add']")
+          ));
+          addReasonButton.click();
+
+          System.out.println("Clicked on Add reason button successfully: " + randomShopReasonName);
+          Thread.sleep(2000);      
+
+
+        } catch (Exception e) {
+            System.err.println("Error in testCourierCancellationReasonFlow: " + e.getMessage());
+            takeScreenshot("error_courier_reason.png");
+            throw e;
+        }
+    }
+
+    
+    @Test(priority = 14, dependsOnMethods = "testShopCancellationReasonShop")
+    public void testSearchUpdateDeleteShopReasons() throws Exception {
+        if (randomShopReasonName == null || randomShopReasonName.trim().isEmpty()) {
+            throw new IllegalStateException("randomCourierReasonName is null or empty. Previous test may have failed.");
+        }
+        
+        System.out.println("Test: Search, Update and Delete Courier Reason: " + randomShopReasonName);
+        
+        try {
+            WebElement searchBox = wait.until(ExpectedConditions
+                .visibilityOfElementLocated(By.xpath("//input[@name='searchValue' and @placeholder='Search...']"))
+            );
+            searchBox.click();
+            Thread.sleep(500);
+
+     
+            searchBox.sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.DELETE);
+            searchBox.sendKeys(randomShopReasonName);
+            Thread.sleep(1000);
+            searchBox.sendKeys(Keys.ENTER);
+            Thread.sleep(2000);
+
+            takeScreenshot("12_search_results.png");
+            
+            
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("window.scrollBy(0,200);");
+            Thread.sleep(500);
+            
+          
+            searchBox.sendKeys(Keys.TAB);
+            Thread.sleep(500);
+            
+          
+            WebElement tableHeader = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//th[contains(text(),'Name')]")
+            ));
+            tableHeader.click();
+            Thread.sleep(500);
+            
+   
+            WebElement menuButton = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//tr[td//div[text()='" + randomShopReasonName + "']]//button[contains(@class,'MuiIconButton-root')]")
+            ));
+            menuButton.click();
+            
+      
+            WebElement editOption = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//li[normalize-space()='Edit']")
+            ));
+            editOption.click();
+            Thread.sleep(2000);
+            System.out.println("Edit option clicked successfully");
+
+            takeScreenshot("12_edit_form_opened.png");
+
+     
+            WebElement statusDropdown = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//div[@role='combobox' and contains(@class,'MuiSelect-select') and text()='Active']")
+            ));
+            statusDropdown.click();
+            Thread.sleep(1000);
+            System.out.println("Status dropdown clicked");
+
+ 
+            WebElement inactiveOption = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//li[@role='option' and @data-value='inactive' and text()='Inactive']")
+            ));
+            inactiveOption.click();
+            Thread.sleep(1000);
+            System.out.println("Changed status to Inactive");
+
+            takeScreenshot("12_status_changed_to_inactive.png");
+
+ 
+            WebElement saveButton = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//button[@type='submit' or contains(text(),'Save') or contains(text(),'Update')]")
+            ));
+            saveButton.click();
+            Thread.sleep(2000);
+            System.out.println("Changes saved successfully");
+
+    
+            WebElement dropdownButton = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//button[contains(@class,'MuiAutocomplete-popupIndicator')]")
+            ));
+            dropdownButton.click();
+            Thread.sleep(1000);
+            System.out.println("Autocomplete dropdown opened");
+            
+            WebElement inactiveFilterOption = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//li[@role='option' and text()='Inactive']")
+            ));
+            inactiveFilterOption.click();
+            Thread.sleep(1000);
+            System.out.println("Selected 'Inactive' from dropdown filter");
+
+ 
+            WebElement menuButtonForDelete = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//tr[td//div[text()='" + randomShopReasonName + "']]//button[contains(@class,'MuiIconButton-root')]")
+            ));
+            menuButtonForDelete.click();		
+
+            Thread.sleep(1000);
+
+
+            WebElement deleteOption = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//li[normalize-space()='Delete']")
+            ));
+            deleteOption.click();
+            Thread.sleep(1000);
+
+            WebElement confirmDeleteButton = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//button[@type='button' and normalize-space()='Delete']")
+            ));
+            confirmDeleteButton.click();
+            Thread.sleep(2000);
+            
+            System.out.println("Shop reason deleted successfully: " + randomShopReasonName);
+            takeScreenshot("12_courier_reason_deleted.png");
+            
+ 
+            JavascriptExecutor js2 = (JavascriptExecutor) driver;
+            js2.executeScript("window.scrollBy(0,-200);"); 
+            Thread.sleep(500);
+
+        } catch (Exception e) {
+            System.err.println("Error in testSearchUpdateDeleteCourierReason: " + e.getMessage());
+            takeScreenshot("error_search_update_delete_courier_reason.png");
+            throw e;
+        }
+    }
     
     
     
     
+    @Test(priority = 15)
+    public void testResolveCancellationReasonShop() throws Exception {
+        System.out.println("Test: Add, Search, Update, and Delete Resolve Chat Cancellation Reason");
+
+        try {
+        	
+          WebElement testOpenCancel = wait.until(ExpectedConditions.elementToBeClickable(
+          By.xpath("//div[@class='MuiBox-root css-171onha' and text()='Cancellation Reasons']")
+      ));
+      testOpenCancel.click();
+      
+      Thread.sleep(2000);
+      takeScreenshot("9_default_cancellation.png");
+      Thread.sleep(2000);
+        
+            WebElement resolveTab = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//button[normalize-space()='Resolve Chat']")   
+            ));
+            resolveTab.click();
+            Thread.sleep(1000);
+            takeScreenshot("21_resolve_tab_opened.png");
+
+  
+            WebElement addButton = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//button[normalize-space()='Add']")  
+            ));
+            addButton.click();
+            Thread.sleep(1000);
+            takeScreenshot("21_add_form_opened.png");
+            
+            
+            String[] subjects = {
+                    "Customer", "Chat", "Restaurant", "System", "Payment gateway"
+                };
+
+                String[] actions = {
+                    "requested cancellation", "faced an issue", "could not complete the order",
+                    "reported a problem", "encountered an error", "declined the request"
+                };
+
+                String[] contexts = {
+                    "due to incorrect address", "because of payment failure", 
+                    "as the item was unavailable", "due to unexpected delay", 
+                    "because the shop was closed", "due to weather conditions"
+                };
+
+                String reason = subjects[random.nextInt(subjects.length)] + " " +
+                                actions[random.nextInt(actions.length)] + " " +
+                                contexts[random.nextInt(contexts.length)];
+
+                reason += " (Ref-" + (1000 + random.nextInt(9000)) + ")";
+
+
+                WebElement reasonInput = driver.findElement(By.name("reason"));
+                reasonInput.clear();
+                reasonInput.sendKeys(reason);
+
+                randomResolveChatReasonName = reason;
+                System.out.println("Entered reason: " + reason);
+            
+              WebElement addReasonButton = wait.until(ExpectedConditions.elementToBeClickable(
+              By.xpath("//button[@type='submit' and normalize-space()='Add']")
+          ));
+          addReasonButton.click();
+          Thread.sleep(2000);  
+          System.out.println("Clicked on Add reason button successfully: " + randomResolveChatReasonName);
+          Thread.sleep(2000);      
+
+
+        } catch (Exception e) {
+            System.err.println("Error in testCourierCancellationReasonFlow: " + e.getMessage());
+            takeScreenshot("error_courier_reason.png");
+            throw e;
+        }
+    }
+
+    
+    @Test(priority = 16, dependsOnMethods = "testResolveCancellationReasonShop")
+    public void testSearchUpdateDeleteResolveReasons() throws Exception {
+        if (randomResolveChatReasonName == null || randomResolveChatReasonName.trim().isEmpty()) {
+            throw new IllegalStateException("randomCourierReasonName is null or empty. Previous test may have failed.");
+        }
+        
+        System.out.println("Test: Search, Update and Delete Courier Reason: " + randomResolveChatReasonName);
+        
+        try {
+            WebElement searchBox = wait.until(ExpectedConditions
+                .visibilityOfElementLocated(By.xpath("//input[@name='searchValue' and @placeholder='Search...']"))
+            );
+
+            searchBox.click();
+            Thread.sleep(500);
+
+     
+            searchBox.sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.DELETE);
+            searchBox.sendKeys(randomResolveChatReasonName);
+            Thread.sleep(1000);
+            searchBox.sendKeys(Keys.ENTER);
+            Thread.sleep(2000);
+
+            takeScreenshot("12_search_results.png");
+            
+            
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("window.scrollBy(0,200);");
+            Thread.sleep(500);
+            
+          
+            searchBox.sendKeys(Keys.TAB);
+            Thread.sleep(500);
+            
+          
+            WebElement tableHeader = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//th[contains(text(),'Name')]")
+            ));
+            tableHeader.click();
+            Thread.sleep(500);
+            
+   
+            WebElement menuButton = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//tr[td//div[text()='" + randomResolveChatReasonName + "']]//button[contains(@class,'MuiIconButton-root')]")
+            ));
+            menuButton.click();
+            
+      
+            WebElement editOption = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//li[normalize-space()='Edit']")
+            ));
+            editOption.click();
+            Thread.sleep(2000);
+            System.out.println("Edit option clicked successfully");
+
+            takeScreenshot("12_edit_form_opened.png");
+
+     
+            WebElement statusDropdown = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//div[@role='combobox' and contains(@class,'MuiSelect-select') and text()='Active']")
+            ));
+            statusDropdown.click();
+            Thread.sleep(1000);
+            System.out.println("Status dropdown clicked");
+
+ 
+            WebElement inactiveOption = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//li[@role='option' and @data-value='inactive' and text()='Inactive']")
+            ));
+            inactiveOption.click();
+            Thread.sleep(1000);
+            System.out.println("Changed status to Inactive");
+
+            takeScreenshot("12_status_changed_to_inactive.png");
+
+ 
+            WebElement saveButton = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//button[@type='submit' or contains(text(),'Save') or contains(text(),'Update')]")
+            ));
+            saveButton.click();
+            Thread.sleep(2000);
+            System.out.println("Changes saved successfully");
+
+    
+            WebElement dropdownButton = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//button[contains(@class,'MuiAutocomplete-popupIndicator')]")
+            ));
+            dropdownButton.click();
+            Thread.sleep(1000);
+            System.out.println("Autocomplete dropdown opened");
+            
+            WebElement inactiveFilterOption = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//li[@role='option' and text()='Inactive']")
+            ));
+            inactiveFilterOption.click();
+            Thread.sleep(1000);
+            System.out.println("Selected 'Inactive' from dropdown filter");
+
+ 
+            WebElement menuButtonForDelete = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//tr[td//div[text()='" + randomResolveChatReasonName + "']]//button[contains(@class,'MuiIconButton-root')]")
+            ));
+            menuButtonForDelete.click();		
+
+            Thread.sleep(1000);
+
+
+            WebElement deleteOption = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//li[normalize-space()='Delete']")
+            ));
+            deleteOption.click();
+            Thread.sleep(1000);
+
+            WebElement confirmDeleteButton = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//button[@type='button' and normalize-space()='Delete']")
+            ));
+            confirmDeleteButton.click();
+            Thread.sleep(2000);
+            
+            System.out.println("Shop reason deleted successfully: " + randomResolveChatReasonName);
+            takeScreenshot("12_courier_reason_deleted.png");
+            
+ 
+            JavascriptExecutor js2 = (JavascriptExecutor) driver;
+            js2.executeScript("window.scrollBy(0,-200);"); 
+            Thread.sleep(500);
+
+        } catch (Exception e) {
+            System.err.println("Error in testSearchUpdateDeleteCourierReason: " + e.getMessage());
+            takeScreenshot("error_search_update_delete_courier_reason.png");
+            throw e;
+        }
+    }
     
     
     
     
+    @Test(priority = 17)
+    public void testLyxaPlusCancellationReason() throws Exception {
+        System.out.println("Test: Add, Search, Update, and Delete Resolve Chat Cancellation Reason");
+
+        try {
+        	
+          WebElement testOpenCancel = wait.until(ExpectedConditions.elementToBeClickable(
+          By.xpath("//div[@class='MuiBox-root css-171onha' and text()='Cancellation Reasons']")
+      ));
+      testOpenCancel.click();
+      
+      Thread.sleep(2000);
+      takeScreenshot("9_default_cancellation.png");
+      Thread.sleep(2000);
+        
+            WebElement resolveTab = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//button[normalize-space()='Lyxa Plus Subscription']")   
+            ));
+            resolveTab.click();
+            Thread.sleep(1000);
+            takeScreenshot("21_resolve_tab_opened.png");
+
+  
+            WebElement addButton = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//button[normalize-space()='Add']")  
+            ));
+            addButton.click();
+            Thread.sleep(1000);
+            takeScreenshot("21_add_form_opened.png");
+            
+            
+            String[] subjects = {
+                    "Customer", "Chat", "Restaurant", "System", "Payment gateway"
+                };
+
+                String[] actions = {
+                    "requested cancellation", "faced an issue", "could not complete the order",
+                    "reported a problem", "encountered an error", "declined the request"
+                };
+
+                String[] contexts = {
+                    "due to incorrect address", "because of payment failure", 
+                    "as the item was unavailable", "due to unexpected delay", 
+                    "because the shop was closed", "due to weather conditions"
+                };
+
+                String reason = subjects[random.nextInt(subjects.length)] + " " +
+                                actions[random.nextInt(actions.length)] + " " +
+                                contexts[random.nextInt(contexts.length)];
+
+                reason += " (Ref-" + (1000 + random.nextInt(9000)) + ")";
+
+
+                WebElement reasonInput = driver.findElement(By.name("reason"));
+                reasonInput.clear();
+                reasonInput.sendKeys(reason);
+
+                randomPlusReasonName = reason;
+                System.out.println("Entered reason: " + reason);
+            
+              WebElement addReasonButton = wait.until(ExpectedConditions.elementToBeClickable(
+              By.xpath("//button[@type='submit' and normalize-space()='Add']")
+          ));
+          addReasonButton.click();
+          Thread.sleep(2000);  
+          System.out.println("Clicked on Add reason button successfully: " + randomPlusReasonName);
+          Thread.sleep(2000);      
+
+
+        } catch (Exception e) {
+            System.err.println("Error in testCourierCancellationReasonFlow: " + e.getMessage());
+            takeScreenshot("error_courier_reason.png");
+            throw e;
+        }
+    }
+
     
+    @Test(priority = 18, dependsOnMethods = "testLyxaPlusCancellationReason")
+    public void testSearchUpdateDeletePlusReasons() throws Exception {
+        if (randomPlusReasonName == null || randomPlusReasonName.trim().isEmpty()) {
+            throw new IllegalStateException("randomCourierReasonName is null or empty. Previous test may have failed.");
+        }
+        
+        System.out.println("Test: Search, Update and Delete Courier Reason: " + randomPlusReasonName);
+        
+        try {
+            WebElement searchBox = wait.until(ExpectedConditions
+                .visibilityOfElementLocated(By.xpath("//input[@name='searchValue' and @placeholder='Search...']"))
+            );
+
+            searchBox.click();
+            Thread.sleep(500);
+
+     
+            searchBox.sendKeys(Keys.chord(Keys.CONTROL, "a"), Keys.DELETE);
+            searchBox.sendKeys(randomPlusReasonName);
+            Thread.sleep(1000);
+            searchBox.sendKeys(Keys.ENTER);
+            Thread.sleep(2000);
+
+            takeScreenshot("12_search_results.png");
+            
+            
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("window.scrollBy(0,200);");
+            Thread.sleep(500);
+            
+          
+            searchBox.sendKeys(Keys.TAB);
+            Thread.sleep(500);
+            
+          
+            WebElement tableHeader = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//th[contains(text(),'Name')]")
+            ));
+            tableHeader.click();
+            Thread.sleep(500);
+            
+   
+            WebElement menuButton = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//tr[td//div[text()='" + randomPlusReasonName + "']]//button[contains(@class,'MuiIconButton-root')]")
+            ));
+            menuButton.click();
+            
+      
+            WebElement editOption = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//li[normalize-space()='Edit']")
+            ));
+            editOption.click();
+            Thread.sleep(2000);
+            System.out.println("Edit option clicked successfully");
+
+            takeScreenshot("12_edit_form_opened.png");
+
+     
+            WebElement statusDropdown = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//div[@role='combobox' and contains(@class,'MuiSelect-select') and text()='Active']")
+            ));
+            statusDropdown.click();
+            Thread.sleep(1000);
+            System.out.println("Status dropdown clicked");
+
+ 
+            WebElement inactiveOption = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//li[@role='option' and @data-value='inactive' and text()='Inactive']")
+            ));
+            inactiveOption.click();
+            Thread.sleep(1000);
+            System.out.println("Changed status to Inactive");
+
+            takeScreenshot("12_status_changed_to_inactive.png");
+
+ 
+            WebElement saveButton = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//button[@type='submit' or contains(text(),'Save') or contains(text(),'Update')]")
+            ));
+            saveButton.click();
+            Thread.sleep(2000);
+            System.out.println("Changes saved successfully");
+
     
-    
+            WebElement dropdownButton = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//button[contains(@class,'MuiAutocomplete-popupIndicator')]")
+            ));
+            dropdownButton.click();
+            Thread.sleep(1000);
+            System.out.println("Autocomplete dropdown opened");
+            
+            WebElement inactiveFilterOption = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//li[@role='option' and text()='Inactive']")
+            ));
+            inactiveFilterOption.click();
+            Thread.sleep(1000);
+            System.out.println("Selected 'Inactive' from dropdown filter");
+
+ 
+            WebElement menuButtonForDelete = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//tr[td//div[text()='" + randomPlusReasonName + "']]//button[contains(@class,'MuiIconButton-root')]")
+            ));
+            menuButtonForDelete.click();		
+
+            Thread.sleep(1000);
+
+
+            WebElement deleteOption = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//li[normalize-space()='Delete']")
+            ));
+            deleteOption.click();
+            Thread.sleep(1000);
+
+            WebElement confirmDeleteButton = wait.until(ExpectedConditions.elementToBeClickable(
+                By.xpath("//button[@type='button' and normalize-space()='Delete']")
+            ));
+            confirmDeleteButton.click();
+            Thread.sleep(2000);
+            
+            System.out.println("Shop reason deleted successfully: " + randomPlusReasonName);
+            takeScreenshot("12_courier_reason_deleted.png");
+            
+ 
+            JavascriptExecutor js2 = (JavascriptExecutor) driver;
+            js2.executeScript("window.scrollBy(0,-200);"); 
+            Thread.sleep(500);
+
+        } catch (Exception e) {
+            System.err.println("Error in testSearchUpdateDeleteCourierReason: " + e.getMessage());
+            takeScreenshot("error_search_update_delete_courier_reason.png");
+            throw e;
+        }
+    }
+     
     
     @AfterClass
     public void tearDown() {

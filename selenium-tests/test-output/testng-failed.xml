@@ -5,14 +5,14 @@
     <classes>
       <class name="brandNutrationCancellation">
         <methods>
-          <include name="testValidLogin"/>
-          <include name="testNavigateToSettings"/>
           <include name="tearDown"/>
-          <include name="testOpenCancellation"/>
-          <include name="testOpenNavigationMenu"/>
+          <include name="testSearchUpdateDeleteShopReasons"/>
+          <include name="testLyxaPlusCancellationReason"/>
+          <include name="testSearchUpdateDeleteResolveReasons"/>
           <include name="setUp"/>
-          <include name="testSearchAndDisableReason"/>
-          <include name="testNavigateToLoginPage"/>
+          <include name="testSearchUpdateDeletePlusReasons"/>
+          <include name="testResolveCancellationReasonShop"/>
+          <include name="testShopCancellationReasonShop"/>
         </methods>
       </class> <!-- brandNutrationCancellation -->
     </classes>

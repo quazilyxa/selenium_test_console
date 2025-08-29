@@ -1,41 +1,311 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testng-results ignored="0" total="6" passed="6" failed="0" skipped="0">
+<testng-results ignored="0" total="12" passed="7" failed="3" skipped="2">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2025-08-28T15:33:21 BDT" name="Default suite" finished-at="2025-08-28T15:34:11 BDT" duration-ms="49751">
+  <suite started-at="2025-08-29T18:14:42 BDT" name="Default suite" finished-at="2025-08-29T18:16:04 BDT" duration-ms="82539">
     <groups>
     </groups>
-    <test started-at="2025-08-28T15:33:21 BDT" name="Default test" finished-at="2025-08-28T15:34:11 BDT" duration-ms="49751">
+    <test started-at="2025-08-29T18:14:42 BDT" name="Default test" finished-at="2025-08-29T18:16:04 BDT" duration-ms="82539">
       <class name="brandNutrationCancellation">
-        <test-method is-config="true" signature="setUp()[pri:0, instance:brandNutrationCancellation@6a78afa0]" started-at="2025-08-28T15:33:21 BDT" name="setUp" finished-at="2025-08-28T15:33:22 BDT" duration-ms="1000" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:brandNutrationCancellation@139982de]" started-at="2025-08-29T18:14:42 BDT" name="setUp" finished-at="2025-08-29T18:14:43 BDT" duration-ms="1007" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="testNavigateToLoginPage()[pri:1, instance:brandNutrationCancellation@6a78afa0]" started-at="2025-08-28T15:33:22 BDT" name="testNavigateToLoginPage" finished-at="2025-08-28T15:33:28 BDT" duration-ms="5569" status="PASS">
+        <test-method signature="testNavigateToLoginPage()[pri:1, instance:brandNutrationCancellation@139982de]" started-at="2025-08-29T18:14:43 BDT" name="testNavigateToLoginPage" finished-at="2025-08-29T18:14:48 BDT" duration-ms="5200" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testNavigateToLoginPage -->
-        <test-method signature="testValidLogin()[pri:2, instance:brandNutrationCancellation@6a78afa0]" started-at="2025-08-28T15:33:28 BDT" name="testValidLogin" finished-at="2025-08-28T15:33:32 BDT" depends-on-methods="brandNutrationCancellation.testNavigateToLoginPage" duration-ms="4822" status="PASS">
+        <test-method signature="testValidLogin()[pri:2, instance:brandNutrationCancellation@139982de]" started-at="2025-08-29T18:14:48 BDT" name="testValidLogin" finished-at="2025-08-29T18:14:53 BDT" depends-on-methods="brandNutrationCancellation.testNavigateToLoginPage" duration-ms="4854" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testValidLogin -->
-        <test-method signature="testOpenNavigationMenu()[pri:3, instance:brandNutrationCancellation@6a78afa0]" started-at="2025-08-28T15:33:32 BDT" name="testOpenNavigationMenu" finished-at="2025-08-28T15:33:37 BDT" depends-on-methods="brandNutrationCancellation.testValidLogin" duration-ms="4404" status="PASS">
+        <test-method signature="testOpenNavigationMenu()[pri:3, instance:brandNutrationCancellation@139982de]" started-at="2025-08-29T18:14:53 BDT" name="testOpenNavigationMenu" finished-at="2025-08-29T18:14:57 BDT" depends-on-methods="brandNutrationCancellation.testValidLogin" duration-ms="4383" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testOpenNavigationMenu -->
-        <test-method signature="testNavigateToSettings()[pri:4, instance:brandNutrationCancellation@6a78afa0]" started-at="2025-08-28T15:33:37 BDT" name="testNavigateToSettings" finished-at="2025-08-28T15:33:39 BDT" depends-on-methods="brandNutrationCancellation.testOpenNavigationMenu" duration-ms="2333" status="PASS">
+        <test-method signature="testNavigateToSettings()[pri:4, instance:brandNutrationCancellation@139982de]" started-at="2025-08-29T18:14:57 BDT" name="testNavigateToSettings" finished-at="2025-08-29T18:15:00 BDT" depends-on-methods="brandNutrationCancellation.testOpenNavigationMenu" duration-ms="2304" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testNavigateToSettings -->
-        <test-method signature="testOpenCancellation()[pri:9, instance:brandNutrationCancellation@6a78afa0]" started-at="2025-08-28T15:33:39 BDT" name="testOpenCancellation" finished-at="2025-08-28T15:33:50 BDT" depends-on-methods="brandNutrationCancellation.testNavigateToSettings" duration-ms="10952" status="PASS">
+        <test-method signature="testCourierCancellationReasonFlow()[pri:11, instance:brandNutrationCancellation@139982de]" started-at="2025-08-29T18:15:00 BDT" name="testCourierCancellationReasonFlow" finished-at="2025-08-29T18:15:09 BDT" duration-ms="9332" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testOpenCancellation -->
-        <test-method signature="testSearchAndDisableReason()[pri:10, instance:brandNutrationCancellation@6a78afa0]" started-at="2025-08-28T15:33:50 BDT" name="testSearchAndDisableReason" finished-at="2025-08-28T15:34:10 BDT" depends-on-methods="brandNutrationCancellation.testOpenCancellation" duration-ms="20218" status="PASS">
+        </test-method> <!-- testCourierCancellationReasonFlow -->
+        <test-method signature="testSearchUpdateDeleteCourierReason()[pri:12, instance:brandNutrationCancellation@139982de]" started-at="2025-08-29T18:15:09 BDT" name="testSearchUpdateDeleteCourierReason" finished-at="2025-08-29T18:15:30 BDT" depends-on-methods="brandNutrationCancellation.testCourierCancellationReasonFlow" duration-ms="20764" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- testSearchAndDisableReason -->
-        <test-method is-config="true" signature="tearDown()[pri:0, instance:brandNutrationCancellation@6a78afa0]" started-at="2025-08-28T15:34:10 BDT" name="tearDown" finished-at="2025-08-28T15:34:11 BDT" duration-ms="395" status="PASS">
+        </test-method> <!-- testSearchUpdateDeleteCourierReason -->
+        <test-method signature="testShopCancellationReasonShop()[pri:13, instance:brandNutrationCancellation@139982de]" started-at="2025-08-29T18:15:30 BDT" name="testShopCancellationReasonShop" finished-at="2025-08-29T18:15:39 BDT" duration-ms="9256" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testShopCancellationReasonShop -->
+        <test-method signature="testSearchUpdateDeleteShopReasons()[pri:14, instance:brandNutrationCancellation@139982de]" started-at="2025-08-29T18:15:39 BDT" name="testSearchUpdateDeleteShopReasons" finished-at="2025-08-29T18:16:01 BDT" depends-on-methods="brandNutrationCancellation.testShopCancellationReasonShop" duration-ms="21708" status="FAIL">
+          <exception class="org.openqa.selenium.TimeoutException">
+            <message>
+              <![CDATA[Expected condition failed: waiting for element to be clickable: By.xpath: //tr[td//div[text()='Payment gateway declined the request as the item was unavailable (Ref-7234)']]//button[contains(@class,'MuiIconButton-root')] (tried for 15 second(s) with 500 milliseconds interval)
+Build info: version: '4.31.0', revision: '1ef9f18787*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.12'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 139.0.7258.139, chrome: {chromedriverVersion: 139.0.7258.68 (40ff94600b6e..., userDataDir: C:\Users\quazi\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:51054}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:51054/devtoo..., se:cdpVersion: 139.0.7258.139, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 1265b7585ab36dd92a5dc46fc1e395d9]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: By.xpath: //tr[td//div[text()='Payment gateway declined the request as the item was unavailable (Ref-7234)']]//button[contains(@class,'MuiIconButton-root')] (tried for 15 second(s) with 500 milliseconds interval)
+Build info: version: '4.31.0', revision: '1ef9f18787*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.12'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 139.0.7258.139, chrome: {chromedriverVersion: 139.0.7258.68 (40ff94600b6e..., userDataDir: C:\Users\quazi\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:51054}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:51054/devtoo..., se:cdpVersion: 139.0.7258.139, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 1265b7585ab36dd92a5dc46fc1e395d9
+at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
+at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
+at brandNutrationCancellation.testSearchUpdateDeleteShopReasons(brandNutrationCancellation.java:955)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:686)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:992)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+at org.testng.TestRunner.privateRun(TestRunner.java:739)
+at org.testng.TestRunner.run(TestRunner.java:614)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+at org.testng.TestNG.runSuites(TestNG.java:1112)
+at org.testng.TestNG.run(TestNG.java:1079)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.TimeoutException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testSearchUpdateDeleteShopReasons -->
+        <test-method signature="testResolveCancellationReasonShop()[pri:15, instance:brandNutrationCancellation@139982de]" started-at="2025-08-29T18:16:01 BDT" name="testResolveCancellationReasonShop" finished-at="2025-08-29T18:16:02 BDT" duration-ms="1524" status="FAIL">
+          <exception class="org.openqa.selenium.ElementClickInterceptedException">
+            <message>
+              <![CDATA[element click intercepted: Element <div class="MuiBox-root css-171onha">...</div> is not clickable at point (175, 69). Other element would receive the click: <div class="MuiContainer-root css-7w5w4u">...</div>
+  (Session info: chrome=139.0.7258.139)
+Build info: version: '4.31.0', revision: '1ef9f18787*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.12'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [1265b7585ab36dd92a5dc46fc1e395d9, clickElement {id=f.FFF0CFAC09EF2455A9C5D8D93B905BF9.d.112EAB779C34C1A5DD8CFF5C88B3BEC4.e.114}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 139.0.7258.139, chrome: {chromedriverVersion: 139.0.7258.68 (40ff94600b6e..., userDataDir: C:\Users\quazi\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:51054}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:51054/devtoo..., se:cdpVersion: 139.0.7258.139, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on windows (1265b7585ab36dd92a5dc46fc1e395d9)] -> xpath: //div[@class='MuiBox-root css-171onha' and text()='Cancellation Reasons']]
+Session ID: 1265b7585ab36dd92a5dc46fc1e395d9]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.ElementClickInterceptedException: element click intercepted: Element <div class="MuiBox-root css-171onha">...</div> is not clickable at point (175, 69). Other element would receive the click: <div class="MuiContainer-root css-7w5w4u">...</div>
+  (Session info: chrome=139.0.7258.139)
+Build info: version: '4.31.0', revision: '1ef9f18787*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.12'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [1265b7585ab36dd92a5dc46fc1e395d9, clickElement {id=f.FFF0CFAC09EF2455A9C5D8D93B905BF9.d.112EAB779C34C1A5DD8CFF5C88B3BEC4.e.114}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 139.0.7258.139, chrome: {chromedriverVersion: 139.0.7258.68 (40ff94600b6e..., userDataDir: C:\Users\quazi\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:51054}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:51054/devtoo..., se:cdpVersion: 139.0.7258.139, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on windows (1265b7585ab36dd92a5dc46fc1e395d9)] -> xpath: //div[@class='MuiBox-root css-171onha' and text()='Cancellation Reasons']]
+Session ID: 1265b7585ab36dd92a5dc46fc1e395d9
+at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
+at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)
+at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
+at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
+at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
+at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:215)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:545)
+at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:223)
+at org.openqa.selenium.remote.RemoteWebElement.click(RemoteWebElement.java:76)
+at brandNutrationCancellation.testResolveCancellationReasonShop(brandNutrationCancellation.java:1059)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:686)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:992)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+at org.testng.TestRunner.privateRun(TestRunner.java:739)
+at org.testng.TestRunner.run(TestRunner.java:614)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+at org.testng.TestNG.runSuites(TestNG.java:1112)
+at org.testng.TestNG.run(TestNG.java:1079)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.ElementClickInterceptedException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testResolveCancellationReasonShop -->
+        <test-method signature="testSearchUpdateDeleteResolveReasons()[pri:16, instance:brandNutrationCancellation@139982de]" started-at="2025-08-29T18:16:02 BDT" name="testSearchUpdateDeleteResolveReasons" finished-at="2025-08-29T18:16:02 BDT" depends-on-methods="brandNutrationCancellation.testResolveCancellationReasonShop" duration-ms="0" status="SKIP">
+          <exception class="java.lang.Throwable">
+            <message>
+              <![CDATA[Method brandNutrationCancellation.testSearchUpdateDeleteResolveReasons() on instance brandNutrationCancellation@139982de depends on not successfully finished methods 
+[brandNutrationCancellation.testResolveCancellationReasonShop() on instance brandNutrationCancellation@139982de]]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.Throwable: Method brandNutrationCancellation.testSearchUpdateDeleteResolveReasons() on instance brandNutrationCancellation@139982de depends on not successfully finished methods 
+[brandNutrationCancellation.testResolveCancellationReasonShop() on instance brandNutrationCancellation@139982de]
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:159)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+at org.testng.TestRunner.privateRun(TestRunner.java:739)
+at org.testng.TestRunner.run(TestRunner.java:614)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+at org.testng.TestNG.runSuites(TestNG.java:1112)
+at org.testng.TestNG.run(TestNG.java:1079)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.Throwable -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testSearchUpdateDeleteResolveReasons -->
+        <test-method signature="testLyxaPlusCancellationReason()[pri:17, instance:brandNutrationCancellation@139982de]" started-at="2025-08-29T18:16:02 BDT" name="testLyxaPlusCancellationReason" finished-at="2025-08-29T18:16:04 BDT" duration-ms="1496" status="FAIL">
+          <exception class="org.openqa.selenium.ElementClickInterceptedException">
+            <message>
+              <![CDATA[element click intercepted: Element <div class="MuiBox-root css-171onha">...</div> is not clickable at point (175, 69). Other element would receive the click: <div class="MuiContainer-root css-7w5w4u">...</div>
+  (Session info: chrome=139.0.7258.139)
+Build info: version: '4.31.0', revision: '1ef9f18787*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.12'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [1265b7585ab36dd92a5dc46fc1e395d9, clickElement {id=f.FFF0CFAC09EF2455A9C5D8D93B905BF9.d.112EAB779C34C1A5DD8CFF5C88B3BEC4.e.114}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 139.0.7258.139, chrome: {chromedriverVersion: 139.0.7258.68 (40ff94600b6e..., userDataDir: C:\Users\quazi\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:51054}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:51054/devtoo..., se:cdpVersion: 139.0.7258.139, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on windows (1265b7585ab36dd92a5dc46fc1e395d9)] -> xpath: //div[@class='MuiBox-root css-171onha' and text()='Cancellation Reasons']]
+Session ID: 1265b7585ab36dd92a5dc46fc1e395d9]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[org.openqa.selenium.ElementClickInterceptedException: element click intercepted: Element <div class="MuiBox-root css-171onha">...</div> is not clickable at point (175, 69). Other element would receive the click: <div class="MuiContainer-root css-7w5w4u">...</div>
+  (Session info: chrome=139.0.7258.139)
+Build info: version: '4.31.0', revision: '1ef9f18787*'
+System info: os.name: 'Windows 11', os.arch: 'amd64', os.version: '10.0', java.version: '17.0.12'
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [1265b7585ab36dd92a5dc46fc1e395d9, clickElement {id=f.FFF0CFAC09EF2455A9C5D8D93B905BF9.d.112EAB779C34C1A5DD8CFF5C88B3BEC4.e.114}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 139.0.7258.139, chrome: {chromedriverVersion: 139.0.7258.68 (40ff94600b6e..., userDataDir: C:\Users\quazi\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:51054}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:51054/devtoo..., se:cdpVersion: 139.0.7258.139, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on windows (1265b7585ab36dd92a5dc46fc1e395d9)] -> xpath: //div[@class='MuiBox-root css-171onha' and text()='Cancellation Reasons']]
+Session ID: 1265b7585ab36dd92a5dc46fc1e395d9
+at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
+at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)
+at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
+at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
+at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
+at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:215)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:545)
+at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:223)
+at org.openqa.selenium.remote.RemoteWebElement.click(RemoteWebElement.java:76)
+at brandNutrationCancellation.testLyxaPlusCancellationReason(brandNutrationCancellation.java:1273)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:686)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:992)
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+at org.testng.TestRunner.privateRun(TestRunner.java:739)
+at org.testng.TestRunner.run(TestRunner.java:614)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+at org.testng.TestNG.runSuites(TestNG.java:1112)
+at org.testng.TestNG.run(TestNG.java:1079)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+]]>
+            </full-stacktrace>
+          </exception> <!-- org.openqa.selenium.ElementClickInterceptedException -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testLyxaPlusCancellationReason -->
+        <test-method signature="testSearchUpdateDeletePlusReasons()[pri:18, instance:brandNutrationCancellation@139982de]" started-at="2025-08-29T18:16:04 BDT" name="testSearchUpdateDeletePlusReasons" finished-at="2025-08-29T18:16:04 BDT" depends-on-methods="brandNutrationCancellation.testLyxaPlusCancellationReason" duration-ms="0" status="SKIP">
+          <exception class="java.lang.Throwable">
+            <message>
+              <![CDATA[Method brandNutrationCancellation.testSearchUpdateDeletePlusReasons() on instance brandNutrationCancellation@139982de depends on not successfully finished methods 
+[brandNutrationCancellation.testLyxaPlusCancellationReason() on instance brandNutrationCancellation@139982de]]]>
+            </message>
+            <full-stacktrace>
+              <![CDATA[java.lang.Throwable: Method brandNutrationCancellation.testSearchUpdateDeletePlusReasons() on instance brandNutrationCancellation@139982de depends on not successfully finished methods 
+[brandNutrationCancellation.testLyxaPlusCancellationReason() on instance brandNutrationCancellation@139982de]
+at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:159)
+at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+at org.testng.TestRunner.privateRun(TestRunner.java:739)
+at org.testng.TestRunner.run(TestRunner.java:614)
+at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+at org.testng.TestNG.runSuites(TestNG.java:1112)
+at org.testng.TestNG.run(TestNG.java:1079)
+at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+]]>
+            </full-stacktrace>
+          </exception> <!-- java.lang.Throwable -->
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- testSearchUpdateDeletePlusReasons -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:brandNutrationCancellation@139982de]" started-at="2025-08-29T18:16:04 BDT" name="tearDown" finished-at="2025-08-29T18:16:04 BDT" duration-ms="579" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- tearDown -->
