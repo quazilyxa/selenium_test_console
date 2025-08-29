@@ -25,7 +25,7 @@
       <span class="top-banner-title-font">Test results</span>
       <button id="button" class="button">Switch Retro Theme</button> <!-- button -->
       <br/>
-      <span class="top-banner-font-1">1 suite</span>
+      <span class="top-banner-font-1">1 suite, 3 failed tests</span>
     </div> <!-- top-banner-root -->
     <div class="navigator-root">
       <div class="navigator-suite-header">
@@ -39,7 +39,7 @@
         <div class="rounded-window">
           <div class="suite-header light-rounded-window-top">
             <a href="#" panel-name="suite-Default_suite" class="navigator-link">
-              <span class="suite-name border-passed">Default suite</span>
+              <span class="suite-name border-failed">Default suite</span>
             </a> <!-- navigator-link -->
           </div> <!-- suite-header light-rounded-window-top -->
           <div class="navigator-suite-content">
@@ -50,7 +50,7 @@
               <ul>
                 <li>
                   <a href="#" panel-name="test-xml-Default_suite" class="navigator-link ">
-                    <span>C:\Users\quazi\AppData\Local\Temp\testng-eclipse-116179212\testng-customsuite.xml</span>
+                    <span>C:\Users\quazi\AppData\Local\Temp\testng-eclipse-333177003\testng-customsuite.xml</span>
                   </a> <!-- navigator-link  -->
                 </li>
                 <li>
@@ -92,7 +92,50 @@
               <div class="suite-section-content">
                 <ul>
                   <li>
-                    <span class="method-stats">6 methods,   6 passed</span>
+                    <span class="method-stats">12 methods, 3 failed,  2 skipped,  7 passed</span>
+                  </li>
+                  <li>
+                    <span class="method-list-title failed">Failed methods</span>
+                    <span class="show-or-hide-methods failed">
+                      <a href="#" panel-name="suite-Default_suite" class="hide-methods failed suite-Default_suite"> (hide)</a> <!-- hide-methods failed suite-Default_suite -->
+                      <a href="#" panel-name="suite-Default_suite" class="show-methods failed suite-Default_suite"> (show)</a> <!-- show-methods failed suite-Default_suite -->
+                    </span>
+                    <div class="method-list-content failed suite-Default_suite">
+                      <span>
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="brandNutrationCancellation" class="method navigator-link" hash-for-method="testLyxaPlusCancellationReason">testLyxaPlusCancellationReason</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="brandNutrationCancellation" class="method navigator-link" hash-for-method="testResolveCancellationReasonShop">testResolveCancellationReasonShop</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="failed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="brandNutrationCancellation" class="method navigator-link" hash-for-method="testSearchUpdateDeleteShopReasons">testSearchUpdateDeleteShopReasons</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                    </div> <!-- method-list-content failed suite-Default_suite -->
+                  </li>
+                  <li>
+                    <span class="method-list-title skipped">Skipped methods</span>
+                    <span class="show-or-hide-methods skipped">
+                      <a href="#" panel-name="suite-Default_suite" class="hide-methods skipped suite-Default_suite"> (hide)</a> <!-- hide-methods skipped suite-Default_suite -->
+                      <a href="#" panel-name="suite-Default_suite" class="show-methods skipped suite-Default_suite"> (show)</a> <!-- show-methods skipped suite-Default_suite -->
+                    </span>
+                    <div class="method-list-content skipped suite-Default_suite">
+                      <span>
+                        <img src="skipped.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="brandNutrationCancellation" class="method navigator-link" hash-for-method="testSearchUpdateDeletePlusReasons">testSearchUpdateDeletePlusReasons</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="skipped.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="brandNutrationCancellation" class="method navigator-link" hash-for-method="testSearchUpdateDeleteResolveReasons">testSearchUpdateDeleteResolveReasons</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                    </div> <!-- method-list-content skipped suite-Default_suite -->
                   </li>
                   <li>
                     <span class="method-list-title passed">Passed methods</span>
@@ -101,6 +144,11 @@
                       <a href="#" panel-name="suite-Default_suite" class="show-methods passed suite-Default_suite"> (show)</a> <!-- show-methods passed suite-Default_suite -->
                     </span>
                     <div class="method-list-content passed suite-Default_suite">
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="brandNutrationCancellation" class="method navigator-link" hash-for-method="testCourierCancellationReasonFlow">testCourierCancellationReasonFlow</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
                       <span>
                         <img src="passed.png" width="3%"/>
                         <a href="#" panel-name="suite-Default_suite" title="brandNutrationCancellation" class="method navigator-link" hash-for-method="testNavigateToLoginPage">testNavigateToLoginPage</a> <!-- method navigator-link -->
@@ -113,17 +161,17 @@
                       <br/>
                       <span>
                         <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Default_suite" title="brandNutrationCancellation" class="method navigator-link" hash-for-method="testOpenCancellation">testOpenCancellation</a> <!-- method navigator-link -->
-                      </span>
-                      <br/>
-                      <span>
-                        <img src="passed.png" width="3%"/>
                         <a href="#" panel-name="suite-Default_suite" title="brandNutrationCancellation" class="method navigator-link" hash-for-method="testOpenNavigationMenu">testOpenNavigationMenu</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
                         <img src="passed.png" width="3%"/>
-                        <a href="#" panel-name="suite-Default_suite" title="brandNutrationCancellation" class="method navigator-link" hash-for-method="testSearchAndDisableReason">testSearchAndDisableReason</a> <!-- method navigator-link -->
+                        <a href="#" panel-name="suite-Default_suite" title="brandNutrationCancellation" class="method navigator-link" hash-for-method="testSearchUpdateDeleteCourierReason">testSearchUpdateDeleteCourierReason</a> <!-- method navigator-link -->
+                      </span>
+                      <br/>
+                      <span>
+                        <img src="passed.png" width="3%"/>
+                        <a href="#" panel-name="suite-Default_suite" title="brandNutrationCancellation" class="method navigator-link" hash-for-method="testShopCancellationReasonShop">testShopCancellationReasonShop</a> <!-- method navigator-link -->
                       </span>
                       <br/>
                       <span>
@@ -143,12 +191,263 @@
     <div class="wrapper">
       <div class="main-panel-root">
         <div panel-name="suite-Default_suite" class="panel Default_suite">
+          <div class="suite-Default_suite-class-failed">
+            <div class="main-panel-header rounded-window-top">
+              <img src="failed.png"/>
+              <span class="class-name">brandNutrationCancellation</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="testLyxaPlusCancellationReason">
+                  </a> <!-- testLyxaPlusCancellationReason -->
+                  <span class="method-name">testLyxaPlusCancellationReason</span>
+                  <div class="stack-trace">org.openqa.selenium.ElementClickInterceptedException: element click intercepted: Element &lt;div class=&quot;MuiBox-root css-171onha&quot;&gt;...&lt;/div&gt; is not clickable at point (175, 69). Other element would receive the click: &lt;div class=&quot;MuiContainer-root css-7w5w4u&quot;&gt;...&lt;/div&gt;
+  (Session info: chrome=139.0.7258.139)
+Build info: version: &apos;4.31.0&apos;, revision: &apos;1ef9f18787*&apos;
+System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;17.0.12&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [1265b7585ab36dd92a5dc46fc1e395d9, clickElement {id=f.FFF0CFAC09EF2455A9C5D8D93B905BF9.d.112EAB779C34C1A5DD8CFF5C88B3BEC4.e.114}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 139.0.7258.139, chrome: {chromedriverVersion: 139.0.7258.68 (40ff94600b6e..., userDataDir: C:\Users\quazi\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:51054}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:51054/devtoo..., se:cdpVersion: 139.0.7258.139, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on windows (1265b7585ab36dd92a5dc46fc1e395d9)] -&gt; xpath: //div[@class=&apos;MuiBox-root css-171onha&apos; and text()=&apos;Cancellation Reasons&apos;]]
+Session ID: 1265b7585ab36dd92a5dc46fc1e395d9
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)
+	at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:215)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:545)
+	at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:223)
+	at org.openqa.selenium.remote.RemoteWebElement.click(RemoteWebElement.java:76)
+	at brandNutrationCancellation.testLyxaPlusCancellationReason(brandNutrationCancellation.java:1273)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:686)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:992)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:739)
+	at org.testng.TestRunner.run(TestRunner.java:614)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testResolveCancellationReasonShop">
+                  </a> <!-- testResolveCancellationReasonShop -->
+                  <span class="method-name">testResolveCancellationReasonShop</span>
+                  <div class="stack-trace">org.openqa.selenium.ElementClickInterceptedException: element click intercepted: Element &lt;div class=&quot;MuiBox-root css-171onha&quot;&gt;...&lt;/div&gt; is not clickable at point (175, 69). Other element would receive the click: &lt;div class=&quot;MuiContainer-root css-7w5w4u&quot;&gt;...&lt;/div&gt;
+  (Session info: chrome=139.0.7258.139)
+Build info: version: &apos;4.31.0&apos;, revision: &apos;1ef9f18787*&apos;
+System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;17.0.12&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Command: [1265b7585ab36dd92a5dc46fc1e395d9, clickElement {id=f.FFF0CFAC09EF2455A9C5D8D93B905BF9.d.112EAB779C34C1A5DD8CFF5C88B3BEC4.e.114}]
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 139.0.7258.139, chrome: {chromedriverVersion: 139.0.7258.68 (40ff94600b6e..., userDataDir: C:\Users\quazi\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:51054}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:51054/devtoo..., se:cdpVersion: 139.0.7258.139, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Element: [[ChromeDriver: chrome on windows (1265b7585ab36dd92a5dc46fc1e395d9)] -&gt; xpath: //div[@class=&apos;MuiBox-root css-171onha&apos; and text()=&apos;Cancellation Reasons&apos;]]
+Session ID: 1265b7585ab36dd92a5dc46fc1e395d9
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at java.base/jdk.internal.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:499)
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:480)
+	at org.openqa.selenium.remote.ErrorCodec.decode(ErrorCodec.java:167)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:138)
+	at org.openqa.selenium.remote.codec.w3c.W3CHttpResponseCodec.decode(W3CHttpResponseCodec.java:50)
+	at org.openqa.selenium.remote.HttpCommandExecutor.execute(HttpCommandExecutor.java:215)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.invokeExecute(DriverCommandExecutor.java:216)
+	at org.openqa.selenium.remote.service.DriverCommandExecutor.execute(DriverCommandExecutor.java:174)
+	at org.openqa.selenium.remote.RemoteWebDriver.execute(RemoteWebDriver.java:545)
+	at org.openqa.selenium.remote.RemoteWebElement.execute(RemoteWebElement.java:223)
+	at org.openqa.selenium.remote.RemoteWebElement.click(RemoteWebElement.java:76)
+	at brandNutrationCancellation.testResolveCancellationReasonShop(brandNutrationCancellation.java:1059)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:686)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:992)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:739)
+	at org.testng.TestRunner.run(TestRunner.java:614)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testSearchUpdateDeleteShopReasons">
+                  </a> <!-- testSearchUpdateDeleteShopReasons -->
+                  <span class="method-name">testSearchUpdateDeleteShopReasons</span>
+                  <div class="stack-trace">org.openqa.selenium.TimeoutException: Expected condition failed: waiting for element to be clickable: By.xpath: //tr[td//div[text()=&apos;Payment gateway declined the request as the item was unavailable (Ref-7234)&apos;]]//button[contains(@class,&apos;MuiIconButton-root&apos;)] (tried for 15 second(s) with 500 milliseconds interval)
+Build info: version: &apos;4.31.0&apos;, revision: &apos;1ef9f18787*&apos;
+System info: os.name: &apos;Windows 11&apos;, os.arch: &apos;amd64&apos;, os.version: &apos;10.0&apos;, java.version: &apos;17.0.12&apos;
+Driver info: org.openqa.selenium.chrome.ChromeDriver
+Capabilities {acceptInsecureCerts: false, browserName: chrome, browserVersion: 139.0.7258.139, chrome: {chromedriverVersion: 139.0.7258.68 (40ff94600b6e..., userDataDir: C:\Users\quazi\AppData\Loca...}, fedcm:accounts: true, goog:chromeOptions: {debuggerAddress: localhost:51054}, networkConnectionEnabled: false, pageLoadStrategy: normal, platformName: windows, proxy: Proxy(), se:cdp: ws://localhost:51054/devtoo..., se:cdpVersion: 139.0.7258.139, setWindowRect: true, strictFileInteractability: false, timeouts: {implicit: 0, pageLoad: 300000, script: 30000}, unhandledPromptBehavior: dismiss and notify, webauthn:extension:credBlob: true, webauthn:extension:largeBlob: true, webauthn:extension:minPinLength: true, webauthn:extension:prf: true, webauthn:virtualAuthenticators: true}
+Session ID: 1265b7585ab36dd92a5dc46fc1e395d9
+	at org.openqa.selenium.support.ui.WebDriverWait.timeoutException(WebDriverWait.java:84)
+	at org.openqa.selenium.support.ui.FluentWait.until(FluentWait.java:228)
+	at brandNutrationCancellation.testSearchUpdateDeleteShopReasons(brandNutrationCancellation.java:955)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:77)
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:568)
+	at org.testng.internal.invokers.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:141)
+	at org.testng.internal.invokers.TestInvoker.invokeMethod(TestInvoker.java:686)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethod(TestInvoker.java:230)
+	at org.testng.internal.invokers.MethodRunner.runInSequence(MethodRunner.java:63)
+	at org.testng.internal.invokers.TestInvoker$MethodInvocationAgent.invoke(TestInvoker.java:992)
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:203)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:739)
+	at org.testng.TestRunner.run(TestRunner.java:614)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Default_suite-class-failed -->
+          <div class="suite-Default_suite-class-skipped">
+            <div class="main-panel-header rounded-window-top">
+              <img src="skipped.png"/>
+              <span class="class-name">brandNutrationCancellation</span>
+            </div> <!-- main-panel-header rounded-window-top -->
+            <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="testSearchUpdateDeletePlusReasons">
+                  </a> <!-- testSearchUpdateDeletePlusReasons -->
+                  <span class="method-name">testSearchUpdateDeletePlusReasons</span>
+                  <div class="stack-trace">java.lang.Throwable: Method brandNutrationCancellation.testSearchUpdateDeletePlusReasons() on instance brandNutrationCancellation@139982de depends on not successfully finished methods 
+[brandNutrationCancellation.testLyxaPlusCancellationReason() on instance brandNutrationCancellation@139982de]
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:159)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:739)
+	at org.testng.TestRunner.run(TestRunner.java:614)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testSearchUpdateDeleteResolveReasons">
+                  </a> <!-- testSearchUpdateDeleteResolveReasons -->
+                  <span class="method-name">testSearchUpdateDeleteResolveReasons</span>
+                  <div class="stack-trace">java.lang.Throwable: Method brandNutrationCancellation.testSearchUpdateDeleteResolveReasons() on instance brandNutrationCancellation@139982de depends on not successfully finished methods 
+[brandNutrationCancellation.testResolveCancellationReasonShop() on instance brandNutrationCancellation@139982de]
+	at org.testng.internal.invokers.TestInvoker.invokeTestMethods(TestInvoker.java:159)
+	at org.testng.internal.invokers.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:154)
+	at org.testng.internal.invokers.TestMethodWorker.run(TestMethodWorker.java:134)
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1511)
+	at org.testng.TestRunner.privateRun(TestRunner.java:739)
+	at org.testng.TestRunner.run(TestRunner.java:614)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:421)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:413)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:373)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:312)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:95)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1274)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1208)
+	at org.testng.TestNG.runSuites(TestNG.java:1112)
+	at org.testng.TestNG.run(TestNG.java:1079)
+	at org.testng.remote.AbstractRemoteTestNG.run(AbstractRemoteTestNG.java:115)
+	at org.testng.remote.RemoteTestNG.initAndRun(RemoteTestNG.java:293)
+	at org.testng.remote.RemoteTestNG.main(RemoteTestNG.java:91)
+
+</div> <!-- stack-trace -->
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+            </div> <!-- main-panel-content rounded-window-bottom -->
+          </div> <!-- suite-Default_suite-class-skipped -->
           <div class="suite-Default_suite-class-passed">
             <div class="main-panel-header rounded-window-top">
               <img src="passed.png"/>
               <span class="class-name">brandNutrationCancellation</span>
             </div> <!-- main-panel-header rounded-window-top -->
             <div class="main-panel-content rounded-window-bottom">
+              <div class="method">
+                <div class="method-content">
+                  <a name="testCourierCancellationReasonFlow">
+                  </a> <!-- testCourierCancellationReasonFlow -->
+                  <span class="method-name">testCourierCancellationReasonFlow</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
                   <a name="testNavigateToLoginPage">
@@ -165,13 +464,6 @@
               </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
-                  <a name="testOpenCancellation">
-                  </a> <!-- testOpenCancellation -->
-                  <span class="method-name">testOpenCancellation</span>
-                </div> <!-- method-content -->
-              </div> <!-- method -->
-              <div class="method">
-                <div class="method-content">
                   <a name="testOpenNavigationMenu">
                   </a> <!-- testOpenNavigationMenu -->
                   <span class="method-name">testOpenNavigationMenu</span>
@@ -179,9 +471,16 @@
               </div> <!-- method -->
               <div class="method">
                 <div class="method-content">
-                  <a name="testSearchAndDisableReason">
-                  </a> <!-- testSearchAndDisableReason -->
-                  <span class="method-name">testSearchAndDisableReason</span>
+                  <a name="testSearchUpdateDeleteCourierReason">
+                  </a> <!-- testSearchUpdateDeleteCourierReason -->
+                  <span class="method-name">testSearchUpdateDeleteCourierReason</span>
+                </div> <!-- method-content -->
+              </div> <!-- method -->
+              <div class="method">
+                <div class="method-content">
+                  <a name="testShopCancellationReasonShop">
+                  </a> <!-- testShopCancellationReasonShop -->
+                  <span class="method-name">testShopCancellationReasonShop</span>
                 </div> <!-- method-content -->
               </div> <!-- method -->
               <div class="method">
@@ -196,7 +495,7 @@
         </div> <!-- panel Default_suite -->
         <div panel-name="test-xml-Default_suite" class="panel">
           <div class="main-panel-header rounded-window-top">
-            <span class="header-content">C:\Users\quazi\AppData\Local\Temp\testng-eclipse-116179212\testng-customsuite.xml</span>
+            <span class="header-content">C:\Users\quazi\AppData\Local\Temp\testng-eclipse-333177003\testng-customsuite.xml</span>
           </div> <!-- main-panel-header rounded-window-top -->
           <div class="main-panel-content rounded-window-bottom">
             <pre>
@@ -245,36 +544,60 @@ data.addColumn('number', 'Number');
 data.addColumn('string', 'Method');
 data.addColumn('string', 'Class');
 data.addColumn('number', 'Time (ms)');
-data.addRows(6);
+data.addRows(12);
 data.setCell(0, 0, 0)
-data.setCell(0, 1, 'testSearchAndDisableReason')
+data.setCell(0, 1, 'testSearchUpdateDeleteShopReasons')
 data.setCell(0, 2, 'brandNutrationCancellation')
-data.setCell(0, 3, 20218);
+data.setCell(0, 3, 21708);
 data.setCell(1, 0, 1)
-data.setCell(1, 1, 'testOpenCancellation')
+data.setCell(1, 1, 'testSearchUpdateDeleteCourierReason')
 data.setCell(1, 2, 'brandNutrationCancellation')
-data.setCell(1, 3, 10952);
+data.setCell(1, 3, 20764);
 data.setCell(2, 0, 2)
-data.setCell(2, 1, 'testNavigateToLoginPage')
+data.setCell(2, 1, 'testCourierCancellationReasonFlow')
 data.setCell(2, 2, 'brandNutrationCancellation')
-data.setCell(2, 3, 5569);
+data.setCell(2, 3, 9332);
 data.setCell(3, 0, 3)
-data.setCell(3, 1, 'testValidLogin')
+data.setCell(3, 1, 'testShopCancellationReasonShop')
 data.setCell(3, 2, 'brandNutrationCancellation')
-data.setCell(3, 3, 4822);
+data.setCell(3, 3, 9256);
 data.setCell(4, 0, 4)
-data.setCell(4, 1, 'testOpenNavigationMenu')
+data.setCell(4, 1, 'testNavigateToLoginPage')
 data.setCell(4, 2, 'brandNutrationCancellation')
-data.setCell(4, 3, 4404);
+data.setCell(4, 3, 5200);
 data.setCell(5, 0, 5)
-data.setCell(5, 1, 'testNavigateToSettings')
+data.setCell(5, 1, 'testValidLogin')
 data.setCell(5, 2, 'brandNutrationCancellation')
-data.setCell(5, 3, 2333);
+data.setCell(5, 3, 4854);
+data.setCell(6, 0, 6)
+data.setCell(6, 1, 'testOpenNavigationMenu')
+data.setCell(6, 2, 'brandNutrationCancellation')
+data.setCell(6, 3, 4383);
+data.setCell(7, 0, 7)
+data.setCell(7, 1, 'testNavigateToSettings')
+data.setCell(7, 2, 'brandNutrationCancellation')
+data.setCell(7, 3, 2304);
+data.setCell(8, 0, 8)
+data.setCell(8, 1, 'testResolveCancellationReasonShop')
+data.setCell(8, 2, 'brandNutrationCancellation')
+data.setCell(8, 3, 1524);
+data.setCell(9, 0, 9)
+data.setCell(9, 1, 'testLyxaPlusCancellationReason')
+data.setCell(9, 2, 'brandNutrationCancellation')
+data.setCell(9, 3, 1496);
+data.setCell(10, 0, 10)
+data.setCell(10, 1, 'testSearchUpdateDeletePlusReasons')
+data.setCell(10, 2, 'brandNutrationCancellation')
+data.setCell(10, 3, 0);
+data.setCell(11, 0, 11)
+data.setCell(11, 1, 'testSearchUpdateDeleteResolveReasons')
+data.setCell(11, 2, 'brandNutrationCancellation')
+data.setCell(11, 3, 0);
 window.suiteTableData['Default_suite']= { tableData: data, tableDiv: 'times-div-Default_suite'}
 return data;
 }
               </script>
-              <span class="suite-total-time">Total running time: 48 seconds</span>
+              <span class="suite-total-time">Total running time: 1 minutes</span>
               <div id="times-div-Default_suite">
               </div> <!-- times-div-Default_suite -->
             </div> <!-- times-div -->
@@ -307,31 +630,53 @@ return data;
               </div> <!-- configuration-class before -->
               <div class="test-method">
                 <span class="method-name">testNavigateToLoginPage</span>
-                <span class="method-start">1005 ms</span>
+                <span class="method-start">1013 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">testValidLogin</span>
-                <span class="method-start">6577 ms</span>
+                <span class="method-start">6223 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">testOpenNavigationMenu</span>
-                <span class="method-start">11404 ms</span>
+                <span class="method-start">11082 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
                 <span class="method-name">testNavigateToSettings</span>
-                <span class="method-start">15808 ms</span>
+                <span class="method-start">15467 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
-                <span class="method-name">testOpenCancellation</span>
-                <span class="method-start">18155 ms</span>
+                <span class="method-name">testCourierCancellationReasonFlow</span>
+                <span class="method-start">17774 ms</span>
               </div> <!-- test-method -->
               <div class="test-method">
-                <span class="method-name">testSearchAndDisableReason</span>
-                <span class="method-start">29108 ms</span>
+                <span class="method-name">testSearchUpdateDeleteCourierReason</span>
+                <span class="method-start">27117 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <span class="method-name">testShopCancellationReasonShop</span>
+                <span class="method-start">47889 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <img src="failed.png">
+                </img>
+                <span class="method-name">testSearchUpdateDeleteShopReasons</span>
+                <span class="method-start">57161 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <img src="failed.png">
+                </img>
+                <span class="method-name">testResolveCancellationReasonShop</span>
+                <span class="method-start">78876 ms</span>
+              </div> <!-- test-method -->
+              <div class="test-method">
+                <img src="failed.png">
+                </img>
+                <span class="method-name">testLyxaPlusCancellationReason</span>
+                <span class="method-start">80417 ms</span>
               </div> <!-- test-method -->
               <div class="configuration-class after">
                 <span class="method-name">tearDown</span>
-                <span class="method-start">49326 ms</span>
+                <span class="method-start">81926 ms</span>
               </div> <!-- configuration-class after -->
           </div> <!-- main-panel-content rounded-window-bottom -->
         </div> <!-- panel -->
